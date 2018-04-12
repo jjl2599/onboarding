@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, $rootScope, spUtil) {
+	/* widget controller */
+	var c = this;
+	
+	//On Document Ready, utilizes the section URL Parameter to show/hide the section
+	angular.element(document).ready(function(){
+		if($scope.data.section == "Account"){
+			document.getElementById('accountDiv').style.display = 'block';
+		}else{
+			document.getElementById('accountDiv').style.display = 'none';
+		}
+	});
+
+	
+	//Toggl User Setup
+	$scope.toggl_buddy = {
+		displayValue: $scope.data.information.toggl_buddy,
+		value: $scope.data.information.toggl_buddy_sysid,
+		name: 'toggl_buddy'
+	};
+	
+	$scope.$on("field.change", function(evt, parms) {
+		if (parms.field.name == 'toggl_buddy')
+			c.data.setToggl = parms.newValue;
+
+		// Send selected users sys_id to 
+		c.server.update().then(function(response) {
+			spUtil.update($scope);
+		})
+	});
+	
+	$scope.saveContact = function() {
+		$scope.data.action = "saveContact";
+		$scope.server.update().then(function() {
+			$scope.data.action = undefined;
+		});
+	}
+	
+	$scope.submitContact = function() {
+		$scope.data.action = "submitContact";
+		$scope.server.update().then(function() {
+			$scope.data.action = undefined;
+		});
+	}
+
+	$rootScope.$on('selectedItem', function(event,obj) {
+		if(obj.target == "Account"){
+			document.getElementById('accountDiv').style.display = 'block';
+		}else{
+			document.getElementById('accountDiv').style.display = 'none';
+		}
+	});
+	
+	spUtil.recordWatch($scope, "x_143728_onboard_contact_information", "", function(name, data){
+		spUtil.update($scope);
+	});
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>//Containers
+#accountDiv{
+  display:none;
+  padding: 20px 0px 35px 0px;
+  width: 800px;
+  margin: 0 auto;
+}
+
+//Global
+p, h2, h3{
+  color:white;
+}
+
+//Form Fields
+.form-group{
+  color: black;
+  background: white;
+  border: 3px solid grey;
+  border-radius: 3px;
+  width:50%;
+  padding-left: 10px;
+}
+
+.form-check-input{
+  vertical-align: middle;
+  margin: 0px;
+}
+
+.cultureSelect{
+  border: none;
+}
+
+.select2-choice{
+  width: 50%;
+}
+
+//Media Queries
+@media(max-width:991px){
+  .select2-choice{
+    width: 100%;
+  }
+  .form-group{
+    width:100%;
+  }
+  #accountDiv{
+    width:100%;
+  }
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>form-context-account</id>
+        <internal>false</internal>
+        <link/>
+        <name>Form Context Account</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	data.sys_id = $sp.getParameter('formid');		
+	data.section = $sp.getParameter('section');
+
+	if(!data.process) 
+		data.process = {};
+
+	var infoRecord = new GlideRecord('x_143728_onboard_contact_information');
+
+	infoRecord.get(data.sys_id);
+
+
+	// Pull User id using reference field
+	var guideSysId = "";
+	if (input && input.setToggl)
+		togglSysId = input.setToggl;
+	else
+		togglSysId = gs.getUser();
+
+	// Create user record with User id
+	var togglGR = new GlideRecord('sys_user');
+	togglGR.get('sys_id', togglSysId);
+
+	data.toggl_buddy = {};
+	$sp.getRecordDisplayValues(data.toggl_buddy, togglGR, 'sys_id,user_name,first_name,last_name,email');
+
+	//Saves the information, does not trigger the flag
+	if(input && input.action == "saveContact") {
+		infoRecord.access_points = this.input.information.access_points;
+		infoRecord.google_drive = this.input.information.google_drive;
+		infoRecord.wiki = this.input.information.wiki;
+		infoRecord.email_group = this.input.information.email_group;
+		infoRecord.toggl_account = this.input.information.toggl_account;
+		infoRecord.toggl_buddy = this.input.toggl_buddy.sys_id;
+		infoRecord.gmail_signature = this.input.information.gmail_signature;
+		infoRecord.guidelines = this.input.information.guidelines;
+		infoRecord.culture_event = this.input.information.culture_event;
+		infoRecord.update();
+		gs.addInfoMessage('Account Setup Saved');
+	}	
+	
+	//Validates inputs, on successful submittion triggers the flag
+	if(input && input.action == "submitContact") {
+		if( this.input.information.access_points == 'false' || this.input.information.google_drive == 'false' ||
+			 this.input.information.wiki == 'false' || this.input.information.email_group == 'false' ||
+			 this.input.information.toggl_account == 'false' || this.input.toggl_buddy.sys_id == '' ||
+			 this.input.information.gmail_signature == 'false' || this.input.information.guidelines == 'false' ||
+			 this.input.information.culture_event == ''){
+			gs.addErrorMessage('Please fill out all fields before submission.')
+		}else{
+			infoRecord.access_points = this.input.information.access_points;
+			infoRecord.google_drive = this.input.information.google_drive;
+			infoRecord.wiki = this.input.information.wiki;
+			infoRecord.email_group = this.input.information.email_group;
+			infoRecord.toggl_account = this.input.information.toggl_account;
+			infoRecord.toggl_buddy = this.input.toggl_buddy.sys_id;
+			infoRecord.gmail_signature = this.input.information.gmail_signature;
+			infoRecord.guidelines = this.input.information.guidelines;
+			infoRecord.culture_event = this.input.information.culture_event;
+			infoRecord.update();
+			var processUpdate = new GlideRecord('x_143728_onboard_process');
+			processUpdate.addQuery('sys_id', infoRecord.process_ticket);
+			processUpdate.query();
+			if(processUpdate.next()){
+				processUpdate.account_setup_flag = true;
+				processUpdate.update();
+			}
+			gs.addInfoMessage('Account Setup Submitted');
+		}
+	}	
+
+
+	data.information = {};
+	data.information.sys_id = infoRecord.getDisplayValue('sys_id');
+	data.information.user = infoRecord.getDisplayValue('user.name');
+	data.information.access_points = infoRecord.getDisplayValue('access_points');
+	data.information.google_drive = infoRecord.getDisplayValue('google_drive');
+	data.information.wiki = infoRecord.getDisplayValue('wiki');
+	data.information.email_group = infoRecord.getDisplayValue('email_group');
+	data.information.toggl_account = infoRecord.getDisplayValue('toggl_account');
+	data.information.toggl_buddy = infoRecord.getDisplayValue('toggl_buddy.name');
+	data.information.toggl_buddy_sysid = infoRecord.getDisplayValue('toggl_buddy.sys_id');
+	data.information.gmail_signature = infoRecord.getDisplayValue('gmail_signature');
+	data.information.guidelines = infoRecord.getDisplayValue('guidelines');
+	data.information.culture_event = infoRecord.getDisplayValue('culture_event');
+	data.information.process_ticket = infoRecord.getDisplayValue('process_ticket.number');
+	data.information.startDate = infoRecord.getDisplayValue('process_ticket.start_date');
+	data.information.dueDate = infoRecord.getDisplayValue('process_ticket.due_date');
+	data.information.user = infoRecord.getDisplayValue('user.name');
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-04-02 14:15:39</sys_created_on>
+        <sys_id>77b57b104f5113004270e9628110c7f8</sys_id>
+        <sys_mod_count>88</sys_mod_count>
+        <sys_name>Form Context Account</sys_name>
+        <sys_package display_value="Onboard" source="x_143728_onboard">07fb0ccd4fc113004270e9628110c71b</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Onboard">07fb0ccd4fc113004270e9628110c71b</sys_scope>
+        <sys_update_name>sp_widget_77b57b104f5113004270e9628110c7f8</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-04-12 17:29:26</sys_updated_on>
+        <template><![CDATA[<div id='accountDiv'>
+  <h2>Account Set-Up</h2>
+  
+  <p>Due Date: {{data.information.dueDate}}</p>
+  
+  <p>
+    Onboarding buddy, Chadd Portwine, can help you with the account setup 
+    steps. Send an email to cportwine@jahnelgroup.com if you have any questions 
+    about your accounts.
+  </p>
+
+  <h3>Wireless Network</h3>
+  <p>1. Follow these <a href='https://docs.google.com/document/d/1LftElL8xQo0ezuRuWrIq3hTHdVzpNcgTbKA4CcLhWxM/edit' target="_blank">instructions</a> to gain Wireless Network Access</p>
+  <p>2. Follow these <a href='https://docs.google.com/document/d/1-pEyzexV07dwgeTqsYSXeEPEMbS2xFq0WqVunabMrUE/edit' target="_blank">instructions</a> to setup the Wireless Printer</p>
+
+  <div class="form-group">
+    <label for="access_points">I have access to the Wifi and Printer:</label>
+    <input type="checkbox" id="access_points" class="form-check-input" ng-model="data.information.access_points"  ng-true-value="'true'" ng-false-value="'false'">
+  </div>
+
+  <h3>Google G Suite</h3>
+  <p>1. Get access to the Jahnel Group Google Drive folder</p>
+  <div class="form-group">
+    <label for="google_drive">I have access to the Google Drive:</label>
+    <input type="checkbox" id="google_drive" class="form-check-input" ng-model="data.information.google_drive"  ng-true-value="'true'" ng-false-value="'false'">
+  </div>
+  
+  <div class="form-group">
+    <label for="email_group">I have set the 'Everybody' Google Group:</label>
+    <input type="checkbox" id="email_group" class="form-check-input" ng-model="data.information.email_group"  ng-true-value="'true'" ng-false-value="'false'">
+  </div>
+  <p>2. Bookmark the <a href='https://sites.google.com/jahnelgroup.com/jahnel-group-wiki/home' target='_blank'>Jahnel Group Wiki</a> and </p>
+  <p>3. Read the Wiki Page</p>
+  <div class="form-group">
+    <label for="wiki">I have read the Wiki:</label>
+    <input type="checkbox" id="wiki" class="form-check-input" ng-model="data.information.wiki"  ng-true-value="'true'" ng-false-value="'false'">
+  </div>
+  <p>4. Follow these <a href='https://docs.google.com/document/d/16kXTLjWyQSAqNe4I04marAy-KWh4743CYdXX6giMCcA/edit' target='_blank'>instructions</a>, and subscribe to the Jahnel Group Google Calendar</p>
+  <p>a. Subscribe</p>
+  <p>b. Add your start date</p>
+  <p>c. Make it a recurring annual entry</p>
+
+  <h3>Toggl</h3>
+  <p>1. Contact Chadd, cportwine@jahnelgroup.com, and request a Toggl account</p>
+  <p>2. Read the <a href='https://docs.google.com/document/d/1A280ksLh_oef5VVOAieClL00Ndlp0GKn0cbXvB5fXW0/edit' target='_blank'>Toggl time entry training information</a></p>
+  <p>3. Ask your project manager to be your "Toggl Buddy"</p>
+  <p>4. Create your first entry in Toggl, and ask your Toggl Buddy to review it for completeness</p>
+  
+  <div class="form-group">
+    <label for="toggl_account">I have set my Toggl Account:</label>
+    <input type="checkbox" id="toggl_account" class="form-check-input" ng-model="data.information.toggl_account"  ng-true-value="'true'" ng-false-value="'false'">
+  </div>
+  
+  <p>
+    Toggl Buddy: <span ng-if='data.information.toggl_buddy != ""'><strong>{{data.information.toggl_buddy}}</strong></span>
+    <span ng-if='data.information.toggl_buddy == ""'><strong>None</strong></span>
+  </p>
+  <sn-record-picker id='toggl_buddy' field="toggl_buddy" table="'sys_user'" 
+                    display-field="'name'" value-field="'sys_id'" 
+                    default-query= "'roles=x_143728_onboard.manager'"
+                    search-fields="'name'" page-size="100" required>
+  </sn-record-picker>
+
+  <h3>Slack</h3>
+  <p>1. Install Slack for macOS or Windows</p>
+  <p>2. Goto jahnelgroup.slack.com/signup to join the Jahnel Group project on Slack </p>
+  <p>3. Add the Channels #general and #random</p>
+  <p>4. Direct Message cportwine at Jahnel Group to verify you're in and it works</p>
+
+  <p>
+    Onboarding buddy, Tony M, can help you with your Jahnel Group Employee Photos. 
+    Send an email to tmercadante@jahnelgroup.com and request your photo 
+    appointment. On photo day, be ready to take two photos.
+  </p>
+
+  <h3>Professional Photo</h3>
+  <p>1. Follow this <a href='https://docs.google.com/document/d/1Qo_w9XhtZuk_TOBUaPHlilzXGpnCHDMlUJjDaQo1Bg8/edit' target='_blank'>Guideline</a> when considering what to wear.</p>
+  <p>2. Check out other employee photos on the <a href='https://www.jahnelgroup.com/team.html' target='_blank'>Team Page</a>.</p>
+
+  <h3>Personality Photo</h3>
+  <p>1. Have fun and share another side of yourself. Tony will help you plan your photo shoot.</p>
+
+  <p>
+    Onboarding buddy, Jessie Z, can help you with Jahnel Group Brand Guidelines. 
+    Send an email to jessiez@jahnelgroup.com if you have any questions about 
+    your email signature or the Jahnel Group Brand.
+  </p>
+
+  <h3>Email Signature</h3>
+  <p>1. Follow this <a href='https://docs.google.com/document/d/1bC3Nua_BKSzU5pJhnm3HTqwpmqabCfKN4kqOXbRu2yk/edit' target='_blank'>Guideline</a> to update your gmail signature.</p>
+  <p>2. Send and email to Jessie Z, jessiez@jahnelgroup.com, who will confirm the format of your signature.</p>
+
+  <div class="form-group">
+    <label for="gmail_signature">I have set my Gmail Signature:</label>
+    <input type="checkbox" id="gmail_signature" class="form-check-input" ng-model="data.information.gmail_signature"  ng-true-value="'true'" ng-false-value="'false'">
+  </div>
+
+  <h3>Brand Guidelines</h3>
+  <p>1. Read and follow the Jahnel Group Brand Guidelines when designing and displaying company assets in your documents.</p>
+
+  <div class="form-group">
+    <label for="guidelines">I have read the Guidelines:</label>
+    <input type="checkbox" id="guidelines" class="form-check-input" ng-model="data.information.guidelines"  ng-true-value="'true'" ng-false-value="'false'">
+  </div>
+  
+  <p>
+    Onboarding buddy, Tonya Sutphin, can help you participate in a Jahnel 
+    Group culture event. Send an email to tsutphin@jahnelgroup.com if 
+    you have any questions about culture events.
+  </p>
+
+  <h3>Culture Event</h3>
+  <p>
+    A  Culture Event happens when two or more Jahnel Group employees 
+    hangout together for fun. Examples are Beer Club, lunch-time food 
+    competitions, Dungeons and Dragons games, and the spring or winter 
+    holiday parties. There are many ad hoc events that come up, such as 
+    someone having a BBQ out back, or people going to Wolf's for a birthday 
+    celebration.
+  </p>
+  <p>1. Contact Tonya, tsutphin@jahnelgroup.com, to get the latest culture event information.</p>
+  <p>2. Pick an event and attend!</p>
+
+  <div class="form-group">
+    <label for="culture_event">Select a Culture Event:</label>
+    <select class='cultureSelect' name="culture_event" ng-model="data.information.culture_event">
+      <option value="Code Wars">Code Wars</option>
+      <option value="Toggl Tuesday">Toggl Tuesday</option>
+      <option value="DnD">DnD</option>
+      <option value="Beer Club">Beer Club</option>
+    </select><br>
+  </div>
+
+
+  <button class='btn btn-primary' ng-click='saveContact()'>Save</button>
+  <button class='btn btn-info' ng-click='submitContact()'>Submit</button>
+
+</div>
+
+]]></template>
+    </sp_widget>
+</record_update>

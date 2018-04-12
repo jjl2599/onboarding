@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_scope_privilege">
+    <sys_scope_privilege action="INSERT_OR_UPDATE">
+        <operation>read</operation>
+        <source_scope display_value="Onboard">07fb0ccd4fc113004270e9628110c71b</source_scope>
+        <status>allowed</status>
+        <sys_class_name>sys_scope_privilege</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-03-26 20:09:51</sys_created_on>
+        <sys_id>8cb3019a4f0513004270e9628110c736</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_143729_it_librar_library_members</sys_name>
+        <sys_package display_value="Onboard" source="x_143728_onboard">07fb0ccd4fc113004270e9628110c71b</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Onboard">07fb0ccd4fc113004270e9628110c71b</sys_scope>
+        <sys_update_name>sys_scope_privilege_8cb3019a4f0513004270e9628110c736</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-03-26 20:09:51</sys_updated_on>
+        <target_name>x_143729_it_librar_library_members</target_name>
+        <target_scope display_value="IT Library">672b7a824f600300ab7100f18110c7c1</target_scope>
+        <target_type>sys_db_object</target_type>
+    </sys_scope_privilege>
+</record_update>

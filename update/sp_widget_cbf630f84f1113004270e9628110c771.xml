@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, spUtil, $location) {
+	/* widget controller */
+	var c = this;
+
+	//Sets the date to a format that the front-end can display correctly
+	$scope.data.process.start_date = new Date($scope.data.process.start_date);
+	$scope.data.process.due_date = new Date($scope.data.process.due_date);
+
+	$scope.updateTicket = function() {
+		$scope.data.action = "updateTicket";
+		$scope.server.update().then(function() {
+			$scope.data.action = undefined;
+		});
+	}
+
+	spUtil.recordWatch($scope, "x_143728_onboard_process", "", function(name, data){
+		spUtil.update($scope);
+	});
+
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>//Global
+p,label{
+  color:white;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>process-ticket</id>
+        <internal>false</internal>
+        <link/>
+        <name>Process Ticket</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	data.sys_id = $sp.getParameter('processid');	
+
+	var processRecord = new GlideRecord('x_143728_onboard_process');
+	processRecord.get(data.sys_id);
+
+	if(input && input.action == "updateTicket") {
+		processRecord.start_date = this.input.process.start_date.toString();
+		processRecord.contact_information_due_date = this.input.process.contactDue.toString();
+		processRecord.account_setup_due_date = this.input.process.accountDue.toString();
+		processRecord.bank_info_due_date = this.input.process.bankDue.toString();
+		processRecord.benefits_due_date = this.input.process.benefitsDue.toString();
+		processRecord.office_setup_due_date = this.input.process.officeDue.toString();
+		processRecord.personal_information_due_date = this.input.process.personalDue.toString();
+		processRecord.update();
+		gs.addInfoMessage('Dates have been updated');
+	}	
+
+	data.process = {};
+	data.process.guide = processRecord.getDisplayValue('orientation_guide.name');
+	data.process.employee = processRecord.getDisplayValue('employee.name');
+	data.process.executive = processRecord.getDisplayValue('executive.name');
+	data.process.start_date = processRecord.getDisplayValue('start_date');
+	data.process.due_date = processRecord.getDisplayValue('due_date');
+	
+	
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-04-03 13:39:10</sys_created_on>
+        <sys_id>cbf630f84f1113004270e9628110c771</sys_id>
+        <sys_mod_count>27</sys_mod_count>
+        <sys_name>Process Ticket</sys_name>
+        <sys_package display_value="Onboard" source="x_143728_onboard">07fb0ccd4fc113004270e9628110c71b</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Onboard">07fb0ccd4fc113004270e9628110c71b</sys_scope>
+        <sys_update_name>sp_widget_cbf630f84f1113004270e9628110c771</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-04-12 18:39:19</sys_updated_on>
+        <template><![CDATA[<div class='container'>
+  <p>
+    Employee Guide: {{data.process.employee}}
+  </p>
+
+  <p>
+    Orientation Guide: {{data.process.guide}}
+  </p>
+
+  <p>
+    Executive: {{data.process.executive}}
+  </p>
+  
+  <div class="form-group">
+    <label for="start_date">Start Date:</label>
+    <input type="date" id="start_date" class="form-control" ng-model="data.process.start_date">
+  </div>
+  
+  <div class="form-group">
+    <label for="dueDate">Due Date:</label>
+    <input type="date" id="dueDate" class="form-control" ng-model="data.process.due_date">
+  </div>
+  
+  <button class='btn btn-primary' ng-click='updateTicket()'>Save</button>
+  
+</div>
+]]></template>
+    </sp_widget>
+</record_update>

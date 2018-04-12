@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="culture_event" table="x_143728_onboard_contact_information" version="3">
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>culture_event</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Code Wars</label>
+            <language>en</language>
+            <name>x_143728_onboard_contact_information</name>
+            <sequence>0</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-04-02 14:46:18</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>89cc7b544f5113004270e9628110c74a</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-04-09 18:38:48</sys_updated_on>
+            <value>Code Wars</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>culture_event</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Toggl Tuesdays</label>
+            <language>en</language>
+            <name>x_143728_onboard_contact_information</name>
+            <sequence>1</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-04-02 14:46:18</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>0dcc7b544f5113004270e9628110c74b</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-04-09 18:38:54</sys_updated_on>
+            <value>Toggle Tuesdays</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>culture_event</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>DnD</label>
+            <language>en</language>
+            <name>x_143728_onboard_contact_information</name>
+            <sequence>2</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-04-02 14:46:18</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>89cc7b544f5113004270e9628110c74c</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-04-09 18:38:58</sys_updated_on>
+            <value>DnD</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>culture_event</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Beer Club</label>
+            <language>en</language>
+            <name>x_143728_onboard_contact_information</name>
+            <sequence>3</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-04-02 14:46:18</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>09cc7b544f5113004270e9628110c74d</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-04-09 18:39:02</sys_updated_on>
+            <value>Beer Club</value>
+        </sys_choice>
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>culture_event</element>
+            <name>x_143728_onboard_contact_information</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-04-02 14:46:18</sys_created_on>
+            <sys_id>c5cc7b544f5113004270e9628110c74b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>culture_event</sys_name>
+            <sys_package display_value="Onboard" source="x_143728_onboard">07fb0ccd4fc113004270e9628110c71b</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Onboard">07fb0ccd4fc113004270e9628110c71b</sys_scope>
+            <sys_update_name>sys_choice_x_143728_onboard_contact_information_culture_event</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-04-02 14:46:18</sys_updated_on>
+        </sys_choice_set>
+    </sys_choice>
+</record_update>

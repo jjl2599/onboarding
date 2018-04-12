@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_container">
+    <sp_container action="INSERT_OR_UPDATE">
+        <background_color/>
+        <background_image/>
+        <background_style>default</background_style>
+        <bootstrap_alt>false</bootstrap_alt>
+        <class_name/>
+        <container_class_name/>
+        <name>FormDetail - Container 6</name>
+        <order>6</order>
+        <sp_page display_value="formdetail">98dff3034fc113004270e9628110c733</sp_page>
+        <subheader>false</subheader>
+        <sys_class_name>sp_container</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-04-02 18:41:32</sys_created_on>
+        <sys_id>f692b4e04fd113004270e9628110c7b5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>FormDetail - Container 6</sys_name>
+        <sys_package display_value="Onboard" source="x_143728_onboard">07fb0ccd4fc113004270e9628110c71b</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Onboard">07fb0ccd4fc113004270e9628110c71b</sys_scope>
+        <sys_update_name>sp_container_f692b4e04fd113004270e9628110c7b5</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-04-02 18:41:32</sys_updated_on>
+        <title/>
+        <width>container</width>
+    </sp_container>
+</record_update>

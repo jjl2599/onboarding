@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope,$window,$location, spUtil) {
+	var c = this;
+
+	//Emmployee sn-record-picker Setup
+	$scope.employee = {
+		displayValue: c.data.employee.name,
+		value: c.data.employee.sys_id,
+		name: 'employee'
+	};
+
+	$scope.$on("field.change", function(evt, parms) {
+		if (parms.field.name == 'employee')
+			c.data.setEmployee = parms.newValue;
+
+		// Send selected users sys_id to 
+		c.server.update().then(function(response) {
+			spUtil.update($scope);
+		})
+	});
+
+	//Orientation sn-record-picker Guide Setup
+	$scope.guide = {
+		displayValue: c.data.guide.name,
+		value: c.data.guide.sys_id,
+		name: 'guide'
+	};
+
+	$scope.$on("field.change", function(evt, parms) {
+		if (parms.field.name == 'guide')
+			c.data.setGuide = parms.newValue;
+
+		// Send selected users sys_id to 
+		c.server.update().then(function(response) {
+			spUtil.update($scope);
+		})
+	});
+
+	//Executive sn-record-picker Guide Setup
+	$scope.executive = {
+		displayValue: c.data.executive.name,
+		value: c.data.executive.sys_id,
+		name: 'executive'
+	};
+
+	$scope.$on("field.change", function(evt, parms) {
+		if (parms.field.name == 'executive')
+			c.data.setExecutive = parms.newValue;
+
+		// Send selected users sys_id to 
+		c.server.update().then(function(response) {
+			spUtil.update($scope);
+		})
+	});
+
+	//sn-date-picker client side setup
+	$scope.start_date = {
+		displayValue: '',
+		value: '',
+		name: 'start_date'
+	};
+	$scope.due_date = {
+		displayValue: '',
+		value: '',
+		name: 'due_date'
+	};
+
+	//Form submittion
+	$scope.onboardUser = function() {
+		console.log($scope.data.checkUser);
+		$scope.data.action = "onboardUser";
+		$scope.server.update().then(function() {
+			$scope.data.action = undefined;
+		});
+		$('#onboardForm')[0].reset();
+	}
+
+	$scope.goBack = function() {
+		$window.history.back();
+	}
+
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>//global
+p, h2, label{
+  color:white;
+}
+
+//Form Styling
+.form-check-input{
+  vertical-align: middle;
+  margin: 0px;
+}
+.btn{
+  margin-bottom: 10px;
+}
+
+//Media Queries
+@media(min-width:1000px){
+	.container {
+    width: 60%;
+  }
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>onboard_form</id>
+        <internal>false</internal>
+        <link/>
+        <name>Onboard Form</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	// Pull User id using reference field
+	var employeeSysId = "";
+	if (input && input.setEmployee)
+		employeeSysId = input.setEmployee;
+	else
+		employeeSysId = gs.getUser();
+
+	// Create user record with User id
+	var employeeGR = new GlideRecord('sys_user');
+	employeeGR.get('sys_id', employeeSysId);
+	
+	// Populate user object
+	data.employee = {};
+	$sp.getRecordDisplayValues(data.employee, employeeGR, 'sys_id,user_name,first_name,last_name,email');
+	
+	
+	// Pull User id using reference field
+	var guideSysId = "";
+	if (input && input.setGuide)
+		guideSysId = input.setGuide;
+	else
+		guideSysId = gs.getUser();
+
+	// Create user record with User id
+	var guideGR = new GlideRecord('sys_user');
+	guideGR.get('sys_id', guideSysId);
+
+	data.guide = {};
+	$sp.getRecordDisplayValues(data.guide, guideGR, 'sys_id,user_name,first_name,last_name,email');
+
+	
+	// Pull User id using reference field
+	var executiveSysId = "";
+	if (input && input.setExecutive)
+		executiveSysId = input.setExecutive;
+	else
+		executiveSysId = gs.getUser();
+
+	// Create user record with User id
+	var executiveGR = new GlideRecord('sys_user');
+	executiveGR.get('sys_id', executiveSysId);
+
+	data.executive = {};
+	$sp.getRecordDisplayValues(data.executive, executiveGR, 'sys_id,user_name,first_name,last_name,email');
+
+	
+	if(input && input.action == "onboardUser") {
+		var newUser = new GlideRecord('sys_user');
+		newUser.initialize();
+		newUser.first_name = input.first_name.toString();
+		newUser.last_name = input.last_name.toString();
+		newUser.user_name = input.first_name.toString() + '.' + input.last_name.toString();
+		newUser.email = input.email.toString();
+		newUser.user_password.setDisplayValue('password');
+		var insertedUser = newUser.insert();
+		
+		var processRecord = new GlideRecord('x_143728_onboard_process');
+		processRecord.initialize();
+		processRecord.employee = insertedUser;
+		processRecord.orientation_guide = input.guide.sys_id.toString();
+		processRecord.executive = input.executive.sys_id.toString();
+		processRecord.start_date = input.start_date.toString();
+		processRecord.due_date = input.due_date.toString();
+		processRecord.insert();
+		gs.addInfoMessage('Onboarding Generated');
+	}	
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-03-26 19:54:47</sys_created_on>
+        <sys_id>133049964f0513004270e9628110c79e</sys_id>
+        <sys_mod_count>142</sys_mod_count>
+        <sys_name>Onboard Form</sys_name>
+        <sys_package display_value="Onboard" source="x_143728_onboard">07fb0ccd4fc113004270e9628110c71b</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Onboard">07fb0ccd4fc113004270e9628110c71b</sys_scope>
+        <sys_update_name>sp_widget_133049964f0513004270e9628110c79e</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-04-12 18:16:40</sys_updated_on>
+        <template><![CDATA[<div class="container">
+  <h2>Onboard a New Employee</h2>
+  <p>Please enter the following information:</p>
+  <form id='onboardForm' name="onboardForm" ng-submit="onboardUser();">
+
+
+    <div class="form-group">
+      <label for="first_name">*First Name:</label>
+      <input type="textarea" id="first_name" class="form-control" ng-model="data.first_name" required>
+    </div>
+
+    <div class="form-group">
+      <label for="last_name">*Last Name:</label>
+      <input type="textarea" id="last_name" class="form-control" ng-model="data.last_name" required>
+    </div>
+
+    <div class="form-group">
+      <label for="email">*Email:</label>
+      <input type="textarea" id="email" class="form-control" ng-model="data.email" required>
+    </div>
+
+    <p>
+      *Orientation Guide:
+    </p>
+    <sn-record-picker id='guide' field="guide" table="'sys_user'" 
+                      display-field="'name'" value-field="'sys_id'" 
+                      default-query= "'roles=x_143728_onboard.guide'"
+                      search-fields="'name'" page-size="100" required>
+    </sn-record-picker>
+
+    <p>
+      *Executive:
+    </p>
+    <sn-record-picker id='executive' field="executive" table="'sys_user'" 
+                      display-field="'name'" value-field="'sys_id'" 
+                      default-query= "'roles=x_143728_onboard.executive_review_user'"
+                      search-fields="'name'" page-size="100" required>
+    </sn-record-picker>
+    
+    <p>
+      *Start Date:
+    </p>
+    <sp-date-picker field = "start_date" ng-model="c.data.start_date" sn-change="" required></sp-date-picker>
+
+    <p>
+      *Completion Due Date:
+    </p>
+    <sp-date-picker field = "due_date" ng-model="c.data.due_date" sn-change="" required></sp-date-picker>
+
+    <p>*REQUIRED</p>
+
+    <div class="col">
+      <input type="submit" class="btn btn-primary btn-lg btn-block" value="SUBMIT">
+    </div>
+
+  </form>
+  <button class="btn btn-info btn-lg btn-block" ng-click="goBack()">BACK</button>
+
+</div>]]></template>
+    </sp_widget>
+</record_update>

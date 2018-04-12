@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($window,$location,$scope) {
+  /* widget controller */
+  var c = this;
+	
+	
+	$scope.goBack = function() {
+		$window.history.back();
+	}
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>//Container
+.container{
+  width: 65%;
+  margin: 0 auto;
+}
+
+//Contact Information Div
+#sheet{
+  padding: 10px 15px;
+  width: 100%;
+  margin: 15px 0px;
+  background-color: white;
+}
+
+//Media Queries
+@media(max-width: 991px){
+  .container{
+    width: 100%;
+  }
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>contact_record</id>
+        <internal>false</internal>
+        <link/>
+        <name>Contact Record</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	data.sys_id = $sp.getParameter('contactid');	
+
+	var contactRecord = new GlideRecord('x_143728_onboard_contact_information');
+	contactRecord.get(data.sys_id);
+
+	data.contact = {};
+	data.contact.sys_id = contactRecord.getDisplayValue('sys_id');
+	data.contact.user = contactRecord.getDisplayValue('user.name');
+	data.contact.address = contactRecord.getDisplayValue('address');
+	data.contact.display = contactRecord.getDisplayValue('display');
+	data.contact.bank_number = contactRecord.getDisplayValue('bank_number');
+	data.contact.bank_routing = contactRecord.getDisplayValue('bank_routing');
+	data.contact.coffee = contactRecord.getDisplayValue('coffee');
+	data.contact.date_of_birth = contactRecord.getDisplayValue('date_of_birth');
+	data.contact.dental_benefits = contactRecord.getDisplayValue('dental_benefits');
+	data.contact.email = contactRecord.getDisplayValue('email');
+	data.contact.check_email = contactRecord.getDisplayValue('check_email');
+	data.contact.emergency_contact_name = contactRecord.getDisplayValue('emergency_contact_name');
+	data.contact.emergency_contact_number = contactRecord.getDisplayValue('emergency_contact_number');
+	data.contact.emergency_contact_relationship = contactRecord.getDisplayValue('emergency_contact_relationship');
+	data.contact.health_insurance = contactRecord.getDisplayValue('health_insurance');
+	data.contact.home_number = contactRecord.getDisplayValue('home_number');
+	data.contact.name = contactRecord.getDisplayValue('name');
+	data.contact.number = contactRecord.getDisplayValue('number');
+	data.contact.office = contactRecord.getDisplayValue('office');
+	data.contact.payroll = contactRecord.getDisplayValue('payroll');
+	data.contact.personal_email = contactRecord.getDisplayValue('personal_email');
+	data.contact.phone_number = contactRecord.getDisplayValue('phone_number');
+	data.contact.places = contactRecord.getDisplayValue('places');
+	data.contact.process_ticket = contactRecord.getDisplayValue('process_ticket.number');
+	data.contact.startDate = contactRecord.getDisplayValue('process_ticket.start_date');
+	data.contact.accountDate = contactRecord.getDisplayValue('process_ticket.account_setup_due_date');
+	data.contact.bankDate = contactRecord.getDisplayValue('process_ticket.bank_info_due_date');
+	data.contact.benefitDate = contactRecord.getDisplayValue('process_ticket.benefits_due_date');
+	data.contact.contactDate = contactRecord.getDisplayValue('process_ticket.contact_information_due_date');
+	data.contact.officeDate = contactRecord.getDisplayValue('process_ticket.office_setup_due_date');
+	data.contact.personalDate = contactRecord.getDisplayValue('process_ticket.personal_information_due_date');
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-04-03 17:23:31</sys_created_on>
+        <sys_id>e15aa1f84f9113004270e9628110c707</sys_id>
+        <sys_mod_count>20</sys_mod_count>
+        <sys_name>Contact Record</sys_name>
+        <sys_package display_value="Onboard" source="x_143728_onboard">07fb0ccd4fc113004270e9628110c71b</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Onboard">07fb0ccd4fc113004270e9628110c71b</sys_scope>
+        <sys_update_name>sp_widget_e15aa1f84f9113004270e9628110c707</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-04-12 17:47:19</sys_updated_on>
+        <template><![CDATA[<div class='container'>
+  <div id='sheet'>
+    <p>{{data.contact.number}}</p>
+    
+    <p>Employee: {{data.contact.user}}</p>
+    <p>Start Date: {{data.contact.startDate}}</p>
+    
+    <h2>Contact Information</h2>
+    <p>Name: {{data.contact.name}}</p>
+    <p>Email: {{data.contact.email}}</p>
+    <p>DOB: {{data.contact.date_of_birth}}</p>
+    <p>Address: {{data.contact.address}}</p>
+    <p>Phone Number: {{data.contact.phone_number}}</p>
+    <p>Home Number: {{data.contact.home_number}}</p>
+    <p>Personal Email: {{data.contact.personal_email}}</p>
+    <p>Emergency Contact Name: {{data.contact.emergency_contact_name}}</p>
+    <p>Emergency Contact Relationship: {{data.contact.emergency_contact_number}}</p>
+    <p>Emergency Contact Number: {{data.contact.emergency_contact_relationship}}</p>
+    <p>Display: {{data.contact.display}}</p>
+    
+    <h2>Bank Information</h2>
+    <p>Bank Number: {{data.contact.bank_number}}</p>
+    <p>Bank Routing: {{data.contact.bank_routing}}</p>
+		
+    <h2>Benefits</h2>
+    <p>Dental: {{data.contact.dental_benefits}}</p>
+    <p>Health: {{data.contact.health_insurance}}</p>
+    
+    <h2>Office Setup</h2>
+    <p>Location: {{data.contact.office}}</p>
+    
+    <h2>Personal Information</h2>
+    <p>Coffee: {{data.contact.coffee}}</p>
+    <p>Places: {{data.contact.places}}</p>
+    
+      <button class="btn btn-primary" ng-click="goBack()">BACK</button>
+    
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

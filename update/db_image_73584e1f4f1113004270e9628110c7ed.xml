@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="db_image">
+    <db_image action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category/>
+        <format/>
+        <height/>
+        <image/>
+        <name>Benefit.svg</name>
+        <size_bytes>713</size_bytes>
+        <sys_class_name>db_image</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-04-11 13:59:39</sys_created_on>
+        <sys_id>73584e1f4f1113004270e9628110c7ed</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>Benefit.svg</sys_name>
+        <sys_package display_value="Onboard" source="x_143728_onboard">07fb0ccd4fc113004270e9628110c71b</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Onboard">07fb0ccd4fc113004270e9628110c71b</sys_scope>
+        <sys_update_name>db_image_73584e1f4f1113004270e9628110c7ed</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-04-11 16:07:03</sys_updated_on>
+        <thumbnail/>
+        <width/>
+    </db_image>
+    <sys_attachment action="INSERT_OR_UPDATE">
+        <average_image_color/>
+        <chunk_size_bytes>734003</chunk_size_bytes>
+        <compressed>true</compressed>
+        <content_type>image/svg+xml</content_type>
+        <encryption_context/>
+        <file_name>image</file_name>
+        <image_height/>
+        <image_width/>
+        <size_bytes>713</size_bytes>
+        <size_compressed>375</size_compressed>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-04-11 16:04:42</sys_created_on>
+        <sys_id>8d0562134f9113004270e9628110c76e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-04-11 16:04:42</sys_updated_on>
+        <table_name>ZZ_YYdb_image</table_name>
+        <table_sys_id>73584e1f4f1113004270e9628110c7ed</table_sys_id>
+    </sys_attachment>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>H4sIAAAAAAAAAA==</data>
+        <length>16</length>
+        <position>0</position>
+        <sys_attachment display_value="image" sys_id="8d0562134f9113004270e9628110c76e">8d0562134f9113004270e9628110c76e</sys_attachment>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-04-11 16:04:42</sys_created_on>
+        <sys_id>cd0562134f9113004270e9628110c76e</sys_id>
+    </sys_attachment_doc>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>dZLfboIwFMZfpeluT/9SYTgg0bsl8gLcLGQCklQ0QkSz7N13CiqybCE9tOf79es5TaP2XJHL3jZtTHddd1wK0fc97z1+OFVCSykFEpSc66JfHy4xlUQSLblcDNHQJNoWZZtEbXe1RcI/bcvUV1lbu3wpy/LtOxKjEomR6+oOV+uiKcq6I+9NeYjEmIsqUm9jusmvxelDU7LNu5w1+b645Yimc0axvyiF1DHvduTT5i12NVSEXExTteBBAEpaw0yuQIEcP6a4URtUjeI6XE2KMoAJywzgDmaelAX3PJCTCeMBkhscYLjvPZEu5dvBAWangjvVGu5hHsOT5AQYqoT5Hh64AmGWYK5CZ8B+uYxtZamSENzqcTGE14cB/lHM0qEb9OWBa8yM3eHK0W6epbhH5ZOJYmo1mTgx22vQ/xJ4jPIQedz7AMAM0RAiwX0fQteNh9fogob7zIP7UmdU4IuqbgNfaPIDvwEys8kCAAA=</data>
+        <length>488</length>
+        <position>1</position>
+        <sys_attachment display_value="image" sys_id="8d0562134f9113004270e9628110c76e">8d0562134f9113004270e9628110c76e</sys_attachment>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-04-11 16:04:42</sys_created_on>
+        <sys_id>410562134f9113004270e9628110c76f</sys_id>
+    </sys_attachment_doc>
+</record_update>

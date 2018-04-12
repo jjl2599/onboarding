@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, $location, spUtil) {
+  /* widget controller */
+  var c = this;
+
+	c.execDetail = function(executiveid){
+		$location.url("onboard/sp?id=executive_record&executiveid=" + executiveid);
+	};
+	
+	//On Status of 'Meeting', User can move the Status to 'Completed'
+	$scope.completeRecord = function(sys_id) {
+		$scope.data.action = "completeRecord";
+		$scope.data.sys_id = sys_id;
+		$scope.server.update().then(function() {
+			$scope.data.action = undefined;
+		});
+	}
+
+	$scope.submitFilter = function() {
+		$scope.SearchList = $scope.searchText;
+	}
+
+	spUtil.recordWatch($scope, "x_143728_onboard_executive_review", "", function(name, data){
+		spUtil.update($scope);
+	});
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>//Container
+.container{
+  width: 80%;
+  margin: 0 auto;
+  padding: 15px 0px;
+}
+
+//Global
+h2, p{
+  color:white;
+}
+
+//Usercard
+.userCard{
+  vertical-align: top;
+  padding-top:15px;
+  margin: 10px;
+  display: inline-block;
+  color:black;
+  text-align: center;
+  height: 325px;
+  width: 300px;
+	background: white;
+}
+
+//Search Filter
+#search{
+  padding: 10px 0px;
+  margin: 5px 0px;
+  width:100%;
+}
+
+#searchBox{
+  border-radius: 10px;
+  padding-left: 5px;
+  width:350px;
+}
+
+//Media Queries
+@media(max-width: 991px){
+  .container{
+    width: 100%;
+    font-size: 12px;
+  }
+  .col-xs-4{
+    padding: 2px;
+  }
+}
+
+@media(max-width:771px){
+  #searchBox{
+    width:100%;
+  }
+  .userCard{
+    width: 100%;
+    margin: 10px 0px;
+  }
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>executive_record_list</id>
+        <internal>false</internal>
+        <link/>
+        <name>Executive Record List</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	data.execRecords = [];
+	
+	var gr = new GlideRecord('x_143728_onboard_executive_review');
+		gr.addQuery('executive',gs.getUserID())
+		gr.query();
+	while(gr.next()){
+		var record = {};
+		record.sys_id = gr.getDisplayValue('sys_id');
+		record.employee = gr.getDisplayValue('process.employee.name');
+		record.employee_sysid = gr.getDisplayValue('process.employee.sys_id');
+		record.status = gr.getDisplayValue('status');
+		data.execRecords.push(record);
+	}
+
+	if(input && input.action == "completeRecord") {
+		var reviewRecord = new GlideRecord('x_143728_onboard_executive_review');
+		reviewRecord.addQuery('sys_id',input.sys_id)
+		reviewRecord.query();
+		if(reviewRecord.next()){
+			reviewRecord.status = 'Completed';
+			reviewRecord.update();
+			gs.addInfoMessage('Review Completed');
+		}
+	}	
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-04-03 18:54:18</sys_created_on>
+        <sys_id>9b1f31344fd113004270e9628110c737</sys_id>
+        <sys_mod_count>109</sys_mod_count>
+        <sys_name>Executive Record List</sys_name>
+        <sys_package display_value="Onboard" source="x_143728_onboard">07fb0ccd4fc113004270e9628110c71b</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Onboard">07fb0ccd4fc113004270e9628110c71b</sys_scope>
+        <sys_update_name>sp_widget_9b1f31344fd113004270e9628110c737</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-04-12 17:52:36</sys_updated_on>
+        <template><![CDATA[<div class='container'>
+  <h2>
+    Executive Review
+  </h2>
+  
+  <p>
+  	The following records are Executive Reviews assigned to you. Make sure to review the Employee's
+    Contact Records and their current Process Ticket progress. When you are available, reach out to the
+    Employee to set up a meeting and finish their onboarding.
+  </p>
+  
+  <p>
+    The option to 'Complete' an onboard for an Employee will be accessible to Executive Reviews
+    that have been moved to the 'Meeting' status.
+  </p>
+
+  <div id='search'>
+    <input type="text" id="searchBox" placeholder='Search...' ng-model="searchText" ng-change="submitFilter()">
+  </div>
+
+  <div class='userCard' ng-repeat="execRecord in data.execRecords | filter:SearchList:strict">
+    <sn-avatar class="avatar-extra-large" primary="execRecord.employee_sysid" show-presence="false" enable-context-menu="false"/>
+    <h4>{{execRecord.employee}}</h4>
+    <h4>Status:</h4>
+    <h4 ng-if='execRecord.status == "Onboarding"' class='execStatus'><strong>ONBOARDING</strong></h4>
+    <h4 ng-if='execRecord.status == "Meeting"' class='execStatus'><strong>MEETING</strong></h4>
+    <h4 ng-if='execRecord.status == "Completed"' class='execStatus'><strong>COMPLETED</strong></h4>
+    <button ng-if='execRecord.status == "Meeting"' ng-click='completeRecord(execRecord.sys_id)' class='btn btn-primary'>Finish Onboarding</button>
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

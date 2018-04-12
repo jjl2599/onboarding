@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="dental_benefits" table="x_143728_onboard_contact_information" version="3">
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>dental_benefits</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>OPT Out</label>
+            <language>en</language>
+            <name>x_143728_onboard_contact_information</name>
+            <sequence>0</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-03-26 15:30:50</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>7cd3c89a4f4113004270e9628110c711</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-04-09 18:35:54</sys_updated_on>
+            <value>OPT Out</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>dental_benefits</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Company Plan A</label>
+            <language>en</language>
+            <name>x_143728_onboard_contact_information</name>
+            <sequence>1</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-03-26 15:30:50</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>bcd3c89a4f4113004270e9628110c712</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-04-09 18:36:01</sys_updated_on>
+            <value>Company Plan A</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>dental_benefits</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Company Plan B</label>
+            <language>en</language>
+            <name>x_143728_onboard_contact_information</name>
+            <sequence>2</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-03-26 15:30:50</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>3cd3c89a4f4113004270e9628110c713</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-04-09 18:36:06</sys_updated_on>
+            <value>Company Plan B</value>
+        </sys_choice>
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>dental_benefits</element>
+            <name>x_143728_onboard_contact_information</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-03-26 15:30:50</sys_created_on>
+            <sys_id>78d3c89a4f4113004270e9628110c712</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>dental_benefits</sys_name>
+            <sys_package display_value="Onboard" source="x_143728_onboard">07fb0ccd4fc113004270e9628110c71b</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Onboard">07fb0ccd4fc113004270e9628110c71b</sys_scope>
+            <sys_update_name>sys_choice_x_143728_onboard_contact_information_dental_benefits</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-03-26 15:30:50</sys_updated_on>
+        </sys_choice_set>
+    </sys_choice>
+</record_update>

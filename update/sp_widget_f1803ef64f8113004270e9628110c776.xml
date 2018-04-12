@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, $location) {
+	/* widget controller */
+	var c = this;
+
+	c.processDetail = function(processid){
+		$location.url("onboard/sp?id=process_ticket&processid=" + processid);
+	};
+
+	c.contactDetail = function(contactid){
+		$location.url("onboard/sp?id=contact_record&contactid=" + contactid);
+	};
+	
+	$scope.submitFilter = function() {
+		$scope.SearchList = $scope.searchText;
+	}
+
+	$('#searchBox').keypress(function(e){
+		if(e.keyCode==13)
+			$('#submitSearch').click();
+	});
+
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>//Global
+.card{
+  width: 100%;
+  margin: 20px 0px;
+  background: grey;
+  display:inline-block;
+}
+p{
+	margin: 0px;
+}
+h2{
+  color:white;
+}
+
+//User Section
+.userSection{
+  height: 100%;
+  color: white;
+}
+button{
+  display: block;
+  margin: 5px 0px;
+}
+.btn{
+  width: 150px;
+}
+.avatar-large{
+  text-align: center;
+  cursor: default;
+  margin: 10px 0px;
+}
+
+//Information Section
+.info{
+  background: white;
+}
+.check{
+  text-align:center;
+}
+
+//Search Filter
+#search{
+  padding: 10px 0px;
+  margin: 5px 0px;
+  width:100%;
+}
+#searchBox{
+  border-radius: 10px;
+  padding-left: 5px;
+  width:350px;
+}
+
+//Media Queries
+@media (min-width : 1200px) {
+  .container{
+    width:65%;
+  }
+  .card{
+    font-size: 12px;
+  }
+}
+@media (max-width : 1200px) {
+  .container{
+    width:100%;
+  }
+  button{
+    display: inline-block;
+  }
+  .info{
+    padding: 20px 0px;
+  }
+  .check{
+    margin-bottom: 10px;
+  }
+}
+@media (min-width : 991px) {
+  .info{
+    height: 200px;
+  }
+  .check{
+    margin-top: 75px;
+  }
+}
+@media(max-width:771px){
+  #searchBox{
+    width:100%;
+  }
+}
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>ongoing-tickets</id>
+        <internal>false</internal>
+        <link/>
+        <name>Ongoing Tickets</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  data.onboards = [];
+	
+	var gr = new GlideRecord('x_143728_onboard_process');
+		gr.addQuery('active',false)
+		gr.query();
+	while(gr.next()){
+		var process = {};
+		
+		var contactRecord =  new GlideRecord('x_143728_onboard_contact_information');
+		contactRecord.addQuery('process_ticket', gr.getDisplayValue('sys_id'));
+		contactRecord.query();
+		if(contactRecord.next()){
+			process.contact_sysid = contactRecord.getDisplayValue('sys_id');
+		}
+		
+		process.sys_id = gr.getDisplayValue('sys_id');
+		process.employee_sysid = gr.getDisplayValue('employee.sys_id');
+		process.employee = gr.getDisplayValue('employee.name');
+		process.guide = gr.getDisplayValue('orientation_guide.name');
+		process.accountFlag = gr.getDisplayValue('account_setup_flag');
+		process.bankFlag = gr.getDisplayValue('bank_info_flag');
+		process.benefitFlag = gr.getDisplayValue('benefits_flag');
+		process.contactFlag = gr.getDisplayValue('contact_information_flag');
+		process.officeFlag = gr.getDisplayValue('office_setup_flag');
+		process.personalFlag = gr.getDisplayValue('personal_information_flag');
+		data.onboards.push(process);
+	}
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-03-28 17:22:20</sys_created_on>
+        <sys_id>f1803ef64f8113004270e9628110c776</sys_id>
+        <sys_mod_count>194</sys_mod_count>
+        <sys_name>Ongoing Tickets</sys_name>
+        <sys_package display_value="Onboard" source="x_143728_onboard">07fb0ccd4fc113004270e9628110c71b</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Onboard">07fb0ccd4fc113004270e9628110c71b</sys_scope>
+        <sys_update_name>sp_widget_f1803ef64f8113004270e9628110c776</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-04-12 17:45:55</sys_updated_on>
+        <template><![CDATA[<div class='container'>
+  <h2>Currently Onboarding</h2>
+  <div id='search'>
+    <input type="text" id="searchBox" placeholder='Search...' ng-model="searchText" ng-change="submitFilter()">
+  </div>
+  
+  <div class="row card" data-ng-init="processid=onboard.sys_id; contactid=onboard.contact_sysid;"  ng-repeat="onboard in data.onboards | filter:SearchList:strict">
+    <div class="col-xs-12 col-md-4 userSection">
+      <sn-avatar class="avatar-large" primary="onboard.employee_sysid" show-presence="false" enable-context-menu="false"/>
+      <p>Employee: {{onboard.employee}}</p>
+      <button class='btn btn-primary' data-ng-click="c.processDetail(processid)" >View Details</button>
+      <button class='btn btn-info' data-ng-click="c.contactDetail(contactid)">View Contact</button>
+    </div>
+
+    <div class='col-xs-12 col-md-8 info'>
+      <div class='col-xs-6 col-sm-4 col-md-2 check'>
+        <p>ACCOUNT</p>
+        <img ng-if='onboard.accountFlag == "true"' src="checkSVG.svg" width="20" height="20"/>
+        <img ng-if='onboard.accountFlag == "false"' src="ob_cancel.svg" width="20" height="20"/>
+      </div>
+
+      <div class='col-xs-6 col-sm-4 col-md-2 check'>
+        <p>BANK</p>
+        <img ng-if='onboard.bankFlag == "true"' src="checkSVG.svg" width="20" height="20"/>
+        <img ng-if='onboard.bankFlag == "false"' src="ob_cancel.svg" width="20" height="20"/>
+      </div>
+
+      <div class='col-xs-6 col-sm-4 col-md-2 check'>
+        <p>BENEFITS</p>
+        <img ng-if='onboard.benefitFlag == "true"' src="checkSVG.svg" width="20" height="20"/>
+        <img ng-if='onboard.benefitFlag == "false"' src="ob_cancel.svg" width="20" height="20"/>
+      </div>
+
+      <div class='col-xs-6 col-sm-4 col-md-2 check'>
+        <p>CONTACT</p>
+        <img ng-if='onboard.contactFlag == "true"' src="checkSVG.svg" width="20" height="20"/>
+        <img ng-if='onboard.contactFlag == "false"' src="ob_cancel.svg" width="20" height="20"/>
+      </div>
+
+      <div class='col-xs-6 col-sm-4 col-md-2 check'>
+        <p>OFFICE</p>
+        <img ng-if='onboard.officeFlag == "true"' src="checkSVG.svg" width="20" height="20"/>
+        <img ng-if='onboard.officeFlag == "false"' src="ob_cancel.svg" width="20" height="20"/>
+      </div>
+
+      <div class='col-xs-6 col-sm-4 col-md-2 check'>
+        <p>PERSONAL</p>
+        <img ng-if='onboard.personalFlag == "true"' src="checkSVG.svg" width="20" height="20"/>
+        <img ng-if='onboard.personalFlag == "false"' src="ob_cancel.svg" width="20" height="20"/>
+      </div>
+    </div>
+  </div>
+
+</div>
+]]></template>
+    </sp_widget>
+</record_update>

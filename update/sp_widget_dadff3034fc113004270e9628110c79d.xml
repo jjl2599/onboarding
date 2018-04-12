@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, spUtil, $location, $rootScope) {
+  /* widget controller */
+  var c = this;
+	
+	//Uses the section URL Parameter to assign the white border selection
+	angular.element(document).ready(function(){
+		document.getElementById('account').style.border = 'none';
+		document.getElementById('bank').style.border = 'none';
+		document.getElementById('benefit').style.border = 'none';
+		document.getElementById('contact').style.border = 'none';
+		document.getElementById('office').style.border = 'none';
+		document.getElementById('personal').style.border = 'none';
+		
+		if($scope.data.section == 'Account'){
+			document.getElementById('account').style.border = '2px solid white';
+		}else if($scope.data.section  == 'Bank'){
+			document.getElementById('bank').style.border = '2px solid white';
+		}else if($scope.data.section  == 'Benefit'){
+			document.getElementById('benefit').style.border = '2px solid white';
+		}else if($scope.data.section  == 'Contact'){
+			document.getElementById('contact').style.border = '2px solid white';
+		}else if($scope.data.section  == 'Office'){
+			document.getElementById('office').style.border = '2px solid white';
+		}else if($scope.data.section  == 'Personal'){
+			document.getElementById('personal').style.border = '2px solid white';
+		}
+	});
+
+	//Broadcasts the selectedItem event to be picked up by the 'Form Context - ' widgets
+	$scope.selectItem = function(target) {  
+		var obj= {
+			target: target
+		};
+		$rootScope.$broadcast('selectedItem', obj);
+		
+		//On selection, the Section is highlighted with the white border selection
+		document.getElementById('account').style.border = 'none';
+		document.getElementById('bank').style.border = 'none';
+		document.getElementById('benefit').style.border = 'none';
+		document.getElementById('contact').style.border = 'none';
+		document.getElementById('office').style.border = 'none';
+		document.getElementById('personal').style.border = 'none';
+		
+		if(target == 'Account'){
+			document.getElementById('account').style.border = '2px solid white';
+		}else if(target == 'Bank'){
+			document.getElementById('bank').style.border = '2px solid white';
+		}else if(target == 'Benefit'){
+			document.getElementById('benefit').style.border = '2px solid white';
+		}else if(target == 'Contact'){
+			document.getElementById('contact').style.border = '2px solid white';
+		}else if(target == 'Office'){
+			document.getElementById('office').style.border = '2px solid white';
+		}else if(target == 'Personal'){
+			document.getElementById('personal').style.border = '2px solid white';
+		}
+	}
+	
+	spUtil.recordWatch($scope, "x_143728_onboard_process", "", function(name, data){
+		spUtil.update($scope);
+	});
+	
+	spUtil.recordWatch($scope, "x_143728_onboard_contact_information", "", function(name, data){
+		spUtil.update($scope);
+	});
+
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>#Sidebar{
+  margin-top: 20px;
+  display: block;
+}
+
+p{
+  font-size: 14px;
+  color:white;
+  text-align: center;
+}
+.icon{
+  text-align: center;
+}
+
+.selection{
+  padding: 5px 0px;
+}
+
+.selection:hover {
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  cursor: pointer;
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);
+  -moz-box-shadow: 0 0 20px #ccc;
+	-webkit-box-shadow: 0 0 20px #ccc;
+	box-shadow: 0 0 20px black;
+}
+
+@media(max-width: 991px){
+  p, .icon{
+    font-size: 12px;
+    display:inline-block;
+    vertical-align: top
+  }
+  .icon{
+    float:right;
+  }
+  .selection{
+    padding: 0px;
+  }
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>form-selector</id>
+        <internal>false</internal>
+        <link/>
+        <name>Form Selector</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  data.sys_id = $sp.getParameter('formid');		
+	data.section = $sp.getParameter('section');
+	
+	if(!data.process) 
+		data.process = {};
+	
+	var infoRecord = new GlideRecord('x_143728_onboard_contact_information');
+	
+	infoRecord.get(data.sys_id);
+
+	data.information = {};
+	data.information.sys_id = infoRecord.getDisplayValue('sys_id');
+	data.information.user = infoRecord.getDisplayValue('user.name');
+	data.information.accountFlag = infoRecord.getDisplayValue('process_ticket.account_setup_flag');
+	data.information.bankFlag = infoRecord.getDisplayValue('process_ticket.bank_info_flag');
+	data.information.benefitFlag = infoRecord.getDisplayValue('process_ticket.benefits_flag');
+	data.information.contactFlag = infoRecord.getDisplayValue('process_ticket.contact_information_flag');
+	data.information.officeFlag = infoRecord.getDisplayValue('process_ticket.office_setup_flag');
+	data.information.personalFlag = infoRecord.getDisplayValue('process_ticket.personal_information_flag');
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-03-29 17:47:23</sys_created_on>
+        <sys_id>dadff3034fc113004270e9628110c79d</sys_id>
+        <sys_mod_count>141</sys_mod_count>
+        <sys_name>Form Selector</sys_name>
+        <sys_package display_value="Onboard" source="x_143728_onboard">07fb0ccd4fc113004270e9628110c71b</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Onboard">07fb0ccd4fc113004270e9628110c71b</sys_scope>
+        <sys_update_name>sp_widget_dadff3034fc113004270e9628110c79d</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-04-12 17:41:38</sys_updated_on>
+        <template><![CDATA[<div class='row' id='Sidebar'>
+  <div class='selection col-xs-12 col-md-2' id='account' ng-click='selectItem("Account")'>
+    <p>Account Information:</p>
+    <div class='icon'>
+      <img ng-if='data.information.accountFlag == "true"' src="checkSVG.svg" width="15" height="15"/>
+      <img ng-if='data.information.accountFlag == "false"' src="ob_cancel.svg" width="15" height="15"/>
+    </div>
+  </div>
+
+  <div class='selection col-xs-12 col-md-2' id='bank' ng-click='selectItem("Bank")'>
+    <p>Bank Information:</p>
+    <div class='icon'>
+      <img ng-if='data.information.bankFlag == "true"' src="checkSVG.svg" width="15" height="15"/>
+      <img ng-if='data.information.bankFlag == "false"' src="ob_cancel.svg" width="15" height="15"/>
+    </div>
+  </div>
+
+  <div class='selection col-xs-12 col-md-2' id='benefit' ng-click='selectItem("Benefit")'>
+    <p>Benefits Information:</p>
+    <div class='icon'>
+      <img ng-if='data.information.benefitFlag == "true"' src="checkSVG.svg" width="15" height="15"/>
+      <img ng-if='data.information.benefitFlag == "false"' src="ob_cancel.svg" width="15" height="15"/>
+    </div>
+  </div>
+
+  <div class='selection col-xs-12 col-md-2' id='contact' ng-click='selectItem("Contact")'>
+    <p>Contact Information:</p>
+    <div class='icon'>
+      <img ng-if='data.information.contactFlag == "true"' src="checkSVG.svg" width="15" height="15"/>
+      <img ng-if='data.information.contactFlag == "false"' src="ob_cancel.svg" width="15" height="15"/>
+    </div>
+  </div>
+
+  <div class='selection col-xs-12 col-md-2' id='office' ng-click='selectItem("Office")'>
+    <p>Office Information:</p>
+    <div class='icon'>
+      <img ng-if='data.information.officeFlag == "true"' src="checkSVG.svg" width="15" height="15"/>
+      <img ng-if='data.information.officeFlag == "false"' src="ob_cancel.svg" width="15" height="15"/>
+    </div>
+  </div>
+
+  <div class='selection col-xs-12 col-md-2' id='personal' ng-click='selectItem("Personal")'>
+    <p>Personal Information:</p>
+    <div class='icon'>
+      <img ng-if='data.information.personalFlag == "true"' src="checkSVG.svg" width="15" height="15"/>
+      <img ng-if='data.information.personalFlag == "false"' src="ob_cancel.svg" width="15" height="15"/>
+    </div>
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

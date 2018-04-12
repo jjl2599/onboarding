@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update>
+    <sys_ui_section caption="Bank Information" section_id="8419af0a4f0113004270e9628110c73a" sys_domain="global" table="x_143728_onboard_contact_information" version="3" view="">
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>process_ticket.bank_info_due_date</element>
+            <position>0</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-03-26 15:17:30</sys_created_on>
+            <sys_id>a5c0c41a4f4113004270e9628110c753</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Bank Information" display_value="Bank Information" name="x_143728_onboard_contact_information" sys_domain="global" view="Default view">8419af0a4f0113004270e9628110c73a</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-03-26 15:17:30</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>bank_routing</element>
+            <position>1</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-03-26 15:17:30</sys_created_on>
+            <sys_id>29c0c41a4f4113004270e9628110c753</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Bank Information" display_value="Bank Information" name="x_143728_onboard_contact_information" sys_domain="global" view="Default view">8419af0a4f0113004270e9628110c73a</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-03-26 15:17:30</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>bank_number</element>
+            <position>2</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-03-26 15:17:30</sys_created_on>
+            <sys_id>a9c0c41a4f4113004270e9628110c753</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Bank Information" display_value="Bank Information" name="x_143728_onboard_contact_information" sys_domain="global" view="Default view">8419af0a4f0113004270e9628110c73a</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-03-26 15:17:30</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.split</element>
+            <position>3</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-03-26 15:17:30</sys_created_on>
+            <sys_id>2dc0c41a4f4113004270e9628110c753</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Bank Information" display_value="Bank Information" name="x_143728_onboard_contact_information" sys_domain="global" view="Default view">8419af0a4f0113004270e9628110c73a</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-03-26 15:17:30</sys_updated_on>
+            <sys_user/>
+            <type>.split</type>
+        </sys_ui_element>
+        <sys_ui_section action="INSERT_OR_UPDATE">
+            <caption>Bank Information</caption>
+            <header>false</header>
+            <name>x_143728_onboard_contact_information</name>
+            <roles/>
+            <sys_class_name>sys_ui_section</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-03-26 13:33:55</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>8419af0a4f0113004270e9628110c73a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Bank Information</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="Onboard" source="x_143728_onboard">07fb0ccd4fc113004270e9628110c71b</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Onboard">07fb0ccd4fc113004270e9628110c71b</sys_scope>
+            <sys_update_name>sys_ui_section_8419af0a4f0113004270e9628110c73a</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-03-26 13:33:55</sys_updated_on>
+            <sys_user/>
+            <title>false</title>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_section>
+    </sys_ui_section>
+</record_update>

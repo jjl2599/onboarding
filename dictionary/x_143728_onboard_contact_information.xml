@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element label="Contact Information" max_length="40" name="x_143728_onboard_contact_information" type="collection">
+        <element label="Access Points" max_length="40" name="access_points" type="boolean"/>
+        <element label="Accounts Setup?" max_length="40" name="account_set" type="boolean"/>
+        <element label="Address" mandatory="true" max_length="200" name="address" type="string"/>
+        <element label="Bank Number" mandatory="true" max_length="40" name="bank_number" type="string"/>
+        <element label="Bank Routing" mandatory="true" max_length="40" name="bank_routing" type="string"/>
+        <element label="Email is Correct?" max_length="40" name="check_email" type="boolean"/>
+        <element label="Coffee" max_length="40" name="coffee" type="string"/>
+        <element choice="1" label="Culture Event" max_length="40" name="culture_event" type="choice">
+            <choice>
+                <element label="Code Wars" sequence="0" value="Code Wars"/>
+                <element label="Toggl Tuesdays" sequence="1" value="Toggle Tuesdays"/>
+                <element label="DnD" sequence="2" value="DnD"/>
+                <element label="Beer Club" sequence="3" value="Beer Club"/>
+            </choice>
+        </element>
+        <element label="Date of Birth" max_length="40" name="date_of_birth" type="glide_date"/>
+        <element choice="1" label="Dental Benefits" mandatory="true" max_length="40" name="dental_benefits" type="choice">
+            <choice>
+                <element label="OPT Out" sequence="0" value="OPT Out"/>
+                <element label="Company Plan A" sequence="1" value="Company Plan A"/>
+                <element label="Company Plan B" sequence="2" value="Company Plan B"/>
+            </choice>
+        </element>
+        <element choice="1" label="Agree to Display Information to the Public?" mandatory="true" max_length="40" name="display" type="choice">
+            <choice>
+                <element label="Public" sequence="0" value="Public"/>
+                <element label="Private" sequence="1" value="Private"/>
+            </choice>
+        </element>
+        <element label="Email" max_length="40" name="email" read_only="true" type="string"/>
+        <element label="Email group" max_length="40" name="email_group" type="boolean"/>
+        <element label="Emergency Contact Name" mandatory="true" max_length="40" name="emergency_contact_name" type="string"/>
+        <element label="Emergency Contact Number" mandatory="true" max_length="40" name="emergency_contact_number" type="string"/>
+        <element label="Emergency Contact Relationship" mandatory="true" max_length="40" name="emergency_contact_relationship" type="string"/>
+        <element label="Gmail Signature" max_length="40" name="gmail_signature" type="boolean"/>
+        <element label="Google Drive" max_length="40" name="google_drive" type="boolean"/>
+        <element label="Guidelines" max_length="40" name="guidelines" type="boolean"/>
+        <element choice="1" label="Health Insurance" mandatory="true" max_length="40" name="health_insurance" type="choice">
+            <choice>
+                <element label="OPT Out" sequence="0" value="OPT Out"/>
+                <element label="Silver Plan" sequence="1" value="Silver Plan"/>
+                <element label="Gold Plan" sequence="2" value="Gold Plan"/>
+            </choice>
+        </element>
+        <element label="Home Number" max_length="40" name="home_number" type="string"/>
+        <element label="Name you go by" mandatory="true" max_length="40" name="name" type="string"/>
+        <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" display="true" label="Number" max_length="40" name="number" read_only="true" type="string"/>
+        <element choice="1" label="Office" mandatory="true" max_length="40" name="office" type="choice">
+            <choice>
+                <element label="SWS Room" sequence="0" value="SWS Room"/>
+                <element label="KAPSE Room" sequence="1" value="KAPSE Room"/>
+                <element label="Graphic Design" sequence="3" value="Graphic Design"/>
+                <element label="QA Room" sequence="4" value="QA Room"/>
+                <element label="WAR Room" sequence="5" value="WAR Room"/>
+                <element label="SNOW Room" sequence="6" value="SNOW Room"/>
+            </choice>
+        </element>
+        <element label="payroll" max_length="40" name="payroll" type="boolean"/>
+        <element label="Personal Email" mandatory="true" max_length="40" name="personal_email" type="string"/>
+        <element label="Phone Number" mandatory="true" max_length="40" name="phone_number" type="string"/>
+        <element label="Places" max_length="40" name="places" type="string"/>
+        <element label="Process Ticket" max_length="32" name="process_ticket" read_only="true" reference="x_143728_onboard_process" type="reference"/>
+        <element label="Toggl Account" max_length="40" name="toggl_account" type="boolean"/>
+        <element label="Toggl Buddy" max_length="32" name="toggl_buddy" reference="sys_user" type="reference"/>
+        <element label="User" max_length="32" name="user" read_only="true" reference="sys_user" type="reference"/>
+        <element label="Wiki" max_length="40" name="wiki" type="boolean"/>
+        <index name="index">
+            <element name="process_ticket"/>
+        </index>
+        <index name="index2">
+            <element name="toggl_buddy"/>
+        </index>
+        <index name="index3">
+            <element name="user"/>
+        </index>
+    </element>
+</database>

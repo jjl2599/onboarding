@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="office" table="x_143728_onboard_contact_information" version="3">
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>office</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>SWS Room</label>
+            <language>en</language>
+            <name>x_143728_onboard_contact_information</name>
+            <sequence>0</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-03-26 15:30:50</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>bcd3c89a4f4113004270e9628110c71d</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-04-09 18:37:40</sys_updated_on>
+            <value>SWS Room</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>office</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>KAPSE Room</label>
+            <language>en</language>
+            <name>x_143728_onboard_contact_information</name>
+            <sequence>1</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-03-26 15:30:50</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>fcd3c89a4f4113004270e9628110c71e</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-04-09 18:37:46</sys_updated_on>
+            <value>KAPSE Room</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>office</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Graphic Design</label>
+            <language>en</language>
+            <name>x_143728_onboard_contact_information</name>
+            <sequence>3</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-03-26 15:30:50</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>f8d3c89a4f4113004270e9628110c720</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-04-09 18:37:52</sys_updated_on>
+            <value>Graphic Design</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>office</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>QA Room</label>
+            <language>en</language>
+            <name>x_143728_onboard_contact_information</name>
+            <sequence>4</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-03-26 15:30:50</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>78d3c89a4f4113004270e9628110c721</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-04-09 18:37:57</sys_updated_on>
+            <value>QA Room</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>office</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>WAR Room</label>
+            <language>en</language>
+            <name>x_143728_onboard_contact_information</name>
+            <sequence>5</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-03-26 15:30:50</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>f4d3c89a4f4113004270e9628110c722</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-04-09 18:38:03</sys_updated_on>
+            <value>WAR Room</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>office</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>SNOW Room</label>
+            <language>en</language>
+            <name>x_143728_onboard_contact_information</name>
+            <sequence>6</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-03-26 15:30:50</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>74d3c89a4f4113004270e9628110c723</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-04-09 18:38:09</sys_updated_on>
+            <value>SNOW Room</value>
+        </sys_choice>
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>office</element>
+            <name>x_143728_onboard_contact_information</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-03-26 15:30:50</sys_created_on>
+            <sys_id>b8d3c89a4f4113004270e9628110c71e</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>office</sys_name>
+            <sys_package display_value="Onboard" source="x_143728_onboard">07fb0ccd4fc113004270e9628110c71b</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Onboard">07fb0ccd4fc113004270e9628110c71b</sys_scope>
+            <sys_update_name>sys_choice_x_143728_onboard_contact_information_office</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-03-26 15:30:50</sys_updated_on>
+        </sys_choice_set>
+    </sys_choice>
+</record_update>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_container">
+    <sp_container action="INSERT_OR_UPDATE">
+        <background_color/>
+        <background_image/>
+        <background_style>default</background_style>
+        <bootstrap_alt>false</bootstrap_alt>
+        <class_name/>
+        <container_class_name/>
+        <name>Ongoing - Container 1</name>
+        <order>1</order>
+        <sp_page display_value="ongoing">b1303ef64f8113004270e9628110c768</sp_page>
+        <subheader>false</subheader>
+        <sys_class_name>sp_container</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-03-28 17:20:59</sys_created_on>
+        <sys_id>35303ef64f8113004270e9628110c76b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Ongoing - Container 1</sys_name>
+        <sys_package display_value="Onboard" source="x_143728_onboard">07fb0ccd4fc113004270e9628110c71b</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Onboard">07fb0ccd4fc113004270e9628110c71b</sys_scope>
+        <sys_update_name>sp_container_35303ef64f8113004270e9628110c76b</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-03-28 17:20:59</sys_updated_on>
+        <title/>
+        <width>container</width>
+    </sp_container>
+</record_update>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_page">
+    <sp_page action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <css>.header{
+  padding-top: 20px;
+  text-align:center;
+  font-size: 32px;
+  color: white;
+}
+
+.container-2{
+  padding: 15px;
+  width: 900px;
+}
+
+@media(max-width: 1090px){
+  .mobile-container{
+    padding-top:15px;
+  }
+  .container-2{
+    width: 100%;
+  }
+}</css>
+        <draft>false</draft>
+        <dynamic_title_structure/>
+        <id>onboard_home</id>
+        <internal>false</internal>
+        <public>false</public>
+        <roles/>
+        <short_description/>
+        <sys_class_name>sp_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-03-26 19:25:12</sys_created_on>
+        <sys_id>f97974de4fc113004270e9628110c78d</sys_id>
+        <sys_mod_count>16</sys_mod_count>
+        <sys_name>onboard_home</sys_name>
+        <sys_package display_value="Onboard" source="x_143728_onboard">07fb0ccd4fc113004270e9628110c71b</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Onboard">07fb0ccd4fc113004270e9628110c71b</sys_scope>
+        <sys_update_name>sp_page_f97974de4fc113004270e9628110c78d</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-04-12 18:20:33</sys_updated_on>
+        <title>Onboard Home</title>
+    </sp_page>
+    <sys_translated_text action="delete_multiple" query="documentkey=f97974de4fc113004270e9628110c78d"/>
+</record_update>

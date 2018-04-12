@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, $location) {
+  /* widget controller */
+  var c = this;
+
+	c.contactDetail = function(contactid){
+		$location.url("onboard/sp?id=contact_record&contactid=" + contactid);
+	};
+
+	$scope.submitFilter = function() {
+		$scope.SearchList = $scope.searchText;
+	}
+
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>//Global
+h2{
+  color:white;
+}
+
+//Individual User Cards
+.userCard{
+  display: inline-block;
+  text-align: center;
+  padding-top:10px;
+  margin: 10px;
+  height: 200px;
+  width: 300px;
+	background: white;
+}
+
+.userCard:hover {
+  position: relative;
+  z-index: 1000;
+  cursor: pointer;
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);
+  -moz-box-shadow: 0 0 20px #ccc;
+	-webkit-box-shadow: 0 0 20px #ccc;
+	box-shadow: 0 0 20px black;
+}
+
+//Search Box
+#search{
+  padding: 10px 0px;
+  margin: 5px 0px;
+  width:100%;
+}
+
+#searchBox{
+  border-radius: 10px;
+  padding-left: 5px;
+  width:350px;
+}
+
+//Media Queries
+@media(max-width:771px){
+  #searchBox{
+    width:100%;
+  }
+  .userCard{
+    width: 100%;
+    margin: 10px 0px;
+  }
+}
+
+  
+  </css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>contact_record_list</id>
+        <internal>false</internal>
+        <link/>
+        <name>Contact Record List</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  data.contacts = [];
+	
+	var gr = new GlideRecord('x_143728_onboard_contact_information');
+		gr.addActiveQuery();
+		gr.query();
+	while(gr.next()){
+		var record = {};
+		record.sys_id = gr.getDisplayValue('sys_id');
+		record.user_sysid = gr.getDisplayValue('user.sys_id');
+		record.name = gr.getDisplayValue('user.name');
+		data.contacts.push(record);
+	}
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-04-03 15:00:25</sys_created_on>
+        <sys_id>d19989f44f5113004270e9628110c772</sys_id>
+        <sys_mod_count>58</sys_mod_count>
+        <sys_name>Contact Record List</sys_name>
+        <sys_package display_value="Onboard" source="x_143728_onboard">07fb0ccd4fc113004270e9628110c71b</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Onboard">07fb0ccd4fc113004270e9628110c71b</sys_scope>
+        <sys_update_name>sp_widget_d19989f44f5113004270e9628110c772</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-04-12 17:52:53</sys_updated_on>
+        <template><![CDATA[<div>
+  <h2>
+    Contact Records
+  </h2>
+  
+  <div id='search'>
+    <input type="text" id="searchBox" placeholder='Search...' ng-model="searchText" ng-change="submitFilter()">
+  </div>
+
+  <div class='userCard' data-ng-init="contactid=contact.sys_id;" data-ng-click="c.contactDetail(contactid)" ng-repeat="contact in data.contacts | filter:SearchList:strict">
+    <sn-avatar class="avatar-extra-large" primary="contact.user_sysid" show-presence="false" enable-context-menu="false"/>
+    <p>{{contact.name}}</p>
+  </div>
+
+</div>]]></template>
+    </sp_widget>
+</record_update>

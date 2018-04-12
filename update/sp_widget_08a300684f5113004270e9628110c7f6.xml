@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, $rootScope, spUtil) {
+	/* widget controller */
+	var c = this;
+	
+	//On Document Ready, utilizes the section URL Parameter to show/hide the section
+	angular.element(document).ready(function(){
+		if($scope.data.section == "Benefit"){
+			document.getElementById('benefitDiv').style.display = 'block';
+		}else{
+			document.getElementById('benefitDiv').style.display = 'none';
+		}
+	});
+
+	//Listens for the 'selectedItem' broadcast from the 'Form Selector' widget
+	$rootScope.$on('selectedItem', function(event,obj) {
+		if(obj.target == "Benefit"){
+			document.getElementById('benefitDiv').style.display = 'block';
+		}else{
+			document.getElementById('benefitDiv').style.display = 'none';
+		}
+	});
+
+	$scope.saveContact = function() {
+		$scope.data.action = "saveContact";
+		$scope.server.update().then(function() {
+			$scope.data.action = undefined;
+		});
+	}
+	
+	$scope.submitContact = function() {
+		$scope.data.action = "submitContact";
+		$scope.server.update().then(function() {
+			$scope.data.action = undefined;
+		});
+	}
+	
+	spUtil.recordWatch($scope, "x_143728_onboard_contact_information", "", function(name, data){
+		spUtil.update($scope);
+	});
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>//Container
+#benefitDiv{
+  display:none;
+  padding: 20px 0px 35px 0px;
+  width: 800px;
+  margin: 0 auto;
+}
+
+//Global
+p, h2, h3, ul, li{
+  color:white;
+}
+
+//Form Fields
+.form-group{
+  color: black;
+  background: white;
+  border: 3px solid grey;
+  border-radius: 3px;
+  width:100%;
+  padding-left: 10px;
+}
+
+.form-check-input{
+  vertical-align: middle;
+  margin: 0px;
+}
+
+.selectField{
+  border: none;
+}
+
+.select2-choice{
+  width: 50%;
+}
+
+//Media Queries
+@media(max-width:991px){
+  .select2-choice{
+    width: 100%;
+  }
+  #benefitDiv{
+    width: 100%;
+  }
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>form_context_benefit</id>
+        <internal>false</internal>
+        <link/>
+        <name>Form Context Benefit</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	data.sys_id = $sp.getParameter('formid');		
+	data.section = $sp.getParameter('section');
+
+	if(!data.process) 
+		data.process = {};
+
+	var infoRecord = new GlideRecord('x_143728_onboard_contact_information');
+
+	infoRecord.get(data.sys_id);
+
+	//Saves the information, does not trigger the flag
+	if(input && input.action == "saveContact") {
+		infoRecord.payroll = this.input.information.payroll;
+		infoRecord.dental_benefits = this.input.information.dental_benefits;
+		infoRecord.health_insurance = this.input.information.health_insurance;
+		infoRecord.update();
+		gs.addInfoMessage('Benefits Saved');
+	}	
+
+	//Validates inputs, on successful submittion triggers the flag
+	if(input && input.action == "submitContact") {
+		if(this.input.information.payroll == '' || this.input.information.dental_benefits == '' ||
+			 this.input.information.health_insurance == ''){
+			gs.addErrorMessage('Please fill out all fields before submission.');
+		}else{
+			infoRecord.payroll = this.input.information.payroll;
+			infoRecord.dental_benefits = this.input.information.dental_benefits;
+			infoRecord.health_insurance = this.input.information.health_insurance;
+			infoRecord.update();
+			var processUpdate = new GlideRecord('x_143728_onboard_process');
+			processUpdate.addQuery('sys_id', infoRecord.process_ticket);
+			processUpdate.query();
+			if(processUpdate.next()){
+				processUpdate.benefits_flag = true;
+				processUpdate.update();
+			}
+			gs.addInfoMessage('Benefits Submitted');
+		}
+	}	
+
+	data.information = {};
+	data.information.sys_id = infoRecord.getDisplayValue('sys_id');
+	data.information.user = infoRecord.getDisplayValue('user.name');
+	data.information.payroll = infoRecord.getDisplayValue('payroll');
+	data.information.dental_benefits = infoRecord.getDisplayValue('dental_benefits');
+	data.information.health_insurance = infoRecord.getDisplayValue('health_insurance');
+	data.information.dueDate = infoRecord.getDisplayValue('process_ticket.due_date');
+	data.information.user = infoRecord.getDisplayValue('user.name');
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-04-02 15:16:17</sys_created_on>
+        <sys_id>08a300684f5113004270e9628110c7f6</sys_id>
+        <sys_mod_count>30</sys_mod_count>
+        <sys_name>Form Context Benefit</sys_name>
+        <sys_package display_value="Onboard" source="x_143728_onboard">07fb0ccd4fc113004270e9628110c71b</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Onboard">07fb0ccd4fc113004270e9628110c71b</sys_scope>
+        <sys_update_name>sp_widget_08a300684f5113004270e9628110c7f6</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-04-12 17:35:59</sys_updated_on>
+        <template><![CDATA[<div id='benefitDiv'>
+  <h2>Benefits</h2>
+  <p>Due Date: {{data.information.dueDate}}</p>
+
+  <p>Print and Sign all the forms in the New Hire Package and deliver to Laura.</p>
+  <ul>
+    <li>Payroll</li>
+    <li>I-9</li>
+    <li>W-4</li>
+    <li>Direct Deposit</li>
+  </ul>
+
+  <div class="form-group">
+    <label for="payroll">I have delivered the Payroll, I-9, W-4, and Direct Deposit forms.:</label>
+    <input type="checkbox" id="payroll" class="form-check-input" ng-model="data.information.payroll"  ng-true-value="'true'" ng-false-value="'false'">
+  </div>
+
+  <p>
+    Read about the Dental Benefits:
+  </p>
+
+  <div class="form-group">
+    <label for="dental_benefits">Dental Benefits:</label>
+    <select name="dental_benefits" class='selectField' ng-model="data.information.dental_benefits">
+      <option value="OPT Out">OPT Out</option>
+      <option value="Company Plan A">Company Plan A</option>
+      <option value="Company Plan B">Company Plan B</option>
+    </select><br>
+  </div>
+
+  <p>
+    Read about Benefits Options. Read about the two options:
+  </p>
+  <ul>
+    <li>The Gold Plan</li>
+    <li>The Silver Plan</li>
+  </ul>
+
+  <div class="form-group">
+    <label for="health_insurance">Health Insurance:</label>
+    <select name="health_insurance" class='selectField' ng-model="data.information.health_insurance">
+      <option value="OPT Out">OPT Out</option>
+      <option value="Silver Plan">Silver Plan</option>
+      <option value="Gold Plan">Gold Plan</option>
+    </select><br>
+  </div>
+
+  <button class='btn btn-primary' ng-click='saveContact()'>Save</button>
+  <button class='btn btn-info' ng-click='submitContact()'>Submit</button>
+</div>
+
+]]></template>
+    </sp_widget>
+</record_update>
