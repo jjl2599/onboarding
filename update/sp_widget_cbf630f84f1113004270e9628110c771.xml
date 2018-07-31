@@ -47,13 +47,8 @@ p,label{
 	processRecord.get(data.sys_id);
 
 	if(input && input.action == "updateTicket") {
-		processRecord.start_date = this.input.process.start_date.toString();
-		processRecord.contact_information_due_date = this.input.process.contactDue.toString();
-		processRecord.account_setup_due_date = this.input.process.accountDue.toString();
-		processRecord.bank_info_due_date = this.input.process.bankDue.toString();
-		processRecord.benefits_due_date = this.input.process.benefitsDue.toString();
-		processRecord.office_setup_due_date = this.input.process.officeDue.toString();
-		processRecord.personal_information_due_date = this.input.process.personalDue.toString();
+		processRecord.start_date = input.process.start_date.toString();
+		processRecord.due_date = input.process.due_date.toString();
 		processRecord.update();
 		gs.addInfoMessage('Dates have been updated');
 	}	
@@ -62,8 +57,8 @@ p,label{
 	data.process.guide = processRecord.getDisplayValue('orientation_guide.name');
 	data.process.employee = processRecord.getDisplayValue('employee.name');
 	data.process.executive = processRecord.getDisplayValue('executive.name');
-	data.process.start_date = processRecord.getDisplayValue('start_date');
-	data.process.due_date = processRecord.getDisplayValue('due_date');
+	data.process.system_start = processRecord.getDisplayValue('start_date');
+	data.process.system_due = processRecord.getDisplayValue('due_date');
 	
 	
 })();]]></script>
@@ -72,14 +67,14 @@ p,label{
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-04-03 13:39:10</sys_created_on>
         <sys_id>cbf630f84f1113004270e9628110c771</sys_id>
-        <sys_mod_count>27</sys_mod_count>
+        <sys_mod_count>30</sys_mod_count>
         <sys_name>Process Ticket</sys_name>
         <sys_package display_value="Onboard" source="x_143728_onboard">07fb0ccd4fc113004270e9628110c71b</sys_package>
         <sys_policy/>
         <sys_scope display_value="Onboard">07fb0ccd4fc113004270e9628110c71b</sys_scope>
         <sys_update_name>sp_widget_cbf630f84f1113004270e9628110c771</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-04-12 18:39:19</sys_updated_on>
+        <sys_updated_on>2018-04-19 13:51:07</sys_updated_on>
         <template><![CDATA[<div class='container'>
   <p>
     Employee Guide: {{data.process.employee}}
@@ -93,13 +88,17 @@ p,label{
     Executive: {{data.process.executive}}
   </p>
   
+  <p>
+    Current Start Date: {{data.process.system_start}}
+  </p>
   <div class="form-group">
-    <label for="start_date">Start Date:</label>
     <input type="date" id="start_date" class="form-control" ng-model="data.process.start_date">
   </div>
   
+  <p>
+    Current Start Date: {{data.process.system_due}}
+  </p>
   <div class="form-group">
-    <label for="dueDate">Due Date:</label>
     <input type="date" id="dueDate" class="form-control" ng-model="data.process.due_date">
   </div>
   

@@ -29,7 +29,7 @@
         <rest_variables/>
         <role_conditions/>
         <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
-	if(current.account_setup_flag == true && current.bank_info_flag == true && current.benefits_flag == true && current.contact_information_flag == true && current.office_setup_flag == true && current.personal_information_flag == true && current.active == false){
+	if(current.account_flag == true && current.bank_flag == true && current.benefit_flag == true && current.contact_flag == true && current.office_flag == true && current.personal_flag == true && current.active == false){
 		current.active = true;
 		current.update();
 
@@ -49,7 +49,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>4bbd37864f4113004270e9628110c72d</sys_id>
-        <sys_mod_count>11</sys_mod_count>
+        <sys_mod_count>12</sys_mod_count>
         <sys_name>Active Flag Toggle</sys_name>
         <sys_overrides/>
         <sys_package display_value="Onboard" source="x_143728_onboard">07fb0ccd4fc113004270e9628110c71b</sys_package>
@@ -57,7 +57,7 @@
         <sys_scope display_value="Onboard">07fb0ccd4fc113004270e9628110c71b</sys_scope>
         <sys_update_name>sys_script_4bbd37864f4113004270e9628110c72d</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-04-09 20:02:41</sys_updated_on>
+        <sys_updated_on>2018-04-18 13:09:18</sys_updated_on>
         <template/>
         <when>after</when>
     </sys_script>

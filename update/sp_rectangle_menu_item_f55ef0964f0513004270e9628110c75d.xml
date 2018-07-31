@@ -8,7 +8,7 @@
         <display_2/>
         <display_date/>
         <filter/>
-        <glyph>sign-in</glyph>
+        <glyph/>
         <hint/>
         <kb_article/>
         <kb_category/>
@@ -26,14 +26,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-03-26 19:46:59</sys_created_on>
         <sys_id>f55ef0964f0513004270e9628110c75d</sys_id>
-        <sys_mod_count>3</sys_mod_count>
+        <sys_mod_count>4</sys_mod_count>
         <sys_name>OnBoard</sys_name>
         <sys_package display_value="Onboard" source="x_143728_onboard">07fb0ccd4fc113004270e9628110c71b</sys_package>
         <sys_policy/>
         <sys_scope display_value="Onboard">07fb0ccd4fc113004270e9628110c71b</sys_scope>
         <sys_update_name>sp_rectangle_menu_item_f55ef0964f0513004270e9628110c75d</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-04-10 15:24:06</sys_updated_on>
+        <sys_updated_on>2018-05-22 14:11:49</sys_updated_on>
         <table/>
         <type>page</type>
         <url/>

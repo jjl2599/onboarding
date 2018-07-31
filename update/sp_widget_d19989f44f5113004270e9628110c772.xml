@@ -14,22 +14,42 @@
 		$scope.SearchList = $scope.searchText;
 	}
 
+	$scope.searchActive = function(toggleHidden){
+		$scope.SearchList = '';
+		var search = document.getElementById('search');
+		if(toggleHidden){
+			search.style.borderBottom = '1px solid #00A99D';
+		}else if(!toggleHidden){
+			search.style.borderBottom = 'none';
+		}
+	}
+
 }]]></client_script>
         <controller_as>c</controller_as>
         <css>//Global
-h2{
-  color:white;
+*{
+  font-family:'Lato';
+  color: #005687;
+}
+.nameFont{
+	font-size:14px;
+  font-weight: bold;
+}
+.infoFont{
+  font-size:12px;
+}
+.row{
+	margin: 0px;
+  padding: 0px;
 }
 
 //Individual User Cards
 .userCard{
-  display: inline-block;
-  text-align: center;
-  padding-top:10px;
-  margin: 10px;
-  height: 200px;
-  width: 300px;
-	background: white;
+  width: 100%;
+	background: #F0F5F9;
+  border-radius: 10px;
+  margin-top: 20px;
+  padding: 7px 0px;
 }
 
 .userCard:hover {
@@ -45,16 +65,24 @@ h2{
 
 //Search Box
 #search{
-  padding: 10px 0px;
-  margin: 5px 0px;
-  width:100%;
+  width: 95%;
+  margin: 0 auto;
+  padding: 5px 0px;
+}
+#searchBox{
+  border: none;
+  width: 100%;
+  color: #005687;
+}
+#hiddenSearch{
+  padding: 0px;
+}
+#searchIcon{
+	text-align: center;
+  float: right;
+  padding:0px;
 }
 
-#searchBox{
-  border-radius: 10px;
-  padding-left: 5px;
-  width:350px;
-}
 
 //Media Queries
 @media(max-width:771px){
@@ -93,6 +121,13 @@ h2{
 		record.sys_id = gr.getDisplayValue('sys_id');
 		record.user_sysid = gr.getDisplayValue('user.sys_id');
 		record.name = gr.getDisplayValue('user.name');
+
+		var process = new GlideRecord('x_143728_onboard_process');
+		process.addQuery('sys_id',gr.process_ticket.sys_id);
+		process.query();
+		if(process.next()){
+			record.position = process.getDisplayValue('position');
+		}
 		data.contacts.push(record);
 	}
 
@@ -102,26 +137,34 @@ h2{
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-04-03 15:00:25</sys_created_on>
         <sys_id>d19989f44f5113004270e9628110c772</sys_id>
-        <sys_mod_count>58</sys_mod_count>
+        <sys_mod_count>81</sys_mod_count>
         <sys_name>Contact Record List</sys_name>
         <sys_package display_value="Onboard" source="x_143728_onboard">07fb0ccd4fc113004270e9628110c71b</sys_package>
         <sys_policy/>
         <sys_scope display_value="Onboard">07fb0ccd4fc113004270e9628110c71b</sys_scope>
         <sys_update_name>sp_widget_d19989f44f5113004270e9628110c772</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-04-12 17:52:53</sys_updated_on>
-        <template><![CDATA[<div>
-  <h2>
-    Contact Records
-  </h2>
-  
-  <div id='search'>
-    <input type="text" id="searchBox" placeholder='Search...' ng-model="searchText" ng-change="submitFilter()">
+        <sys_updated_on>2018-05-24 15:53:06</sys_updated_on>
+        <template><![CDATA[<div class='container'>
+  <div id='search' class='row'>
+    <div ng-show="toggleHidden" id="hiddenSearch" class='col-xs-11'>
+      <input type="text" id="searchBox" placeholder='Search' ng-model="searchText" ng-change="submitFilter()">
+    </div>
+
+    <div id='searchIcon' class='col-xs-1'>
+      <img src="ob_searchIcon.svg" height="20px" width="20px" id="searchIcon" ng-click="toggleHidden = !toggleHidden; searchText = null; searchActive(toggleHidden)">
+    </div>
   </div>
 
-  <div class='userCard' data-ng-init="contactid=contact.sys_id;" data-ng-click="c.contactDetail(contactid)" ng-repeat="contact in data.contacts | filter:SearchList:strict">
-    <sn-avatar class="avatar-extra-large" primary="contact.user_sysid" show-presence="false" enable-context-menu="false"/>
-    <p>{{contact.name}}</p>
+  <div class='row userCard' data-ng-init="contactid=contact.sys_id;" data-ng-click="c.contactDetail(contactid)" ng-repeat="contact in data.contacts | filter:SearchList">
+    <div class='col-xs-3 col-sm-2 avatarCol'>
+      <sn-avatar class="avatar-large" primary="contact.user_sysid" show-presence="false" enable-context-menu="false"/>
+    </div>
+
+    <div class='col-xs-9 col-sm-10 employeeCol'>
+      <p class='nameFont'>{{contact.name}}</p>
+      <p class='infoFont'>{{contact.position}}</p>
+    </div>
   </div>
 
 </div>]]></template>

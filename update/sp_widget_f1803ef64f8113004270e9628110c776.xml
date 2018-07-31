@@ -17,32 +17,72 @@
 	$scope.submitFilter = function() {
 		$scope.SearchList = $scope.searchText;
 	}
-
-	$('#searchBox').keypress(function(e){
-		if(e.keyCode==13)
-			$('#submitSearch').click();
-	});
+	
+	$scope.clearSearch = function(){
+		$scope.SearchList = '';
+	}
+	
+	$scope.searchActive = function(toggleHidden){
+		$scope.SearchList = '';
+		var search = document.getElementById('search');
+		if(toggleHidden){
+			search.style.borderBottom = '1px solid #00A99D';
+		}else if(!toggleHidden){
+			search.style.borderBottom = 'none';
+		}
+	}
+	
 
 }]]></client_script>
         <controller_as>c</controller_as>
         <css>//Global
+*{
+  font-family:'Lato';
+  color: #005687;
+}
+.nameFont{
+	font-size:14px;
+  font-weight: bold;
+}
+.infoFont{
+  font-size:12px;
+}
+
 .card{
   width: 100%;
   margin: 20px 0px;
-  background: grey;
+  padding: 5px 0px;
+  border-radius: 5px;
+  background: #F0F5F9;
   display:inline-block;
 }
 p{
 	margin: 0px;
+  color: #005687;
 }
-h2{
-  color:white;
+.infoFont{
+  display: block;
+	font-size: 12px;
+  color: #005687;
+}
+h2, h5{
+  color:#005687;
+}
+.container{
+  padding: 0px;
+  margin: 0 auto;
+}
+
+//Image
+#InfoIcon{
+  cursor: pointer;
 }
 
 //User Section
 .userSection{
   height: 100%;
-  color: white;
+  width: 100%;
+  margin: 0px;
 }
 button{
   display: block;
@@ -56,25 +96,47 @@ button{
   cursor: default;
   margin: 10px 0px;
 }
+.avatarCol{
+  text-align: center;
+}
+
+//Employee Information
+.employeeCol{
+	height:100%;
+}
+.innerEmployCol {
+  padding: 15px 0px;
+}
 
 //Information Section
 .info{
-  background: white;
+  width: 100%;
+  padding: 20px 0px;
+  margin: 0 auto;
 }
 .check{
   text-align:center;
+  padding: 0px 5px;
 }
 
 //Search Filter
 #search{
-  padding: 10px 0px;
-  margin: 5px 0px;
-  width:100%;
+  width: 95%;
+  margin: 0 auto;
+  padding: 5px 0px;
 }
 #searchBox{
-  border-radius: 10px;
-  padding-left: 5px;
-  width:350px;
+  border: none;
+  width: 100%;
+  color: #005687;
+}
+#hiddenSearch{
+  padding: 0px;
+}
+#searchIcon{
+	text-align: center;
+  float: right;
+  padding:0px;
 }
 
 //Media Queries
@@ -86,31 +148,19 @@ button{
     font-size: 12px;
   }
 }
+
 @media (max-width : 1200px) {
   .container{
     width:100%;
   }
-  button{
-    display: inline-block;
-  }
-  .info{
-    padding: 20px 0px;
-  }
-  .check{
-    margin-bottom: 10px;
-  }
-}
-@media (min-width : 991px) {
-  .info{
-    height: 200px;
-  }
-  .check{
-    margin-top: 75px;
-  }
-}
-@media(max-width:771px){
   #searchBox{
     width:100%;
+  }
+}
+
+@media(max-width:771px){
+  p{
+    font-size: 10px;
   }
 }
 </css>
@@ -135,6 +185,7 @@ button{
 		gr.query();
 	while(gr.next()){
 		var process = {};
+		$sp.getRecordValues(process, gr, 'sys_id,position,account_flag,bank_flag,benefit_flag,contact_flag,office_flag,personal_flag');
 		
 		var contactRecord =  new GlideRecord('x_143728_onboard_contact_information');
 		contactRecord.addQuery('process_ticket', gr.getDisplayValue('sys_id'));
@@ -143,16 +194,10 @@ button{
 			process.contact_sysid = contactRecord.getDisplayValue('sys_id');
 		}
 		
-		process.sys_id = gr.getDisplayValue('sys_id');
 		process.employee_sysid = gr.getDisplayValue('employee.sys_id');
 		process.employee = gr.getDisplayValue('employee.name');
 		process.guide = gr.getDisplayValue('orientation_guide.name');
-		process.accountFlag = gr.getDisplayValue('account_setup_flag');
-		process.bankFlag = gr.getDisplayValue('bank_info_flag');
-		process.benefitFlag = gr.getDisplayValue('benefits_flag');
-		process.contactFlag = gr.getDisplayValue('contact_information_flag');
-		process.officeFlag = gr.getDisplayValue('office_setup_flag');
-		process.personalFlag = gr.getDisplayValue('personal_information_flag');
+		process.position = gr.getDisplayValue('position');
 		data.onboards.push(process);
 	}
 })();]]></script>
@@ -161,63 +206,79 @@ button{
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-03-28 17:22:20</sys_created_on>
         <sys_id>f1803ef64f8113004270e9628110c776</sys_id>
-        <sys_mod_count>194</sys_mod_count>
+        <sys_mod_count>293</sys_mod_count>
         <sys_name>Ongoing Tickets</sys_name>
         <sys_package display_value="Onboard" source="x_143728_onboard">07fb0ccd4fc113004270e9628110c71b</sys_package>
         <sys_policy/>
         <sys_scope display_value="Onboard">07fb0ccd4fc113004270e9628110c71b</sys_scope>
         <sys_update_name>sp_widget_f1803ef64f8113004270e9628110c776</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-04-12 17:45:55</sys_updated_on>
+        <sys_updated_on>2018-05-24 15:52:50</sys_updated_on>
         <template><![CDATA[<div class='container'>
-  <h2>Currently Onboarding</h2>
-  <div id='search'>
-    <input type="text" id="searchBox" placeholder='Search...' ng-model="searchText" ng-change="submitFilter()">
+  <div id='search' class='row'>
+    <div ng-show="toggleHidden" id="hiddenSearch" class='col-xs-11'>
+      <input type="text" id="searchBox" placeholder='Search' ng-model="searchText" ng-change="submitFilter()">
+    </div>
+    
+    <div id='searchIcon' class='col-xs-1'>
+      <img src="ob_searchIcon.svg" height="20px" width="20px" id="searchIcon" ng-click="toggleHidden = !toggleHidden; searchText = null; searchActive(toggleHidden)">
+    </div>
   </div>
-  
+
   <div class="row card" data-ng-init="processid=onboard.sys_id; contactid=onboard.contact_sysid;"  ng-repeat="onboard in data.onboards | filter:SearchList:strict">
-    <div class="col-xs-12 col-md-4 userSection">
-      <sn-avatar class="avatar-large" primary="onboard.employee_sysid" show-presence="false" enable-context-menu="false"/>
-      <p>Employee: {{onboard.employee}}</p>
-      <button class='btn btn-primary' data-ng-click="c.processDetail(processid)" >View Details</button>
-      <button class='btn btn-info' data-ng-click="c.contactDetail(contactid)">View Contact</button>
+    <div class="row userSection">
+      <div class='col-xs-3 col-sm-2 avatarCol'>
+        <sn-avatar class="avatar-large" primary="onboard.employee_sysid" show-presence="false" enable-context-menu="false"/>
+      </div>
+
+      <div class='col-xs-9 col-sm-10 employeeCol'>
+        <div class='row innerEmployRow'>
+          <div class='col-xs-10 innerEmployCol'>
+            <p class='nameFont'>{{onboard.employee}}</p>
+            <p class='infoFont'>{{onboard.position}}</p>
+          </div>
+         	<div class='col-xs-2 innerEmployCol'>
+            <img id='InfoIcon' src="infoIcon.svg" data-ng-click="c.contactDetail(contactid)" width="20" height="20"/>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class='col-xs-12 col-md-8 info'>
-      <div class='col-xs-6 col-sm-4 col-md-2 check'>
-        <p>ACCOUNT</p>
-        <img ng-if='onboard.accountFlag == "true"' src="checkSVG.svg" width="20" height="20"/>
-        <img ng-if='onboard.accountFlag == "false"' src="ob_cancel.svg" width="20" height="20"/>
+    <div class='row info'>
+      <div class='col-xs-2 check'>
+        <img ng-if='onboard.account_flag == "true"' src="AccountGreen.svg" width="20" height="20"/>
+        <img ng-if='onboard.account_flag == "false"' src="AccountGrey.svg" width="20" height="20"/>
+        <p>Account</p>
       </div>
 
-      <div class='col-xs-6 col-sm-4 col-md-2 check'>
-        <p>BANK</p>
-        <img ng-if='onboard.bankFlag == "true"' src="checkSVG.svg" width="20" height="20"/>
-        <img ng-if='onboard.bankFlag == "false"' src="ob_cancel.svg" width="20" height="20"/>
+      <div class='col-xs-2 check'>
+        <img ng-if='onboard.bank_flag == "true"' src="BankGreen.svg" width="20" height="20"/>
+        <img ng-if='onboard.bank_flag == "false"' src="BankGrey.svg" width="20" height="20"/>
+        <p>Bank</p>
       </div>
 
-      <div class='col-xs-6 col-sm-4 col-md-2 check'>
-        <p>BENEFITS</p>
-        <img ng-if='onboard.benefitFlag == "true"' src="checkSVG.svg" width="20" height="20"/>
-        <img ng-if='onboard.benefitFlag == "false"' src="ob_cancel.svg" width="20" height="20"/>
+      <div class='col-xs-2 check'>
+        <img ng-if='onboard.benefit_flag == "true"' src="BenefitsGreen.svg" width="20" height="20"/>
+        <img ng-if='onboard.benefit_flag == "false"' src="BenefitsGrey.svg" width="20" height="20"/>
+        <p>Benefits</p>
       </div>
 
-      <div class='col-xs-6 col-sm-4 col-md-2 check'>
-        <p>CONTACT</p>
-        <img ng-if='onboard.contactFlag == "true"' src="checkSVG.svg" width="20" height="20"/>
-        <img ng-if='onboard.contactFlag == "false"' src="ob_cancel.svg" width="20" height="20"/>
+      <div class='col-xs-2 check'>
+        <img ng-if='onboard.contact_flag == "true"' src="ContactGreen.svg" width="20" height="20"/>
+        <img ng-if='onboard.contact_flag == "false"' src="ContactGrey.svg" width="20" height="20"/>
+        <p>Contact</p>
       </div>
 
-      <div class='col-xs-6 col-sm-4 col-md-2 check'>
-        <p>OFFICE</p>
-        <img ng-if='onboard.officeFlag == "true"' src="checkSVG.svg" width="20" height="20"/>
-        <img ng-if='onboard.officeFlag == "false"' src="ob_cancel.svg" width="20" height="20"/>
+      <div class='col-xs-2 check'>
+        <img ng-if='onboard.office_flag == "true"' src="OfficeGreen.svg" width="20" height="20"/>
+        <img ng-if='onboard.office_flag == "false"' src="OfficeGrey.svg" width="20" height="20"/>
+        <p>Office</p>
       </div>
 
-      <div class='col-xs-6 col-sm-4 col-md-2 check'>
-        <p>PERSONAL</p>
-        <img ng-if='onboard.personalFlag == "true"' src="checkSVG.svg" width="20" height="20"/>
-        <img ng-if='onboard.personalFlag == "false"' src="ob_cancel.svg" width="20" height="20"/>
+      <div class='col-xs-2 check'>
+        <img ng-if='onboard.personal_flag == "true"' src="PersonalGreen.svg" width="20" height="20"/>
+        <img ng-if='onboard.personal_flag == "false"' src="PersonalGrey.svg" width="20" height="20"/>
+        <p>Personal</p>
       </div>
     </div>
   </div>

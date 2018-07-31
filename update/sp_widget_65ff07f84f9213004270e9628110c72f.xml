@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function(spUtil, $scope, $location) {
+	/* widget controller */
+	var c = this;
+
+	//Redirects
+	c.employeePage = function(){
+		$location.url("onboard/sp?id=onboard_form");
+	};
+	
+	c.ongoingPage = function(){
+		$location.url("onboard/sp?id=ongoing");
+	};
+	
+	c.contactPage = function(){
+		$location.url("onboard/sp?id=contact_record_list");
+	};
+	
+	c.executivePage = function(){
+		$location.url("onboard/sp?id=executive_record_list");
+	};
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>//Global Style
+*{
+  font-family:'Lato';
+  color: #005687;
+}
+h4{
+  color:white;
+}
+.title{
+	font-size: 14px;
+  font-weight: bold;
+  margin-left:10px;
+}
+.text{
+	font-size: 12px;
+}
+
+//Selection
+.select{
+	text-align: center;
+}
+
+img{
+  cursor: pointer;
+}
+
+//Container
+.container{
+  background-color: white;
+  width: 100%;
+  padding: 10px 20px 20px 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  background: #F0F5F9;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>onboard_recommended</id>
+        <internal>false</internal>
+        <link/>
+        <name>Onboard Recommended</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {  /* populate the 'data' object */  /* e.g., data.table = $sp.getValue('table'); */})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-05-23 17:50:19</sys_created_on>
+        <sys_id>65ff07f84f9213004270e9628110c72f</sys_id>
+        <sys_mod_count>15</sys_mod_count>
+        <sys_name>Onboard Recommended</sys_name>
+        <sys_package display_value="Onboard" source="x_143728_onboard">07fb0ccd4fc113004270e9628110c71b</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Onboard">07fb0ccd4fc113004270e9628110c71b</sys_scope>
+        <sys_update_name>sp_widget_65ff07f84f9213004270e9628110c72f</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-05-24 14:51:20</sys_updated_on>
+        <template><![CDATA[<p class='title'>Recommended Options</p>
+<div class='container'>
+	<div class='row'>
+    <div class='select col-xs-3'>
+      <img src='employeeOption.svg' ng-click='c.employeePage()' width="65" height="65"/>
+      <p class='text'>New Employee</p>
+    </div>
+    
+    <div class='select col-xs-3'>
+      <img src='ongoingOption.svg' ng-click='c.ongoingPage()' width="65" height="65"/>
+      <p class='text'>View Ongoing</p>
+    </div>
+    
+    <div class='select col-xs-3'>
+      <img src='contactOption.svg' ng-click='c.contactPage()'width="65" height="65"/>
+      <p class='text'>Contact Records</p>
+    </div>
+    
+    <div class='select col-xs-3'>
+      <img src='executiveOption.svg' ng-click='c.executivePage()'width="65" height="65"/>
+      <p class='text'>Executive Reviews</p>
+    </div>
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function() {
+  /* widget controller */
+  var c = this;
+	
+	var granimInstance = new Granim({
+		element: '#canvas-image-blending',
+		direction: 'top-bottom',
+		opacity: [1, 1],
+		isPausedWhenNotInView: true,
+		image : {
+			source: 'mug.jpg',
+			blendingMode: 'multiply'
+		},
+		states : {
+			"default-state": {
+				gradients: [
+					['#29323c', '#485563'],
+					['#FF6B6B', '#556270']
+				],
+				transitionSpeed: 7000
+			}
+		}
+	});
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.container{
+  width: 100%;
+  height: 100%;
+}
+
+#canvas-image {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>granim</id>
+        <internal>false</internal>
+        <link/>
+        <name>Granim</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {  /* populate the 'data' object */  /* e.g., data.table = $sp.getValue('table'); */})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-04-27 19:14:07</sys_created_on>
+        <sys_id>7fc9ad604fb113004270e9628110c714</sys_id>
+        <sys_mod_count>14</sys_mod_count>
+        <sys_name>Granim</sys_name>
+        <sys_package display_value="Onboard" source="x_143728_onboard">07fb0ccd4fc113004270e9628110c71b</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Onboard">07fb0ccd4fc113004270e9628110c71b</sys_scope>
+        <sys_update_name>sp_widget_7fc9ad604fb113004270e9628110c714</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-04-27 19:46:57</sys_updated_on>
+        <template><![CDATA[<div class='container'>
+  <canvas id="canvas-image-blending" width="1080" height="1080"></canvas>
+</div>
+]]></template>
+    </sp_widget>
+</record_update>

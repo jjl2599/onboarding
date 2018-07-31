@@ -2,7 +2,7 @@
 <record_update table="sp_carousel_slide">
     <sp_carousel_slide action="INSERT_OR_UPDATE">
         <background/>
-        <carousel display_value="Onboard Home">f28638ee4f5113004270e9628110c7be</carousel>
+        <carousel/>
         <name>Image5</name>
         <order>100</order>
         <sys_class_name>sp_carousel_slide</sys_class_name>

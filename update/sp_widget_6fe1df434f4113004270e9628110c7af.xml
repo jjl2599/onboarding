@@ -10,36 +10,6 @@
 	c.formDetail = function(formid, section){
 		$location.url("onboard/sp?id=formdetail&formid=" + formid + '&section=' + section);
 	};
-
-	//Compares the current date with the Contact Form Due date
-	c.dates = function(){
-			var today = new Date();
-			var dd = today.getDate();
-			var mm = today.getMonth()+1; //January is 0!
-			var yyyy = today.getFullYear();
-			if(dd<10) {
-				dd = '0'+dd
-			}
-			if(mm<10) {
-				mm = '0'+mm
-			} 
-			today = yyyy + '-' + mm + '-' + dd;
-
-			var dateOut1 = new Date($scope.data.ticketInfo.dueDate);
-			var dateOut2 = new Date(today);
-
-			var timeDiff = Math.abs(dateOut2.getTime() - dateOut1.getTime());
-			var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
-
-			if(dateOut1 < dateOut2){
-				diffDays = diffDays + ' Days Passed Due!';
-			}else{
-				diffDays = diffDays + ' Days'
-			}
-		$scope.data.ticketInfo.dueDate = diffDays;
-	}
-
-	c.dates();
 	
 	//Dynamic Progress Bar width based on the number of finished flags
 	$scope.progress = function(information){
@@ -56,53 +26,64 @@
 
 }]]></client_script>
         <controller_as>c</controller_as>
-        <css>//Containers
+        <css>//Global
+*{
+  font-family:'Lato';
+  color: #005687;
+}
+p{
+  margin: 0px;
+}
+
+//Containers
 .container{
   width: 65%;
+  padding:0px;
+}
+p{
+  font-size: 14px;
 }
 .sections{
   width: 100%;
   padding: 20px 15px;
   margin: 10px 0px;
-  background: #979797;
+  border-radius: 10px;
+  background: #F0F5F9;
+}
+.userInfo{
+  margin: 0px 10px;
 }
 
 //Section 1
+.picture{
+	text-align: center;
+}
 #ceo{
   border-radius:50%;
 }
 .speech{
   border-radius: 5px;
-  background: white;
-  font-style: italic;
 }
 
 //Form Sections
-.select{
-  margin: 5px 0px;
+.iconDiv{
+  text-align: center;
+  margin: 10px 0px;
 }
-.select:hover {
+.iconDiv:hover{
   position: relative;
   z-index: 1000;
   cursor: pointer;
   -webkit-transform: scale(1.05);
   transform: scale(1.05);
   -moz-box-shadow: 0 0 20px #ccc;
-	-webkit-box-shadow: 0 0 20px #ccc;
-	box-shadow: 0 0 20px black;
-}
-.iconDiv{
-  background-color: #484848;
-  height: 70px;
-  text-align: center;
+  -webkit-box-shadow: 0 0 20px #ccc;
+  box-shadow: 0 0 20px black;
 }
 .formDiv, .statusDiv{
   background-color: white;
   height: 70px;
   margin: 0 auto
-}
-.icon{
-  padding-top: 15px;
 }
 .formDiv p, .statusDiv p{
   line-height: 10px;
@@ -161,14 +142,14 @@
 			//Returns a 'percent' of finished sections for the Contact Form
 			var done = 0;
 			var arr = [];
-			arr.push(processTicket.getDisplayValue('account_setup_flag').toString());
-			arr.push(processTicket.getDisplayValue('bank_info_flag').toString());
-			arr.push(processTicket.getDisplayValue('benefits_flag').toString());
-			arr.push(processTicket.getDisplayValue('contact_information_flag').toString());
-			arr.push(processTicket.getDisplayValue('office_setup_flag').toString());
-			arr.push(processTicket.getDisplayValue('personal_information_flag').toString());
+			arr.push(processTicket.getValue('account_flag'));
+			arr.push(processTicket.getValue('bank_flag'));
+			arr.push(processTicket.getValue('benefit_flag'));
+			arr.push(processTicket.getValue('contact_flag'));
+			arr.push(processTicket.getValue('office_flag'));
+			arr.push(processTicket.getValue('personal_flag'));
 			for(i = 0; i < arr.length; i++){
-				if(arr[i] == "true"){
+				if(arr[i] == true){
 					done++;
 				}
 			}
@@ -181,15 +162,9 @@
 				percent: (percent*100).toString().substr(0, 4)
 			};
 			
-			data.ticketInfo = {};
-			data.ticketInfo.accountFlag = processTicket.getDisplayValue('account_setup_flag').toString();
-			data.ticketInfo.bankFlag = processTicket.getDisplayValue('bank_info_flag').toString();
-			data.ticketInfo.benefitFlag = processTicket.getDisplayValue('benefits_flag').toString();
-			data.ticketInfo.contactFlag = processTicket.getDisplayValue('contact_information_flag').toString();
-			data.ticketInfo.officeFlag = processTicket.getDisplayValue('office_setup_flag').toString();
-			data.ticketInfo.personalFlag = processTicket.getDisplayValue('personal_information_flag').toString();
-			data.ticketInfo.start_date = processTicket.getDisplayValue('start_date');
-			data.ticketInfo.dueDate = processTicket.getDisplayValue('due_date');
+			data.ticket = {};
+			$sp.getRecordValues(data.ticket, processTicket, 'account_flag,bank_flag,benefit_flag,contact_flag,office_flag,personal_flag,start_date,due_date');
+
 		}
 	}
 
@@ -200,18 +175,18 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-03-29 14:26:46</sys_created_on>
         <sys_id>6fe1df434f4113004270e9628110c7af</sys_id>
-        <sys_mod_count>261</sys_mod_count>
+        <sys_mod_count>311</sys_mod_count>
         <sys_name>My Onboard</sys_name>
         <sys_package display_value="Onboard" source="x_143728_onboard">07fb0ccd4fc113004270e9628110c71b</sys_package>
         <sys_policy/>
         <sys_scope display_value="Onboard">07fb0ccd4fc113004270e9628110c71b</sys_scope>
         <sys_update_name>sp_widget_6fe1df434f4113004270e9628110c7af</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-04-12 17:21:12</sys_updated_on>
+        <sys_updated_on>2018-05-29 17:47:02</sys_updated_on>
         <template><![CDATA[<div class='container'>
 
   <div class='row sections'>
-    <div class='col-xs-12 col-md-4'>
+    <div class='col-xs-12 col-md-4 picture'>
       <img id='ceo' src="jahnel.jpg" width="150" height="150"/>
     </div>
 
@@ -224,126 +199,69 @@
     </div>
   </div>
 
-  <div class="row sections" ng-if='data.information.user != ""'>
-    <div>
-      <p>User: <span class='titleFont'>{{data.information.user}}</span></p>
-      <p>Due: {{data.ticketInfo.dueDate}}</p>
+  <div class='row sections'>
+    <div class="userInfo" ng-if='data.information.user != ""'>
+        <p>User: <span class='titleFont'>{{data.information.user}}</span></p>
+
+      <div ng-if='data.information != 100' id="progress-container">
+        <div id="progressbar" ng-if='data.information.percent != 0' data-ng-init="progress(data.information)">{{data.information.percent}} %</div>
+      </div>
     </div>
 
-    <div ng-if='data.information != 100' id="progress-container">
-      <div id="progressbar" ng-if='data.information.percent != 0' data-ng-init="progress(data.information)"><p>{{data.information.percent}} %</p></div>
-    </div>
+    <div class='row'>
+      <div class="iconDiv col-xs-6" data-ng-init="formid=data.information.sys_id;" data-ng-click="c.formDetail(formid, 'Account')">
+        <img ng-if='data.ticket.account_flag =="false"' class='icon' src='AccountGrey.svg' width="50" height="50"/>
+        <img ng-if='data.ticket.account_flag =="true"' class='icon' src='AccountGreen.svg' width="50" height="50"/>
+        <p>Account</p>
+      </div>
 
-    <div class="row select" data-ng-init="formid=data.information.sys_id;" data-ng-click="c.formDetail(formid, 'Account')">
-      <div class='iconDiv col-sm-2'>
-        <img ng-if='data.ticketInfo.accountFlag =="false"' class='icon' src='Account.svg' width="50" height="50"/>
-        <img ng-if='data.ticketInfo.accountFlag =="true"' class='icon' src='checkSVG.svg' width="50" height="50"/>
-      </div>
-      <div class='formDiv col-sm-5'>
+      <div class="iconDiv col-xs-6" data-ng-init="formid=data.information.sys_id;" data-ng-click="c.formDetail(formid, 'Bank')">
+        <img ng-if='data.ticket.bank_flag =="false"' class='icon' src='BankGrey.svg' width="50" height="50"/>
+        <img ng-if='data.ticket.bank_flag =="true"' class='icon' src='BankGreen.svg' width="50" height="50"/>
         <p>
-          Account Information:
-        </p>
-      </div>
-      <div class='statusDiv col-sm-5'>
-        <p>
-          <span ng-if='data.ticketInfo.accountFlag =="false"'>Ongoing</span>
-          <span ng-if='data.ticketInfo.accountFlag =="true"'>Completed</span>
+          Bank
         </p>
       </div>
     </div>
 
-    <div class="row select" data-ng-init="formid=data.information.sys_id;" data-ng-click="c.formDetail(formid, 'Bank')">
-      <div class='iconDiv col-sm-2'>
-        <img ng-if='data.ticketInfo.bankFlag =="false"' class='icon' src='Bank.svg' width="50" height="50"/>
-        <img ng-if='data.ticketInfo.bankFlag =="true"' class='icon' src='checkSVG.svg' width="50" height="50"/>
-      </div>
-      <div class='formDiv col-sm-5'>
+    <div class='row'>
+      <div class="iconDiv col-xs-6" data-ng-init="formid=data.information.sys_id;" data-ng-click="c.formDetail(formid, 'Benefit')">
+        <img ng-if='data.ticket.benefit_flag =="false"' class='icon' src='BenefitsGrey.svg' width="50" height="50"/>
+        <img ng-if='data.ticket.benefit_flag =="true"' class='icon' src='BenefitsGreen.svg' width="50" height="50"/>
         <p>
-          Bank Information:
+          Benefits
         </p>
       </div>
-      <div class='statusDiv col-sm-5'>
+
+      <div class="iconDiv col-xs-6" data-ng-init="formid=data.information.sys_id;" data-ng-click="c.formDetail(formid, 'Contact')">
+        <img ng-if='data.ticket.contact_flag =="false"' class='icon' src='ContactGrey.svg' width="50" height="50"/>
+        <img ng-if='data.ticket.contact_flag =="true"' class='icon' src='ContactGreen.svg' width="50" height="50"/>
         <p>
-          <span ng-if='data.ticketInfo.bankFlag =="false"'>Ongoing</span>
-          <span ng-if='data.ticketInfo.bankFlag =="true"'>Completed</span>
+          Contact
         </p>
       </div>
     </div>
 
-    <div class="row select" data-ng-init="formid=data.information.sys_id;" data-ng-click="c.formDetail(formid, 'Benefit')">
-      <div class='iconDiv col-sm-2'>
-        <img ng-if='data.ticketInfo.benefitFlag =="false"' class='icon' src='Benefit.svg' width="50" height="50"/>
-        <img ng-if='data.ticketInfo.benefitFlag =="true"' class='icon' src='checkSVG.svg' width="50" height="50"/>
-      </div>
-      <div class='formDiv col-sm-5'>
+    <div class='row'>
+      <div class="iconDiv col-xs-6" data-ng-init="formid=data.information.sys_id;" data-ng-click="c.formDetail(formid, 'Office')">
+        <img ng-if='data.ticket.office_flag =="false"' class='icon' src='OfficeGrey.svg' width="50" height="50"/>
+        <img ng-if='data.ticket.office_flag =="true"' class='icon' src='OfficeGreen.svg' width="50" height="50"/>
         <p>
-          Benefit Information:
+          Office
         </p>
       </div>
-      <div class='statusDiv col-sm-5'>
-        <p>
-          <span ng-if='data.ticketInfo.benefitFlag =="false"'>Ongoing</span>
-          <span ng-if='data.ticketInfo.benefitFlag =="true"'>Completed</span>
-        </p>
-      </div>
-    </div>
 
-    <div class="row select" data-ng-init="formid=data.information.sys_id;" data-ng-click="c.formDetail(formid, 'Contact')">
-      <div class='iconDiv col-sm-2'>
-        <img ng-if='data.ticketInfo.contactFlag =="false"' class='icon' src='Contact.svg' width="50" height="50"/>
-        <img ng-if='data.ticketInfo.contactFlag =="true"' class='icon' src='checkSVG.svg' width="50" height="50"/>
-      </div>
-      <div class='formDiv col-sm-5'>
+      <div class="iconDiv col-xs-6" data-ng-init="formid=data.information.sys_id;" data-ng-click="c.formDetail(formid, 'Personal')">
+        <img ng-if='data.ticket.personal_flag =="false"' class='icon' src='PersonalGrey.svg' width="50" height="50"/>
+        <img ng-if='data.ticket.personal_flag =="true"' class='icon' src='PersonalGreen.svg' width="50" height="50"/>
         <p>
-          Contact Information:
-        </p>
-      </div>
-      <div class='statusDiv col-sm-5'>
-        <p>
-          <span ng-if='data.ticketInfo.contactFlag =="false"'>Ongoing</span>
-          <span ng-if='data.ticketInfo.contactFlag =="true"'>Completed</span>
-        </p>
-      </div>
-    </div>
-
-    <div class="row select" data-ng-init="formid=data.information.sys_id;" data-ng-click="c.formDetail(formid, 'Office')">
-      <div class='iconDiv col-sm-2'>
-        <img ng-if='data.ticketInfo.officeFlag =="false"' class='icon' src='Office.svg' width="50" height="50"/>
-        <img ng-if='data.ticketInfo.officeFlag =="true"' class='icon' src='checkSVG.svg' width="50" height="50"/>
-      </div>
-      <div class='formDiv col-sm-5'>
-        <p>
-          Office Information:
-        </p>
-      </div>
-      <div class='statusDiv col-sm-5'>
-        <p>
-          <span ng-if='data.ticketInfo.officeFlag =="false"'>Ongoing</span>
-          <span ng-if='data.ticketInfo.officeFlag =="true"'>Completed</span>
-        </p>
-      </div>
-    </div>
-
-    <div class="row select" data-ng-init="formid=data.information.sys_id;" data-ng-click="c.formDetail(formid, 'Personal')">
-      <div class='iconDiv col-sm-2'>
-        <img ng-if='data.ticketInfo.personalFlag =="false"' class='icon' src='Personal.svg' width="50" height="50"/>
-        <img ng-if='data.ticketInfo.personalFlag =="true"' class='icon' src='checkSVG.svg' width="50" height="50"/>
-      </div>
-      <div class='formDiv col-sm-5'>
-        <p>
-          Personal Information:
-        </p>
-      </div>
-      <div class='statusDiv col-sm-5'>
-        <p>
-          <span ng-if='data.ticketInfo.personalFlag =="false"'>Ongoing</span>
-          <span ng-if='data.ticketInfo.personalFlag =="true"'>Completed</span>
+          Personal
         </p>
       </div>
     </div>
 
   </div>
-  
+
   <div class="row" ng-if='data.information.user == ""'>
     <h4>Onboarding has not been set for you. Please get in touch with a manager.</h4>
   </div>

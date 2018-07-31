@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update>
+    <sys_documentation element="personal_flag" label="Personal Flag" language="en" table="x_143728_onboard_process">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>personal_flag</element>
+            <help/>
+            <hint/>
+            <label>Personal Flag</label>
+            <language>en</language>
+            <name>x_143728_onboard_process</name>
+            <plural>Personal Flags</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-04-18 13:08:02</sys_created_on>
+            <sys_id>d1bfbd254f2113004270e9628110c7c5</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Personal Flag</sys_name>
+            <sys_package display_value="Onboard" source="x_143728_onboard">07fb0ccd4fc113004270e9628110c71b</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Onboard">07fb0ccd4fc113004270e9628110c71b</sys_scope>
+            <sys_update_name>sys_documentation_x_143728_onboard_process_personal_flag_en</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-04-18 13:08:02</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

@@ -5,97 +5,181 @@
             <element>employee</element>
             <position>0</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2018-04-12 17:57:49</sys_created_on>
-            <sys_id>cc8840ff4f9113004270e9628110c7ce</sys_id>
+            <sys_created_on>2018-05-22 15:21:11</sys_created_on>
+            <sys_id>1b34e5684fde13004270e9628110c75c</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_143728_onboard_process" sys_domain="global" view="7810db6a0a0a0b3440d2382eb2207a4f">64ba5cd14f4113004270e9628110c727</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2018-04-12 17:57:49</sys_updated_on>
-            <sys_user/>
-            <type/>
-        </sys_ui_element>
-        <sys_ui_element action="INSERT_OR_UPDATE">
-            <element>department</element>
-            <position>1</position>
-            <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2018-04-12 17:57:49</sys_created_on>
-            <sys_id>448840ff4f9113004270e9628110c7cf</sys_id>
-            <sys_mod_count>0</sys_mod_count>
-            <sys_ui_formatter/>
-            <sys_ui_section caption="NULL" display_value="" name="x_143728_onboard_process" sys_domain="global" view="7810db6a0a0a0b3440d2382eb2207a4f">64ba5cd14f4113004270e9628110c727</sys_ui_section>
-            <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2018-04-12 17:57:49</sys_updated_on>
+            <sys_updated_on>2018-05-22 15:21:11</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>orientation_guide</element>
-            <position>2</position>
+            <position>1</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2018-04-12 17:57:49</sys_created_on>
-            <sys_id>c48840ff4f9113004270e9628110c7cf</sys_id>
+            <sys_created_on>2018-05-22 15:21:11</sys_created_on>
+            <sys_id>9b34e5684fde13004270e9628110c75c</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_143728_onboard_process" sys_domain="global" view="7810db6a0a0a0b3440d2382eb2207a4f">64ba5cd14f4113004270e9628110c727</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2018-04-12 17:57:49</sys_updated_on>
+            <sys_updated_on>2018-05-22 15:21:11</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>executive</element>
-            <position>3</position>
+            <position>2</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2018-04-12 17:57:49</sys_created_on>
-            <sys_id>488840ff4f9113004270e9628110c7cf</sys_id>
+            <sys_created_on>2018-05-22 15:21:11</sys_created_on>
+            <sys_id>1f34e5684fde13004270e9628110c75c</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_143728_onboard_process" sys_domain="global" view="7810db6a0a0a0b3440d2382eb2207a4f">64ba5cd14f4113004270e9628110c727</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2018-04-12 17:57:49</sys_updated_on>
+            <sys_updated_on>2018-05-22 15:21:11</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>position</element>
+            <position>3</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-05-22 15:21:11</sys_created_on>
+            <sys_id>9f34e5684fde13004270e9628110c75c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_143728_onboard_process" sys_domain="global" view="7810db6a0a0a0b3440d2382eb2207a4f">64ba5cd14f4113004270e9628110c727</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-05-22 15:21:11</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>account_flag</element>
+            <position>4</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-05-22 15:21:11</sys_created_on>
+            <sys_id>1334e5684fde13004270e9628110c75d</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_143728_onboard_process" sys_domain="global" view="7810db6a0a0a0b3440d2382eb2207a4f">64ba5cd14f4113004270e9628110c727</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-05-22 15:21:11</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>bank_flag</element>
+            <position>5</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-05-22 15:21:11</sys_created_on>
+            <sys_id>9334e5684fde13004270e9628110c75d</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_143728_onboard_process" sys_domain="global" view="7810db6a0a0a0b3440d2382eb2207a4f">64ba5cd14f4113004270e9628110c727</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-05-22 15:21:11</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>benefit_flag</element>
+            <position>6</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-05-22 15:21:11</sys_created_on>
+            <sys_id>1734e5684fde13004270e9628110c75d</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_143728_onboard_process" sys_domain="global" view="7810db6a0a0a0b3440d2382eb2207a4f">64ba5cd14f4113004270e9628110c727</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-05-22 15:21:11</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>contact_flag</element>
+            <position>7</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-05-22 15:21:11</sys_created_on>
+            <sys_id>9734e5684fde13004270e9628110c75d</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_143728_onboard_process" sys_domain="global" view="7810db6a0a0a0b3440d2382eb2207a4f">64ba5cd14f4113004270e9628110c727</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-05-22 15:21:11</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>office_flag</element>
+            <position>8</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-05-22 15:21:11</sys_created_on>
+            <sys_id>1b34e5684fde13004270e9628110c75d</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_143728_onboard_process" sys_domain="global" view="7810db6a0a0a0b3440d2382eb2207a4f">64ba5cd14f4113004270e9628110c727</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-05-22 15:21:11</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>personal_flag</element>
+            <position>9</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-05-22 15:21:11</sys_created_on>
+            <sys_id>9b34e5684fde13004270e9628110c75d</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_143728_onboard_process" sys_domain="global" view="7810db6a0a0a0b3440d2382eb2207a4f">64ba5cd14f4113004270e9628110c727</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-05-22 15:21:11</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>.split</element>
-            <position>4</position>
+            <position>10</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2018-04-12 17:57:49</sys_created_on>
-            <sys_id>c88840ff4f9113004270e9628110c7cf</sys_id>
+            <sys_created_on>2018-05-22 15:21:11</sys_created_on>
+            <sys_id>1f34e5684fde13004270e9628110c75d</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_143728_onboard_process" sys_domain="global" view="7810db6a0a0a0b3440d2382eb2207a4f">64ba5cd14f4113004270e9628110c727</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2018-04-12 17:57:49</sys_updated_on>
+            <sys_updated_on>2018-05-22 15:21:11</sys_updated_on>
             <sys_user/>
             <type>.split</type>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>start_date</element>
-            <position>5</position>
+            <position>11</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2018-04-12 17:57:49</sys_created_on>
-            <sys_id>4c8840ff4f9113004270e9628110c7cf</sys_id>
+            <sys_created_on>2018-05-22 15:21:11</sys_created_on>
+            <sys_id>9f34e5684fde13004270e9628110c75d</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_143728_onboard_process" sys_domain="global" view="7810db6a0a0a0b3440d2382eb2207a4f">64ba5cd14f4113004270e9628110c727</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2018-04-12 17:57:49</sys_updated_on>
+            <sys_updated_on>2018-05-22 15:21:11</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>due_date</element>
-            <position>6</position>
+            <position>12</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2018-04-12 17:57:49</sys_created_on>
-            <sys_id>cc8840ff4f9113004270e9628110c7cf</sys_id>
+            <sys_created_on>2018-05-22 15:21:11</sys_created_on>
+            <sys_id>1334e5684fde13004270e9628110c75e</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_143728_onboard_process" sys_domain="global" view="7810db6a0a0a0b3440d2382eb2207a4f">64ba5cd14f4113004270e9628110c727</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2018-04-12 17:57:49</sys_updated_on>
+            <sys_updated_on>2018-05-22 15:21:11</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>

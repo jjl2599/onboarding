@@ -24,8 +24,28 @@
 		}
 	});
 	
-	//Sets the date to a format that the front-end can display correctly
-	$scope.data.information.date_of_birth = new Date($scope.data.information.date_of_birth);
+	//Comparing today's date with DOB, making sure it is not in the future
+	$scope.dateCheck = function(){
+		var today = new Date();
+		var dd = today.getDate();
+		var mm = today.getMonth()+1; //January is 0!
+		var yyyy = today.getFullYear();
+		if(dd<10) {
+			dd = '0'+dd
+		}
+		if(mm<10) {
+			mm = '0'+mm
+		} 
+		today = yyyy + '-' + mm + '-' + dd;
+
+		var todayDate = new Date(today);
+		var dob = new Date($scope.data.information.date_of_birth);
+
+		if(todayDate <= dob){
+			alert('Your Birthday can not be today or in the future.');
+			$scope.data.information.date_of_birth = '';
+		}
+	}
 
 	$scope.saveContact = function() {
 		$scope.data.action = "saveContact";
@@ -34,16 +54,42 @@
 		});
 	}
 	
+	//Custom validation due to angular validation not compatiable with 'Save' AND 'Submit'
 	$scope.submitContact = function() {
+		var email = checkEmail($scope.data.information.personal_email);
+		
+		if(!email){
+			document.getElementById('emailError').style.display = 'block';
+			return;
+		}else if(email){
+			document.getElementById('emailError').style.display = 'none';
+		}
+
+		if(!email){
+			return;
+		}
+		
 		$scope.data.action = "submitContact";
 		$scope.server.update().then(function() {
 			$scope.data.action = undefined;
 		});
 	}
+	
+	//Regex for proper email format
+	function checkEmail(email){
+		var emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		var emailResult = emailRegex.test(email);
+		if(emailResult == false){
+			return false;
+		}else{
+			return true;
+		}
+	}
 
 	spUtil.recordWatch($scope, "x_143728_onboard_contact_information", "", function(name, data){
 		spUtil.update($scope);
 	});
+	
 }]]></client_script>
         <controller_as>c</controller_as>
         <css>//Container
@@ -55,8 +101,19 @@
 }
 
 //Global
-p, label, h2, h3{
-  color:white;
+*{
+  font-family:'Lato';
+  color: #005687;
+}
+button{
+  color: white;
+}
+
+span{
+  color:red;
+}
+#emailError{
+  display:none;
 }
 
 //Form Fields
@@ -90,97 +147,75 @@ p, label, h2, h3{
 		data.process = {};
 
 	var infoRecord = new GlideRecord('x_143728_onboard_contact_information');
-
 	infoRecord.get(data.sys_id);
-
-	//Saves the information, does not trigger the flag
-	if(input && input.action == "saveContact") {
-		infoRecord.check_email = this.input.information.check_email;
-		infoRecord.name = this.input.information.name;
-		infoRecord.date_of_birth = this.input.information.date_of_birth;
-		infoRecord.address = this.input.information.address;
-		infoRecord.phone_number = this.input.information.phone_number;
-		infoRecord.home_number = this.input.information.home_number;
-		infoRecord.personal_email = this.input.information.personal_email;
-		infoRecord.emergency_contact_name = this.input.information.emergency_contact_name;
-		infoRecord.emergency_contact_number = this.input.information.emergency_contact_number;
-		infoRecord.emergency_contact_relationship = this.input.information.emergency_contact_relationship;
-		infoRecord.display = this.input.information.display;
+	
+	if(input){
+		infoRecord.check_email = input.information.check_email;
+		infoRecord.name = input.information.name;
+		infoRecord.date_of_birth = getDate(input.information.date_of_birth.toString());
+		infoRecord.address = input.information.address;
+		infoRecord.setValue('phone_number', input.information.phone_number);
+		infoRecord.setValue('home_number', input.information.home_number);
+		infoRecord.personal_email = input.information.personal_email;
+		infoRecord.emergency_contact_name = input.information.emergency_contact_name;
+		infoRecord.setValue('emergency_contact_number', input.information.emergency_contact_number);
+		infoRecord.emergency_contact_relationship = input.information.emergency_contact_relationship;
+		infoRecord.display = input.information.display;
 		infoRecord.update();
-		gs.addInfoMessage('Contact Information Saved');
-	}	
-
-	//Validates inputs, on successful submittion triggers the flag
-	if(input && input.action == "submitContact") {
-		if(this.input.information.check_email == '' ||  this.input.information.name == '' || 
-			 this.input.information.date_of_birth == '' || this.input.information.address == '' ||
-			 this.input.information.phone_number == '' || this.input.information.personal_email == ''||
-			 this.input.information.emergency_contact_name == '' || this.input.information.emergency_contact_number == '' ||
-			 this.input.information.emergency_contact_relationship == '' || this.input.information.display == ''){
+		if(input.action == 'saveContact'){
+			//Saves the information, does not trigger the flag
+			gs.addInfoMessage('Contact Information Saved');
+		}else if(input.action == 'submitContact' && (input.information.check_email == '' ||  input.information.name == '' || 
+																									input.information.date_of_birth == '' || input.information.address == '' ||
+																									input.information.phone_number == '' || input.information.personal_email == ''||
+																									input.information.emergency_contact_name == '' || input.information.emergency_contact_number == '' ||
+																									input.information.emergency_contact_relationship == '' || input.information.display == undefined)){
+			//Validates inputs, on successful submittion triggers the flag
 			gs.addErrorMessage('Please fill out all fields before submission.');
-		}else{
-			infoRecord.check_email = this.input.information.check_email;
-			infoRecord.name = this.input.information.name;
-			infoRecord.date_of_birth = this.input.information.date_of_birth;
-			infoRecord.address = this.input.information.address;
-			infoRecord.phone_number = this.input.information.phone_number;
-			infoRecord.home_number = this.input.information.home_number;
-			infoRecord.personal_email = this.input.information.personal_email;
-			infoRecord.emergency_contact_name = this.input.information.emergency_contact_name;
-			infoRecord.emergency_contact_number = this.input.information.emergency_contact_number;
-			infoRecord.emergency_contact_relationship = this.input.information.emergency_contact_relationship;
-			infoRecord.display = this.input.information.display;
-			infoRecord.update();
+			return;
+		}else if( input.action == 'submitContact'){
+			//If input passes validation, triggers the flag
 			var processUpdate = new GlideRecord('x_143728_onboard_process');
 			processUpdate.addQuery('sys_id', infoRecord.process_ticket);
 			processUpdate.query();
 			if(processUpdate.next()){
-				processUpdate.contact_information_flag = true;
+				processUpdate.contact_flag = true;
 				processUpdate.update();
 			}
 			gs.addInfoMessage('Contact Information Submitted');
 		}
-	}	
+	}
+	
 
 	data.information = {};
-	data.information.sys_id = infoRecord.getDisplayValue('sys_id');
+	$sp.getRecordValues(data.information, infoRecord, 'sys_id,address,display,dental_benefits,email,check_email,emergency_contact_name,emergency_contact_relationship,name,number,personal_email');
+	
+	data.information.system_dob = infoRecord.getValue('date_of_birth');
 	data.information.user = infoRecord.getDisplayValue('user.name');
-	data.information.address = infoRecord.getDisplayValue('address');
-	data.information.display = infoRecord.getDisplayValue('display');
-	data.information.date_of_birth = infoRecord.getDisplayValue('date_of_birth');
-	data.information.dental_benefits = infoRecord.getDisplayValue('dental_benefits');
-	data.information.email = infoRecord.getDisplayValue('email');
-	data.information.check_email = infoRecord.getDisplayValue('check_email');
-	data.information.emergency_contact_name = infoRecord.getDisplayValue('emergency_contact_name');
-	data.information.emergency_contact_number = infoRecord.getDisplayValue('emergency_contact_number');
-	data.information.emergency_contact_relationship = infoRecord.getDisplayValue('emergency_contact_relationship');
-	data.information.home_number = infoRecord.getDisplayValue('home_number');
-	data.information.name = infoRecord.getDisplayValue('name');
-	data.information.number = infoRecord.getDisplayValue('number');
-	data.information.personal_email = infoRecord.getDisplayValue('personal_email');
-	data.information.phone_number = infoRecord.getDisplayValue('phone_number');
+	data.information.emergency_contact_number = parseInt(infoRecord.getDisplayValue('emergency_contact_number'));
+	data.information.home_number = parseInt(infoRecord.getDisplayValue('home_number'));
+	data.information.phone_number = parseInt(infoRecord.getDisplayValue('phone_number'));
 	data.information.process_ticket = infoRecord.getDisplayValue('process_ticket.number');
-	data.information.startDate = infoRecord.getDisplayValue('process_ticket.start_date');
 	data.information.dueDate = infoRecord.getDisplayValue('process_ticket.due_date');
-	data.information.user = infoRecord.getDisplayValue('user.name');
+	data.information.flag = infoRecord.getDisplayValue('process_ticket.contact_flag');
 })();]]></script>
         <servicenow>false</servicenow>
         <sys_class_name>sp_widget</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-03-29 19:52:56</sys_created_on>
         <sys_id>259cd8934f0513004270e9628110c765</sys_id>
-        <sys_mod_count>92</sys_mod_count>
+        <sys_mod_count>321</sys_mod_count>
         <sys_name>Form Context Contact</sys_name>
         <sys_package display_value="Onboard" source="x_143728_onboard">07fb0ccd4fc113004270e9628110c71b</sys_package>
         <sys_policy/>
         <sys_scope display_value="Onboard">07fb0ccd4fc113004270e9628110c71b</sys_scope>
         <sys_update_name>sp_widget_259cd8934f0513004270e9628110c765</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-04-12 17:34:28</sys_updated_on>
+        <sys_updated_on>2018-05-29 18:08:54</sys_updated_on>
         <template><![CDATA[<div id='contactDiv'>
   <h2>Contact Information</h2>
   <p>Due Date: {{data.information.dueDate}}</p>
-  
+
   <p>
     Your email is typically your first initial followed by your last name. 
     CTO Steven Zgaljic's email is szgaljic@jahnelgroup.com
@@ -190,70 +225,99 @@ p, label, h2, h3{
 
   <div class="form-group">
     <label for="check_email">Is this email correct?:</label>
-    <input type="checkbox" id="check_email" class="form-check-input" ng-model="data.information.check_email"  ng-true-value="'true'" ng-false-value="'false'">
+    <input type="checkbox" id="check_email" class="form-check-input" 
+           ng-disabled='data.information.flag == "true"'
+           ng-model="data.information.check_email" 
+           ng-true-value="'true'" ng-false-value="'false'">
   </div>
-	
+
   <p>
     Please enter your legal name as it appears on your Passport, Social Security Card, or 
     similar document. If you have a nickname you prefer, let us know!
   </p>
-  
+
   <div class="form-group">
     <label for="name">Name you go by:</label>
-    <input type="textarea" id="name" class="form-control" ng-model="data.information.name">
+    <input type="textarea" id="name" class="form-control" 
+           ng-readonly='data.information.flag == "true"' 
+           ng-model="data.information.name">
   </div>
 
   <p>
     We need your Date of Birth for record, and we post birthdays on the company calendar. 
     Let us know if you'd like to keep your birthday private.
   </p>
-  
+
   <div class="form-group">
-    <label for="date_of_birth">Date of Birth:</label>
-    <input type="date" id="date_of_birth" class="form-control" ng-model="data.information.date_of_birth">
+    <label for="date_of_birth">Date of Birth on file: <strong>{{data.information.system_dob}}</strong></label>
+    <input type="date" id="date_of_birth" class="form-control" 
+           ng-readonly='data.information.flag == "true"' 
+           ng-model="data.information.date_of_birth"
+           ng-change='dateCheck()'>
   </div>
-  
+
   <p>
     Please enter your phone and email information. Enter NA if the question does Not Apply to you.
   </p>
-  
+
   <div class="form-group">
     <label for="address">Where do you live?:</label>
-    <input type="textarea" id="address" class="form-control" ng-model="data.information.address">
+    <input type="textarea" id="address" class="form-control" 
+           ng-readonly='data.information.flag == "true"' 
+           ng-model="data.information.address">
   </div>
 
   <div class="form-group">
     <label for="phone_number">Phone Number:</label>
-    <input type="textarea" id="phone_number" class="form-control" ng-model="data.information.phone_number">
+    <input type="number"
+           id="phone_number" name='phone_number'
+           class="form-control" min="0"
+           ng-readonly='data.information.flag == "true"' 
+           ng-model="data.information.phone_number">
   </div>
 
   <div class="form-group">
     <label for="home_number">Home Number:</label>
-    <input type="textarea" id="home_number" class="form-control" ng-model="data.information.home_number">
+    <input type="number" id="home_number" 
+           class="form-control" min="0"
+           ng-readonly='data.information.flag == "true"' 
+           ng-model="data.information.home_number">
   </div>
 
   <div class="form-group">
     <label for="personal_email">Personal Email:</label>
-    <input type="textarea" id="personal_email" class="form-control" ng-model="data.information.personal_email">
+    <input type="textarea" id="personal_email" class="form-control" 
+           ng-readonly='data.information.flag == "true"' 
+           ng-model="data.information.personal_email">
+    <span id="emailError">
+      Incorrect email format
+    </span>
   </div>
-  
+
   <p>
     Please tell us who we should contact in case of an emergency.
   </p>
 
   <div class="form-group">
     <label for="emergency_contact_name">Emergency Contact Name:</label>
-    <input type="textarea" id="emergency_contact_name" class="form-control" ng-model="data.information.emergency_contact_name">
+    <input type="textarea" id="emergency_contact_name" class="form-control" 
+           ng-readonly='data.information.flag == "true"' 
+           ng-model="data.information.emergency_contact_name">
   </div>
 
   <div class="form-group">
     <label for="emergency_contact_number">Emergency Contact Number:</label>
-    <input type="textarea" id="emergency_contact_number" class="form-control" ng-model="data.information.emergency_contact_number">
+    <input type="number" id="emergency_contact_number" 
+           class="form-control" min="0"
+           ng-readonly='data.information.flag == "true"' 
+           ng-model="data.information.emergency_contact_number">
   </div>
 
   <div class="form-group">
     <label for="emergency_contact_relationship">Emergency Contact Relationship:</label>
-    <input type="textarea" id="emergency_contact_relationship" class="form-control" ng-model="data.information.emergency_contact_relationship">
+    <input type="textarea" id="emergency_contact_relationship" class="form-control" 
+           ng-readonly='data.information.flag == "true"' 
+           ng-model="data.information.emergency_contact_relationship">
   </div>
 
   <p>
@@ -263,14 +327,21 @@ p, label, h2, h3{
 
   <div class="form-group">
     <label for="display">Display Information to the Public or keep Private?:</label>
-    <select name="display" ng-model="data.information.display">
+    <select name="display" class='form-control'
+            ng-disabled='data.information.flag == "true"'
+            ng-model="data.information.display">
       <option value="Public">Public</option>
       <option value="Private">Private</option>
     </select><br>
   </div>
 
-  <button class='btn btn-primary' ng-click='saveContact()'>Save</button>
-  <button class='btn btn-info' ng-click='submitContact()'>Submit</button>
+  <button class='btn btn-primary' 
+          ng-if='data.information.flag == "false"'
+          ng-click='saveContact()'>Save</button>
+  
+  <button class='btn btn-info' 
+          ng-if='data.information.flag == "false"'
+          ng-click='submitContact()'>Submit</button>
 </div>
 
 ]]></template>

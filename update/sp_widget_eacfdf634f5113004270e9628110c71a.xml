@@ -16,15 +16,27 @@
 	});
 }]]></client_script>
         <controller_as>c</controller_as>
-        <css>//Container
+        <css>//Global Style
+*{
+  font-family:'Lato';
+  color: #005687;
+}
+h4{
+  color:white;
+}
+.title{
+	font-size: 14px;
+  font-weight: bold;
+  margin-left:10px;
+}
+
+//Container
 .container{
   background-color: white;
   width: 100%;
-}
-
-//Global Style
-h4{
-  color:white;
+  padding: 10px 20px 20px 20px;
+  border-radius: 10px;
+  background: #F0F5F9;
 }
 
 //Div for users with no Contaact Form
@@ -38,7 +50,7 @@ h4{
   width: 100%;
   padding: 10px 0px 5px 0px;
   margin: 5px 0px;
-  background-color: #484848;
+  background-color: #4395CB;
 }
 .section:hover {
   position: relative;
@@ -72,12 +84,12 @@ h4{
 		//Returns the total unfinished Contact Form sections
 		var todo = 0;
 		var arr = [];
-		arr.push(gr.getDisplayValue('account_setup_flag').toString());
-		arr.push(gr.getDisplayValue('bank_info_flag').toString());
-		arr.push(gr.getDisplayValue('benefits_flag').toString());
-		arr.push(gr.getDisplayValue('contact_information_flag').toString());
-		arr.push(gr.getDisplayValue('office_setup_flag').toString());
-		arr.push(gr.getDisplayValue('personal_information_flag').toString());
+		arr.push(gr.getDisplayValue('account_flag'));
+		arr.push(gr.getDisplayValue('bank_flag'));
+		arr.push(gr.getDisplayValue('benefit_flag'));
+		arr.push(gr.getDisplayValue('contact_flag'));
+		arr.push(gr.getDisplayValue('office_flag'));
+		arr.push(gr.getDisplayValue('personal_flag'));
 		for(i = 0; i < arr.length; i++){
 			if(arr[i] == "false"){
 				todo++;
@@ -85,15 +97,8 @@ h4{
 		}
 		
 		data.ticket = {};
+		$sp.getRecordValues(data.ticket, gr, 'account_flag,bank_flag,benefit_flag,contact_flag,office_flag,personal_flag,start_date,due_date');
 		data.ticket.count = todo;
-		data.ticket.accountFlag = gr.getDisplayValue('account_setup_flag').toString();
-		data.ticket.bankFlag = gr.getDisplayValue('bank_info_flag').toString();
-		data.ticket.benefitFlag = gr.getDisplayValue('benefits_flag').toString();
-		data.ticket.contactFlag = gr.getDisplayValue('contact_information_flag').toString();
-		data.ticket.officeFlag = gr.getDisplayValue('office_setup_flag').toString();
-		data.ticket.personalFlag = gr.getDisplayValue('personal_information_flag').toString();
-		data.ticket.start_date = gr.getDisplayValue('start_date');
-		data.ticket.dueDate = gr.getDisplayValue('due_date');
 	}
 	
 	data.contact = {};
@@ -103,7 +108,7 @@ h4{
 	contact.addQuery('user',gs.getUserID());
 	contact.query();
 	if(contact.next()){
-		data.contact.sys_id = contact.getDisplayValue('sys_id').toString();
+		data.contact.sys_id = contact.getDisplayValue('sys_id');
 	}else{
 		//Used to trigger the 'noOnboard' div
 		data.contact.sys_id = '';
@@ -115,58 +120,58 @@ h4{
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-04-12 14:59:57</sys_created_on>
         <sys_id>eacfdf634f5113004270e9628110c71a</sys_id>
-        <sys_mod_count>35</sys_mod_count>
+        <sys_mod_count>50</sys_mod_count>
         <sys_name>Onboard To Do</sys_name>
         <sys_package display_value="Onboard" source="x_143728_onboard">07fb0ccd4fc113004270e9628110c71b</sys_package>
         <sys_policy/>
         <sys_scope display_value="Onboard">07fb0ccd4fc113004270e9628110c71b</sys_scope>
         <sys_update_name>sp_widget_eacfdf634f5113004270e9628110c71a</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-04-12 17:14:21</sys_updated_on>
-        <template><![CDATA[<div class='container'>
+        <sys_updated_on>2018-05-23 18:01:31</sys_updated_on>
+        <template><![CDATA[<p class='title'>Onboarding Progress</p>
+<div class='container'>
   <div ng-if='data.contact.sys_id != ""'>
-    <h2>Onboarding</h2>
-    <p>You still have {{data.ticket.count}} section(s) to finish:</p>
+    <p>You still have {{data.ticket.count}} section(s) to finish</p>
 
-    <div class='section' ng-if='data.ticket.accountFlag =="false"'
+    <div class='section' ng-if='data.ticket.account_flag =="false"'
          data-ng-init="formid=data.contact.sys_id;" 
          data-ng-click="c.formDetail(formid, 'Account')">
-      <img src='Account.svg' width="25" height="25"/>
+      <img src='AccountGrey.svg' width="25" height="25"/>
       <h4>Account Setup</h4>
     </div>
 
-    <div class='section' ng-if='data.ticket.bankFlag =="false"'
+    <div class='section' ng-if='data.ticket.bank_flag =="false"'
          data-ng-init="formid=data.contact.sys_id;" 
          data-ng-click="c.formDetail(formid, 'Bank')">
-      <img src='Bank.svg' width="25" height="25"/>
+      <img src='BankGrey.svg' width="25" height="25"/>
       <h4>Bank Information</h4>
     </div>
 
-    <div class='section' ng-if='data.ticket.benefitFlag =="false"'
+    <div class='section' ng-if='data.ticket.benefit_flag =="false"'
          data-ng-init="formid=data.contact.sys_id;" 
          data-ng-click="c.formDetail(formid, 'Benefit')">
-      <img src='Benefit.svg' width="25" height="25"/>
+      <img src='BenefitsGrey.svg' width="25" height="25"/>
       <h4>Benefits Information</h4>
     </div>
 
-    <div class='section' ng-if='data.ticket.contactFlag =="false"'
+    <div class='section' ng-if='data.ticket.contact_flag =="false"'
          data-ng-init="formid=data.contact.sys_id;" 
          data-ng-click="c.formDetail(formid, 'Contact')">
-      <img src='Contact.svg' width="25" height="25"/>
+      <img src='ContactGrey.svg' width="25" height="25"/>
       <h4>Contact Information</h4>
     </div>
 
-    <div class='section' ng-if='data.ticket.officeFlag =="false"'
+    <div class='section' ng-if='data.ticket.office_flag =="false"'
          data-ng-init="formid=data.contact.sys_id;" 
          data-ng-click="c.formDetail(formid, 'Office')">
-      <img src='Office.svg' width="25" height="25"/>
+      <img src='OfficeGrey.svg' width="25" height="25"/>
       <h4>Office Setup</h4>
     </div>
 
-    <div class='section' ng-if='data.ticket.personalFlag =="false"'
+    <div class='section' ng-if='data.ticket.personal_flag =="false"'
          data-ng-init="formid=data.contact.sys_id;" 
          data-ng-click="c.formDetail(formid, 'Personal')">
-      <img src='Personal.svg' width="25" height="25"/>
+      <img src='PersonalGrey.svg' width="25" height="25"/>
       <h4>Personal Information</h4>
     </div>
   </div>

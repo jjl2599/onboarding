@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="db_image">
+    <db_image action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category/>
+        <format/>
+        <height/>
+        <image/>
+        <name>PersonalGrey.svg</name>
+        <size_bytes>462</size_bytes>
+        <sys_class_name>db_image</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-05-22 15:11:26</sys_created_on>
+        <sys_id>6af121e44fde13004270e9628110c7cf</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>PersonalGrey.svg</sys_name>
+        <sys_package display_value="Onboard" source="x_143728_onboard">07fb0ccd4fc113004270e9628110c71b</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Onboard">07fb0ccd4fc113004270e9628110c71b</sys_scope>
+        <sys_update_name>db_image_6af121e44fde13004270e9628110c7cf</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-05-22 15:12:16</sys_updated_on>
+        <thumbnail/>
+        <width/>
+    </db_image>
+    <sys_attachment action="INSERT_OR_UPDATE">
+        <average_image_color/>
+        <chunk_size_bytes>734003</chunk_size_bytes>
+        <compressed>true</compressed>
+        <content_type>image/svg+xml</content_type>
+        <encryption_context/>
+        <file_name>image</file_name>
+        <image_height/>
+        <image_width/>
+        <size_bytes>462</size_bytes>
+        <size_compressed>287</size_compressed>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-05-22 15:11:31</sys_created_on>
+        <sys_id>a50221e44fde13004270e9628110c7ab</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-05-22 15:11:31</sys_updated_on>
+        <table_name>ZZ_YYdb_image</table_name>
+        <table_sys_id>6af121e44fde13004270e9628110c7cf</table_sys_id>
+    </sys_attachment>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>H4sIAAAAAAAAAA==</data>
+        <length>16</length>
+        <position>0</position>
+        <sys_attachment display_value="image" sys_id="a50221e44fde13004270e9628110c7ab">a50221e44fde13004270e9628110c7ab</sys_attachment>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-05-22 15:11:31</sys_created_on>
+        <sys_id>e50221e44fde13004270e9628110c7ab</sys_id>
+    </sys_attachment_doc>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>bVHLasMwELznKxb1Kuuxlt00tQPpyZdATznkUtRYSQyKbSoRu5T+e2U7fYQGiWU0zM7OosydD1CVOXnVztiqNlHdeBOhansC/cnWLidH79sF513XsS5mzduBoxCCh04C58p0T02fEwECUIVLljOArDR7N4AAnX+3ZsIAbGddJOHj8gTYV9Yu4E4n+l4/PF7oz9lfOf6T101tfrXjFP4zJuPfw7NW++O43XMAL4gESu11VOuTmTgYuJ3VLqw5JguKnKwRqRRUplQVaoVMiJROVYwHabqRcybkCgOeOEVRWJlG1+xgNN+uZUITlgRFKFIWMtkSfitgfCNgfBUQp4DBu0C1QVWI0SobfmM5+wKDASmdzgEAAA==</data>
+        <length>372</length>
+        <position>1</position>
+        <sys_attachment display_value="image" sys_id="a50221e44fde13004270e9628110c7ab">a50221e44fde13004270e9628110c7ab</sys_attachment>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-05-22 15:11:31</sys_created_on>
+        <sys_id>690221e44fde13004270e9628110c7ab</sys_id>
+    </sys_attachment_doc>
+</record_update>

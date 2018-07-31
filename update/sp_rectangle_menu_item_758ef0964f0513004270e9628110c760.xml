@@ -8,12 +8,12 @@
         <display_2/>
         <display_date/>
         <filter/>
-        <glyph>user-circle-o</glyph>
+        <glyph/>
         <hint/>
         <kb_article/>
         <kb_category/>
         <kb_topic/>
-        <label>Executive Reviews</label>
+        <label>Executive Review</label>
         <order>600</order>
         <record_script/>
         <sc_cat_item/>
@@ -26,14 +26,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-03-26 19:50:28</sys_created_on>
         <sys_id>758ef0964f0513004270e9628110c760</sys_id>
-        <sys_mod_count>10</sys_mod_count>
-        <sys_name>Executive Reviews</sys_name>
+        <sys_mod_count>12</sys_mod_count>
+        <sys_name>Executive Review</sys_name>
         <sys_package display_value="Onboard" source="x_143728_onboard">07fb0ccd4fc113004270e9628110c71b</sys_package>
         <sys_policy/>
         <sys_scope display_value="Onboard">07fb0ccd4fc113004270e9628110c71b</sys_scope>
         <sys_update_name>sp_rectangle_menu_item_758ef0964f0513004270e9628110c760</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-04-10 15:23:41</sys_updated_on>
+        <sys_updated_on>2018-05-22 14:12:50</sys_updated_on>
         <table/>
         <type>page</type>
         <url/>

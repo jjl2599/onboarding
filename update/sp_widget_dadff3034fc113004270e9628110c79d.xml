@@ -2,9 +2,13 @@
 <record_update table="sp_widget">
     <sp_widget action="INSERT_OR_UPDATE">
         <category>custom</category>
-        <client_script><![CDATA[function($scope, spUtil, $location, $rootScope) {
+        <client_script><![CDATA[function($scope, spUtil, $location, $rootScope, $window) {
   /* widget controller */
   var c = this;
+	
+	if($scope.data.logUser == false){
+		$location.url("onboard/?id=404");
+	}
 	
 	//Uses the section URL Parameter to assign the white border selection
 	angular.element(document).ready(function(){
@@ -70,14 +74,17 @@
 
 }]]></client_script>
         <controller_as>c</controller_as>
-        <css>#Sidebar{
+        <css>*{
+  font-family:'Lato';
+  color: #005687;
+}
+#Sidebar{
   margin-top: 20px;
   display: block;
 }
 
 p{
   font-size: 14px;
-  color:white;
   text-align: center;
 }
 .icon{
@@ -136,77 +143,81 @@ p{
 	var infoRecord = new GlideRecord('x_143728_onboard_contact_information');
 	
 	infoRecord.get(data.sys_id);
+	data.logUser = true;
+	if(infoRecord.getValue('user') != gs.getUserID()){
+		data.logUser = false;
+		return;
+	}
 
 	data.information = {};
 	data.information.sys_id = infoRecord.getDisplayValue('sys_id');
 	data.information.user = infoRecord.getDisplayValue('user.name');
-	data.information.accountFlag = infoRecord.getDisplayValue('process_ticket.account_setup_flag');
-	data.information.bankFlag = infoRecord.getDisplayValue('process_ticket.bank_info_flag');
-	data.information.benefitFlag = infoRecord.getDisplayValue('process_ticket.benefits_flag');
-	data.information.contactFlag = infoRecord.getDisplayValue('process_ticket.contact_information_flag');
-	data.information.officeFlag = infoRecord.getDisplayValue('process_ticket.office_setup_flag');
-	data.information.personalFlag = infoRecord.getDisplayValue('process_ticket.personal_information_flag');
-
+	data.information.account_flag = infoRecord.getDisplayValue('process_ticket.account_flag');
+	data.information.bank_flag = infoRecord.getDisplayValue('process_ticket.bank_flag');
+	data.information.benefit_flag = infoRecord.getDisplayValue('process_ticket.benefit_flag');
+	data.information.contact_flag = infoRecord.getDisplayValue('process_ticket.contact_flag');
+	data.information.office_flag = infoRecord.getDisplayValue('process_ticket.office_flag');
+	data.information.personal_flag = infoRecord.getDisplayValue('process_ticket.personal_flag');
 })();]]></script>
         <servicenow>false</servicenow>
         <sys_class_name>sp_widget</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-03-29 17:47:23</sys_created_on>
         <sys_id>dadff3034fc113004270e9628110c79d</sys_id>
-        <sys_mod_count>141</sys_mod_count>
+        <sys_mod_count>169</sys_mod_count>
         <sys_name>Form Selector</sys_name>
         <sys_package display_value="Onboard" source="x_143728_onboard">07fb0ccd4fc113004270e9628110c71b</sys_package>
         <sys_policy/>
         <sys_scope display_value="Onboard">07fb0ccd4fc113004270e9628110c71b</sys_scope>
         <sys_update_name>sp_widget_dadff3034fc113004270e9628110c79d</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-04-12 17:41:38</sys_updated_on>
+        <sys_updated_on>2018-05-29 18:05:38</sys_updated_on>
         <template><![CDATA[<div class='row' id='Sidebar'>
   <div class='selection col-xs-12 col-md-2' id='account' ng-click='selectItem("Account")'>
     <p>Account Information:</p>
     <div class='icon'>
-      <img ng-if='data.information.accountFlag == "true"' src="checkSVG.svg" width="15" height="15"/>
-      <img ng-if='data.information.accountFlag == "false"' src="ob_cancel.svg" width="15" height="15"/>
+      <img ng-if='data.information.account_flag == "true"' src="checkSVG.svg" width="15" height="15"/>
+      <img ng-if='data.information.account_flag == "false"' src="ob_cancel.svg" width="15" height="15"/>
     </div>
   </div>
 
   <div class='selection col-xs-12 col-md-2' id='bank' ng-click='selectItem("Bank")'>
     <p>Bank Information:</p>
     <div class='icon'>
-      <img ng-if='data.information.bankFlag == "true"' src="checkSVG.svg" width="15" height="15"/>
-      <img ng-if='data.information.bankFlag == "false"' src="ob_cancel.svg" width="15" height="15"/>
+      <img ng-if='data.information.bank_flag == "true"' src="checkSVG.svg" width="15" height="15"/>
+      <img ng-if='data.information.bank_flag == "false"' src="ob_cancel.svg" width="15" height="15"/>
     </div>
   </div>
 
   <div class='selection col-xs-12 col-md-2' id='benefit' ng-click='selectItem("Benefit")'>
     <p>Benefits Information:</p>
     <div class='icon'>
-      <img ng-if='data.information.benefitFlag == "true"' src="checkSVG.svg" width="15" height="15"/>
-      <img ng-if='data.information.benefitFlag == "false"' src="ob_cancel.svg" width="15" height="15"/>
+      <img ng-if='data.information.benefit_flag == "true"' src="checkSVG.svg" width="15" height="15"/>
+      <img ng-if='data.information.benefit_flag == "false"' src="ob_cancel.svg" width="15" height="15"/>
     </div>
   </div>
 
   <div class='selection col-xs-12 col-md-2' id='contact' ng-click='selectItem("Contact")'>
     <p>Contact Information:</p>
     <div class='icon'>
-      <img ng-if='data.information.contactFlag == "true"' src="checkSVG.svg" width="15" height="15"/>
-      <img ng-if='data.information.contactFlag == "false"' src="ob_cancel.svg" width="15" height="15"/>
+      <img ng-if='data.information.contact_flag == "true"' src="checkSVG.svg" width="15" height="15"/>
+      <img ng-if='data.information.contact_flag == "false"' src="ob_cancel.svg" width="15" height="15"/>
     </div>
   </div>
 
   <div class='selection col-xs-12 col-md-2' id='office' ng-click='selectItem("Office")'>
     <p>Office Information:</p>
     <div class='icon'>
-      <img ng-if='data.information.officeFlag == "true"' src="checkSVG.svg" width="15" height="15"/>
-      <img ng-if='data.information.officeFlag == "false"' src="ob_cancel.svg" width="15" height="15"/>
+      <img ng-if='data.information.office_flag == "true"' src="checkSVG.svg" width="15" height="15"/>
+      <img ng-if='data.information.office_flag == "false"' src="ob_cancel.svg" width="15" height="15"/>
     </div>
   </div>
 
   <div class='selection col-xs-12 col-md-2' id='personal' ng-click='selectItem("Personal")'>
     <p>Personal Information:</p>
     <div class='icon'>
-      <img ng-if='data.information.personalFlag == "true"' src="checkSVG.svg" width="15" height="15"/>
-      <img ng-if='data.information.personalFlag == "false"' src="ob_cancel.svg" width="15" height="15"/>
+      <img ng-if='data.information.personal_flag == "true"' src="checkSVG.svg" width="15" height="15"/>
+      <img ng-if='data.information.personal_flag == "false"' src="ob_cancel.svg" width="15" height="15"/>
     </div>
   </div>
 </div>]]></template>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="db_image">
+    <db_image action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category/>
+        <format/>
+        <height/>
+        <image/>
+        <name>ContactGreen.svg</name>
+        <size_bytes>693</size_bytes>
+        <sys_class_name>db_image</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-05-22 15:15:52</sys_created_on>
+        <sys_id>17f265e44fde13004270e9628110c711</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>ContactGreen.svg</sys_name>
+        <sys_package display_value="Onboard" source="x_143728_onboard">07fb0ccd4fc113004270e9628110c71b</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Onboard">07fb0ccd4fc113004270e9628110c71b</sys_scope>
+        <sys_update_name>db_image_17f265e44fde13004270e9628110c711</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-05-22 15:15:57</sys_updated_on>
+        <thumbnail/>
+        <width/>
+    </db_image>
+    <sys_attachment action="INSERT_OR_UPDATE">
+        <average_image_color/>
+        <chunk_size_bytes>734003</chunk_size_bytes>
+        <compressed>true</compressed>
+        <content_type>image/svg+xml</content_type>
+        <encryption_context/>
+        <file_name>image</file_name>
+        <image_height/>
+        <image_width/>
+        <size_bytes>693</size_bytes>
+        <size_compressed>396</size_compressed>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-05-22 15:15:57</sys_created_on>
+        <sys_id>6603ede44fde13004270e9628110c781</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-05-22 15:15:57</sys_updated_on>
+        <table_name>ZZ_YYdb_image</table_name>
+        <table_sys_id>17f265e44fde13004270e9628110c711</table_sys_id>
+    </sys_attachment>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>H4sIAAAAAAAAAA==</data>
+        <length>16</length>
+        <position>0</position>
+        <sys_attachment display_value="image" sys_id="6603ede44fde13004270e9628110c781">6603ede44fde13004270e9628110c781</sys_attachment>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-05-22 15:15:57</sys_created_on>
+        <sys_id>a603ede44fde13004270e9628110c781</sys_id>
+    </sys_attachment_doc>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>bVLLbsMgELznKxC9tBJgFuMmpHak9pRLpZ5yyKWiCXEsEScKKE5V9d+7xO5LrbS7nl0PM4Aow6km551vQ0W3MR6mWdZ1nehysT/WmZJSZsig5NS47mF/rqgkkiiNQWcjQsq124QEEIb46l2PCRErHziQt6ElZNN4PyXtvnV3w+x99JOr/nCvpLTGrL/pF5fsy6bMPs3LmjTrir7Y4HzTOh5cjE1bh+fDFv240oczJfFo27DZH3cVvUBvo7uWN3TY/cHG7UXlCcEzTChZ22h5a3eun5E0W3kb8KYuh0NGRR8lk3OlF0rP5ZJm/4uZf8TMLzHVi0HOzBzgpLZqudOoDEWPc3YrCgsg8lvWV/RlwHNRjDkmAyEVDDX9kjxhobTnWBmmhULIsWbDp1+PqiaViUdGYoIVZqJS9jJMqCJJwf0fczYRBdMWXT8dOcz1/VfPcoZu4xR9rzDgm4/2sAA0/7EEKbi/YvkIhpl09IUZbrXM6tmoTI9xNvoAeJi1t7UCAAA=</data>
+        <length>516</length>
+        <position>1</position>
+        <sys_attachment display_value="image" sys_id="6603ede44fde13004270e9628110c781">6603ede44fde13004270e9628110c781</sys_attachment>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-05-22 15:15:57</sys_created_on>
+        <sys_id>2a03ede44fde13004270e9628110c781</sys_id>
+    </sys_attachment_doc>
+</record_update>

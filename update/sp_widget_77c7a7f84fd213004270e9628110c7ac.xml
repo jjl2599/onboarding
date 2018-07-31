@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function() {  /* widget controller */  var c = this;}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>//global
+*{
+  font-family:'Lato';
+  color: #005687;
+}
+
+.head{
+  width: 100%;
+  padding: 30px 0px;
+  text-align: center;
+  background: linear-gradient(to right, #00304D , #00609A);
+}
+
+p{
+  color: white;
+  margin: 0px 0px 10px 0px;
+  padding: 0px;
+  font-size:14;
+  font-weight: bold;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>employee_header</id>
+        <internal>false</internal>
+        <link/>
+        <name>Employee Header</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {  /* populate the 'data' object */  /* e.g., data.table = $sp.getValue('table'); */})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-05-23 19:34:30</sys_created_on>
+        <sys_id>77c7a7f84fd213004270e9628110c7ac</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>Employee Header</sys_name>
+        <sys_package display_value="Onboard" source="x_143728_onboard">07fb0ccd4fc113004270e9628110c71b</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Onboard">07fb0ccd4fc113004270e9628110c71b</sys_scope>
+        <sys_update_name>sp_widget_77c7a7f84fd213004270e9628110c7ac</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-05-23 19:48:42</sys_updated_on>
+        <template><![CDATA[<div class='head'>
+  <p>
+    Onboard New Employee
+  </p>
+   <img src="employeeNav.svg" width='50' height='50'/>
+</div>]]></template>
+    </sp_widget>
+</record_update>

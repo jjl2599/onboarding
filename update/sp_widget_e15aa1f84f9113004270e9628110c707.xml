@@ -12,18 +12,51 @@
 	}
 }]]></client_script>
         <controller_as>c</controller_as>
-        <css>//Container
+        <css>//Global
+*{
+  font-family:'Lato';
+  color: #005687;
+}
 .container{
-  width: 65%;
+  padding:0px;
+  width:100%;
   margin: 0 auto;
 }
+.title{
+  font-size: 14px;
+  font-weight: bold;
+  margin:10px 0px 0px 0px;
+}
+.text{
+  font-size: 12px;
+  margin:0px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
 
-//Contact Information Div
-#sheet{
-  padding: 10px 15px;
-  width: 100%;
-  margin: 15px 0px;
-  background-color: white;
+//Card
+.card{
+  width:100%;
+	border-radius: 10px;
+  background: #F0F5F9;
+  padding:10px 0px;
+  margin: 0px;
+}
+
+//Button
+button{
+  width: 80% !important;
+  border-radius: 10px !important;
+  color: white !important;
+  box-shadow: 2px 4px 6px #E8E8E8 !important;
+}
+.btnDiv{
+  width:100%;
+  margin-top:10px;
+  text-align:center;
 }
 
 //Media Queries
@@ -90,52 +123,86 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-04-03 17:23:31</sys_created_on>
         <sys_id>e15aa1f84f9113004270e9628110c707</sys_id>
-        <sys_mod_count>20</sys_mod_count>
+        <sys_mod_count>57</sys_mod_count>
         <sys_name>Contact Record</sys_name>
         <sys_package display_value="Onboard" source="x_143728_onboard">07fb0ccd4fc113004270e9628110c71b</sys_package>
         <sys_policy/>
         <sys_scope display_value="Onboard">07fb0ccd4fc113004270e9628110c71b</sys_scope>
         <sys_update_name>sp_widget_e15aa1f84f9113004270e9628110c707</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-04-12 17:47:19</sys_updated_on>
+        <sys_updated_on>2018-05-23 17:02:05</sys_updated_on>
         <template><![CDATA[<div class='container'>
-  <div id='sheet'>
-    <p>{{data.contact.number}}</p>
-    
-    <p>Employee: {{data.contact.user}}</p>
-    <p>Start Date: {{data.contact.startDate}}</p>
-    
-    <h2>Contact Information</h2>
-    <p>Name: {{data.contact.name}}</p>
-    <p>Email: {{data.contact.email}}</p>
-    <p>DOB: {{data.contact.date_of_birth}}</p>
-    <p>Address: {{data.contact.address}}</p>
-    <p>Phone Number: {{data.contact.phone_number}}</p>
-    <p>Home Number: {{data.contact.home_number}}</p>
-    <p>Personal Email: {{data.contact.personal_email}}</p>
-    <p>Emergency Contact Name: {{data.contact.emergency_contact_name}}</p>
-    <p>Emergency Contact Relationship: {{data.contact.emergency_contact_number}}</p>
-    <p>Emergency Contact Number: {{data.contact.emergency_contact_relationship}}</p>
-    <p>Display: {{data.contact.display}}</p>
-    
-    <h2>Bank Information</h2>
-    <p>Bank Number: {{data.contact.bank_number}}</p>
-    <p>Bank Routing: {{data.contact.bank_routing}}</p>
-		
-    <h2>Benefits</h2>
-    <p>Dental: {{data.contact.dental_benefits}}</p>
-    <p>Health: {{data.contact.health_insurance}}</p>
-    
-    <h2>Office Setup</h2>
-    <p>Location: {{data.contact.office}}</p>
-    
-    <h2>Personal Information</h2>
-    <p>Coffee: {{data.contact.coffee}}</p>
-    <p>Places: {{data.contact.places}}</p>
-    
-      <button class="btn btn-primary" ng-click="goBack()">BACK</button>
-    
+  <p class='title'>Contact Information</p>
+  <div class='row card'>
+    <div ng-if='data.contact.email == "" && data.contact.address == "" && data.contact.home_number == "" && data.contact.phone_number == ""' class='col-xs-12'>
+      <p class='text'>N/A</p>
+    </div>
+    <div class='col-xs-6'>
+      <p class='text'>{{data.contact.email}}</p>
+      <p class='text'>{{data.contact.address}}</p>
+    </div>
+    <div class='col-xs-6'>
+      <p class='text'>O: {{data.contact.home_number}}</p>
+      <p class='text'>M: {{data.contact.phone_number}}</p>
+    </div>
   </div>
+
+  <p class='title'>Emergency Contact</p>
+  <div class='row card'>
+    <div ng-if='data.contact.emergency_contact_name == "" && data.contact.emergency_contact_relationship == "" && data.contact.emergency_contact_number == ""' class='col-xs-12'>
+      <p class='text'>N/A</p>
+    </div>
+    <div class='col-xs-4'>
+      <p class='text'>{{data.contact.emergency_contact_name}}</p>
+    </div>
+
+    <div class='col-xs-4'>
+      <p class='text'>{{data.contact.emergency_contact_relationship}}</p>
+    </div>
+
+    <div class='col-xs-4'>
+      <p class='text'>{{data.contact.emergency_contact_number}}</p>
+    </div>
+  </div>
+
+  <p class='title'>Banking Information</p>
+  <div class='row card'>
+    <div ng-if='data.contact.bank_number == "" && data.contact.bank_routing == ""' class='col-xs-12'>
+      <p class='text'>N/A</p>
+    </div>
+    <div ng-if='data.contact.bank_number != ""  && data.contact.bank_routing != "" ' class='col-xs-6'>
+      <p class='text'>Routing # {{data.contact.bank_number}}</p>
+    </div>
+    <div ng-if='data.contact.bank_number != ""  && data.contact.bank_routing != "" ' class='col-xs-6'>
+      <p class='text'>Account # {{data.contact.bank_routing}}</p>
+    </div>
+  </div>
+
+  <p class='title'>Office Information</p>
+  <div class='row card'>
+    <div ng-if='data.contact.office == undefined' class='col-xs-12'>
+      <p class='text'>N/A</p>
+    </div>
+    <div class='col-xs-12'>
+      <p class='text'>{{data.contact.office}}</p>
+    </div>
+  </div>
+
+  <p class='title'>Benefits Information</p>
+  <div class='row card'>
+    <div ng-if='data.contact.health_insurance == undefined && data.contact.dental_benefits == undefined' class='col-xs-12'>
+      <p class='text'>N/A</p>
+    </div>
+    <div ng-if='data.contact.health_insurance != undefined && data.contact.dental_benefits != undefined' class='col-xs-12'>
+      <p class='text'>Health: {{data.contact.health_insurance}}</p>
+      <p class='text'>Dental: {{data.contact.dental_benefits}}</p>
+    </div>
+  </div>
+
+   <div class="btnDiv">
+    <button class="btn btn-info btn-lg " ng-click="goBack()">Back</button>
+  </div>
+
 </div>]]></template>
     </sp_widget>
 </record_update>

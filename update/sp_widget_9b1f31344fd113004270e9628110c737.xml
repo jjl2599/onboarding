@@ -18,9 +18,23 @@
 			$scope.data.action = undefined;
 		});
 	}
-
+	
 	$scope.submitFilter = function() {
 		$scope.SearchList = $scope.searchText;
+	}
+
+	$scope.searchActive = function(toggleHidden){
+		$scope.SearchList = '';
+		var search = document.getElementById('search');
+		if(toggleHidden){
+			search.style.borderBottom = '1px solid #00A99D';
+		}else if(!toggleHidden){
+			search.style.borderBottom = 'none';
+		}
+	}
+	
+	$scope.test = function(state){
+		console.log(state)
 	}
 
 	spUtil.recordWatch($scope, "x_143728_onboard_executive_review", "", function(name, data){
@@ -28,42 +42,72 @@
 	});
 }]]></client_script>
         <controller_as>c</controller_as>
-        <css>//Container
-.container{
-  width: 80%;
-  margin: 0 auto;
-  padding: 15px 0px;
+        <css>//Global
+*{
+  font-family:'Lato';
+  color: #005687;
+}
+.nameFont{
+	font-size:14px;
+  font-weight: bold;
+}
+.infoFont{
+  font-size:12px;
+}
+.row{
+	margin: 0px;
+  padding: 0px;
+}
+button{
+  color:white;
+  margin: 10px 0px;
+  text-align: center;
+  width: 80% !important;
+  box-shadow: 2px 4px 6px #E8E8E8 !important;
 }
 
-//Global
-h2, p{
-  color:white;
+//Container
+.container{
+	padding: 0px;
+}
+.completeSection{
+	width:100%;
+  text-align:center;
+}
+.innerRow{
+  width:100%;
 }
 
 //Usercard
 .userCard{
-  vertical-align: top;
-  padding-top:15px;
-  margin: 10px;
-  display: inline-block;
-  color:black;
-  text-align: center;
-  height: 325px;
-  width: 300px;
-	background: white;
-}
-
-//Search Filter
-#search{
-  padding: 10px 0px;
-  margin: 5px 0px;
-  width:100%;
-}
-
-#searchBox{
+  width: 100%;
+	background: #F0F5F9;
   border-radius: 10px;
-  padding-left: 5px;
-  width:350px;
+  margin-top: 20px;
+  padding: 7px 0px;
+}
+.notification{
+  margin-top: 10px;
+}
+
+//Search Box
+#search{
+  width: 95%;
+  margin: 0 auto;
+  padding: 5px 0px;
+}
+#searchBox{
+  border: none;
+  width: 100%;
+  color: #005687;
+}
+#hiddenSearch{
+  padding: 0px;
+}
+#searchIcon{
+	text-align: center;
+  float: right;
+  padding:0px;
 }
 
 //Media Queries
@@ -71,19 +115,6 @@ h2, p{
   .container{
     width: 100%;
     font-size: 12px;
-  }
-  .col-xs-4{
-    padding: 2px;
-  }
-}
-
-@media(max-width:771px){
-  #searchBox{
-    width:100%;
-  }
-  .userCard{
-    width: 100%;
-    margin: 10px 0px;
   }
 }</css>
         <data_table>sp_instance</data_table>
@@ -103,7 +134,8 @@ h2, p{
 	data.execRecords = [];
 	
 	var gr = new GlideRecord('x_143728_onboard_executive_review');
-		gr.addQuery('executive',gs.getUserID())
+		//gr.addQuery('executive',gs.getUserID())
+		gr.addQuery('status','!=','Completed')
 		gr.query();
 	while(gr.next()){
 		var record = {};
@@ -131,43 +163,62 @@ h2, p{
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-04-03 18:54:18</sys_created_on>
         <sys_id>9b1f31344fd113004270e9628110c737</sys_id>
-        <sys_mod_count>109</sys_mod_count>
+        <sys_mod_count>199</sys_mod_count>
         <sys_name>Executive Record List</sys_name>
         <sys_package display_value="Onboard" source="x_143728_onboard">07fb0ccd4fc113004270e9628110c71b</sys_package>
         <sys_policy/>
         <sys_scope display_value="Onboard">07fb0ccd4fc113004270e9628110c71b</sys_scope>
         <sys_update_name>sp_widget_9b1f31344fd113004270e9628110c737</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-04-12 17:52:36</sys_updated_on>
+        <sys_updated_on>2018-05-24 15:52:16</sys_updated_on>
         <template><![CDATA[<div class='container'>
-  <h2>
-    Executive Review
-  </h2>
-  
-  <p>
-  	The following records are Executive Reviews assigned to you. Make sure to review the Employee's
-    Contact Records and their current Process Ticket progress. When you are available, reach out to the
-    Employee to set up a meeting and finish their onboarding.
-  </p>
-  
-  <p>
-    The option to 'Complete' an onboard for an Employee will be accessible to Executive Reviews
-    that have been moved to the 'Meeting' status.
-  </p>
+  <div id='search' class='row'>
+    <div ng-show="toggleHidden" id="hiddenSearch" class='col-xs-11'>
+      <input type="text" id="searchBox" placeholder='Search' ng-model="searchText" ng-change="submitFilter()">
+    </div>
 
-  <div id='search'>
-    <input type="text" id="searchBox" placeholder='Search...' ng-model="searchText" ng-change="submitFilter()">
+    <div id='searchIcon' class='col-xs-1'>
+      <img src="ob_searchIcon.svg" height="20px" width="20px" id="searchIcon" ng-click="toggleHidden = !toggleHidden; searchText = null; searchActive(toggleHidden)">
+    </div>
   </div>
 
-  <div class='userCard' ng-repeat="execRecord in data.execRecords | filter:SearchList:strict">
-    <sn-avatar class="avatar-extra-large" primary="execRecord.employee_sysid" show-presence="false" enable-context-menu="false"/>
-    <h4>{{execRecord.employee}}</h4>
-    <h4>Status:</h4>
-    <h4 ng-if='execRecord.status == "Onboarding"' class='execStatus'><strong>ONBOARDING</strong></h4>
-    <h4 ng-if='execRecord.status == "Meeting"' class='execStatus'><strong>MEETING</strong></h4>
-    <h4 ng-if='execRecord.status == "Completed"' class='execStatus'><strong>COMPLETED</strong></h4>
-    <button ng-if='execRecord.status == "Meeting"' ng-click='completeRecord(execRecord.sys_id)' class='btn btn-primary'>Finish Onboarding</button>
+  <div class='row userCard' ng-repeat="execRecord in data.execRecords | filter:SearchList:strict | orderBy:'status'">
+    <div class='innerRow col-xs-12' ng-if='execRecord.status != "Meeting"'>
+      <div class='col-xs-3 col-sm-2'>
+        <sn-avatar class="avatar-large" primary="execRecord.employee_sysid" show-presence="false" enable-context-menu="false"/>
+      </div>
+
+      <div class='col-xs-7 col-sm-8'>
+        <p class='nameFont'>{{execRecord.employee}}</p>
+        <p ng-if='execRecord.status == "Onboarding"' class='infoFont'>Onboarding in Progress</p>
+        <p ng-if='execRecord.status == "Meeting"' class='infoFont'>Ready for Executive Meeting</p>
+        <p ng-if='execRecord.status == "Completed"' class='infoFont'>Complete</p>
+      </div>
+    </div>
+
+    <div class='innerRow col-xs-12' ng-if='execRecord.status == "Meeting"' ng-click="actionBtn = !actionBtn">
+      <div class='col-xs-3 col-sm-2'>
+        <sn-avatar class="avatar-large" primary="execRecord.employee_sysid" show-presence="false" enable-context-menu="false"/>
+      </div>
+
+      <div class='col-xs-7 col-sm-8'>
+        <p class='nameFont'>{{execRecord.employee}}</p>
+        <p ng-if='execRecord.status == "Onboarding"' class='infoFont'>Onboarding in Progress</p>
+        <p ng-if='execRecord.status == "Meeting"' class='infoFont'>Ready for Executive Meeting</p>
+        <p ng-if='execRecord.status == "Completed"' class='infoFont'>Complete</p>
+      </div>
+
+      <div class='col-xs-1 col-sm-2'>
+        <img class='notification' src="notification.svg" ng-if='execRecord.status == "Meeting"' height="20px" width="20px"/>
+      </div>
+
+      <div class='col-xs-12 completeSection' ng-show="actionBtn">
+        <button class='btn btn-primary btn-lg' ng-click='completeRecord(execRecord.sys_id)'>Complete</button>
+      </div>
+    </div>
+
   </div>
+
 </div>]]></template>
     </sp_widget>
 </record_update>

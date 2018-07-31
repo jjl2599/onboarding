@@ -7,7 +7,7 @@
         <element label="Bank Number" mandatory="true" max_length="40" name="bank_number" type="string"/>
         <element label="Bank Routing" mandatory="true" max_length="40" name="bank_routing" type="string"/>
         <element label="Email is Correct?" max_length="40" name="check_email" type="boolean"/>
-        <element label="Coffee" max_length="40" name="coffee" type="string"/>
+        <element label="Coffee" max_length="255" name="coffee" type="string"/>
         <element choice="1" label="Culture Event" max_length="40" name="culture_event" type="choice">
             <choice>
                 <element label="Code Wars" sequence="0" value="Code Wars"/>
@@ -61,7 +61,7 @@
         <element label="payroll" max_length="40" name="payroll" type="boolean"/>
         <element label="Personal Email" mandatory="true" max_length="40" name="personal_email" type="string"/>
         <element label="Phone Number" mandatory="true" max_length="40" name="phone_number" type="string"/>
-        <element label="Places" max_length="40" name="places" type="string"/>
+        <element label="Places" max_length="255" name="places" type="string"/>
         <element label="Process Ticket" max_length="32" name="process_ticket" read_only="true" reference="x_143728_onboard_process" type="reference"/>
         <element label="Toggl Account" max_length="40" name="toggl_account" type="boolean"/>
         <element label="Toggl Buddy" max_length="32" name="toggl_buddy" reference="sys_user" type="reference"/>

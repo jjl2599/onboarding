@@ -2,25 +2,8 @@
 <record_update table="sp_widget">
     <sp_widget action="INSERT_OR_UPDATE">
         <category>custom</category>
-        <client_script><![CDATA[function($scope,$window,$location, spUtil) {
+        <client_script><![CDATA[function($scope,$window,$location,$timeout,spUtil) {
 	var c = this;
-
-	//Emmployee sn-record-picker Setup
-	$scope.employee = {
-		displayValue: c.data.employee.name,
-		value: c.data.employee.sys_id,
-		name: 'employee'
-	};
-
-	$scope.$on("field.change", function(evt, parms) {
-		if (parms.field.name == 'employee')
-			c.data.setEmployee = parms.newValue;
-
-		// Send selected users sys_id to 
-		c.server.update().then(function(response) {
-			spUtil.update($scope);
-		})
-	});
 
 	//Orientation sn-record-picker Guide Setup
 	$scope.guide = {
@@ -39,22 +22,6 @@
 		})
 	});
 
-	//Executive sn-record-picker Guide Setup
-	$scope.executive = {
-		displayValue: c.data.executive.name,
-		value: c.data.executive.sys_id,
-		name: 'executive'
-	};
-
-	$scope.$on("field.change", function(evt, parms) {
-		if (parms.field.name == 'executive')
-			c.data.setExecutive = parms.newValue;
-
-		// Send selected users sys_id to 
-		c.server.update().then(function(response) {
-			spUtil.update($scope);
-		})
-	});
 
 	//sn-date-picker client side setup
 	$scope.start_date = {
@@ -67,10 +34,41 @@
 		value: '',
 		name: 'due_date'
 	};
+	
+	$scope.dateCheck = function(){
+		var today = new Date();
+		var dd = today.getDate();
+		var mm = today.getMonth()+1; //January is 0!
+		var yyyy = today.getFullYear();
+		if(dd<10) {
+			dd = '0'+dd
+		}
+		if(mm<10) {
+			mm = '0'+mm
+		} 
+		today = yyyy + '-' + mm + '-' + dd;
 
+		var todayDate = new Date(today);
+		var start = new Date($scope.data.start_date);
+
+		if(todayDate > start){
+			alert('The Start Date can not be earlier than today.');
+			$scope.data.start_date = '';
+		}
+		
+		if($scope.data.start_date == undefined){
+			alert('Please select a Start Date first.');
+			$scope.data.due_date = '';
+		}
+	}
+	
 	//Form submittion
-	$scope.onboardUser = function() {
-		console.log($scope.data.checkUser);
+	$scope.onboardUser = function(isValid) {
+		c.submitted = true;
+		
+		if(!isValid)
+			return;
+		
 		$scope.data.action = "onboardUser";
 		$scope.server.update().then(function() {
 			$scope.data.action = undefined;
@@ -84,9 +82,13 @@
 
 }]]></client_script>
         <controller_as>c</controller_as>
-        <css>//global
-p, h2, label{
-  color:white;
+        <css>//Global
+*{
+  font-family:'Lato';
+  color: #005687;
+}
+.container{
+  margin-top: 25px;
 }
 
 //Form Styling
@@ -96,6 +98,33 @@ p, h2, label{
 }
 .btn{
   margin-bottom: 10px;
+  color: white !important;
+}
+.btn-default{
+  border: none;
+  border-radius: 0px !important;
+  padding-bottom: 7px;
+  margin: 0px;
+  border-bottom: 1px solid #00A99D;
+}
+.btn-primary, .btn-info{
+	box-shadow: 2px 4px 6px #E8E8E8 !important;
+}
+.btn-lg{
+  width: 80% !important;
+  border-radius: 10px !important;
+}
+.btnDiv{
+  width:100%;
+  margin-bottom:10px;
+  text-align:center;
+}
+
+input, select{
+  border: none;
+  border-bottom: 1px solid #00A99D;
+  border-radius: 0px !important;
+  -webkit-box-shadow: none !important;
 }
 
 //Media Queries
@@ -148,7 +177,7 @@ p, h2, label{
 	data.guide = {};
 	$sp.getRecordDisplayValues(data.guide, guideGR, 'sys_id,user_name,first_name,last_name,email');
 
-	
+
 	// Pull User id using reference field
 	var executiveSysId = "";
 	if (input && input.setExecutive)
@@ -163,8 +192,8 @@ p, h2, label{
 	data.executive = {};
 	$sp.getRecordDisplayValues(data.executive, executiveGR, 'sys_id,user_name,first_name,last_name,email');
 
-	
-	if(input && input.action == "onboardUser") {
+
+	if(input && input.action == "onboardUser" && validateRecord(input.email)) {
 		var newUser = new GlideRecord('sys_user');
 		newUser.initialize();
 		newUser.first_name = input.first_name.toString();
@@ -173,17 +202,60 @@ p, h2, label{
 		newUser.email = input.email.toString();
 		newUser.user_password.setDisplayValue('password');
 		var insertedUser = newUser.insert();
-		
+
 		var processRecord = new GlideRecord('x_143728_onboard_process');
 		processRecord.initialize();
 		processRecord.employee = insertedUser;
-		processRecord.orientation_guide = input.guide.sys_id.toString();
-		processRecord.executive = input.executive.sys_id.toString();
+		processRecord.orientation_guide = input.guide.toString();
+		processRecord.executive = input.executive.toString();
 		processRecord.start_date = input.start_date.toString();
-		processRecord.due_date = input.due_date.toString();
+		processRecord.position = input.position.toString();
 		processRecord.insert();
 		gs.addInfoMessage('Onboarding Generated');
 	}	
+
+	function validateRecord(email){
+		var isNoDuplicate = true;
+
+		//Abort if Email exists		
+		if(emailExists(email)){
+			gs.addErrorMessage('This email is already registered/onboarding.')
+		}
+
+		return isNoDuplicate;
+	}
+
+	function emailExists(email){
+		var user = new GlideRecord('sys_user');
+		user.addQuery('email',email);
+		user.query();
+		
+		return user.hasNext();
+	}
+	
+	data.execusers = [];
+	
+	var execRole = new GlideRecord('sys_user_has_role');
+	execRole.addQuery('role.name','x_143728_onboard.executive_review_user');
+	execRole.query();
+	while(execRole.next()){
+		var record = {};
+		record.sys_id = execRole.getDisplayValue('user.sys_id');
+		record.name = execRole.getDisplayValue('user.name');
+		data.execusers.push(record);
+	}
+
+	data.guideusers = [];
+
+	var guideRole = new GlideRecord('sys_user_has_role');
+	guideRole.addQuery('role.name','x_143728_onboard.guide');
+	guideRole.query();
+	while(guideRole.next()){
+		var record2 = {};
+		record2.sys_id = guideRole.getDisplayValue('user.sys_id');
+		record2.name = guideRole.getDisplayValue('user.name');
+		data.guideusers.push(record2);
+	}
 
 })();]]></script>
         <servicenow>false</servicenow>
@@ -191,71 +263,128 @@ p, h2, label{
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-03-26 19:54:47</sys_created_on>
         <sys_id>133049964f0513004270e9628110c79e</sys_id>
-        <sys_mod_count>142</sys_mod_count>
+        <sys_mod_count>308</sys_mod_count>
         <sys_name>Onboard Form</sys_name>
         <sys_package display_value="Onboard" source="x_143728_onboard">07fb0ccd4fc113004270e9628110c71b</sys_package>
         <sys_policy/>
         <sys_scope display_value="Onboard">07fb0ccd4fc113004270e9628110c71b</sys_scope>
         <sys_update_name>sp_widget_133049964f0513004270e9628110c79e</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-04-12 18:16:40</sys_updated_on>
+        <sys_updated_on>2018-05-23 20:45:52</sys_updated_on>
         <template><![CDATA[<div class="container">
-  <h2>Onboard a New Employee</h2>
-  <p>Please enter the following information:</p>
-  <form id='onboardForm' name="onboardForm" ng-submit="onboardUser();">
+  <p><strong>Please Enter Employee Information</strong></p>
+  <form id='onboardForm' name="onboardForm" novalidate
+        ng-submit="onboardUser(onboardForm.$valid)">
 
-
-    <div class="form-group">
+    <div class="form-group" 
+         ng-class=" { 'has-error' : onboardForm.first_name && c.submitted }">
       <label for="first_name">*First Name:</label>
-      <input type="textarea" id="first_name" class="form-control" ng-model="data.first_name" required>
+      <input type="textarea" name="first_name" id="first_name" class="form-control" 
+             ng-model="data.first_name"
+             ng-required="true">
+      <p class='help-block'
+         ng-show='onboardForm.first_name.$invalid && c.submitted'>
+        Field is required
+      </p>
     </div>
 
-    <div class="form-group">
+    <div class="form-group"
+         ng-class=" { 'has-error' : onboardForm.last_name && c.submitted }">
       <label for="last_name">*Last Name:</label>
-      <input type="textarea" id="last_name" class="form-control" ng-model="data.last_name" required>
+      <input type="textarea" name="last_name" id="last_name" class="form-control" 
+             ng-model="data.last_name"
+             ng-required="true">
+      <p class='help-block'
+         ng-show='onboardForm.last_name.$invalid && c.submitted'>
+        Field is required
+      </p>
     </div>
 
-    <div class="form-group">
+    <div class="form-group"
+         ng-class=" { 'has-error' : onboardForm.email && c.submitted }">
       <label for="email">*Email:</label>
-      <input type="textarea" id="email" class="form-control" ng-model="data.email" required>
+      <input type="email" name="email" id="email" class="form-control"
+             ng-model="data.email"
+             ng-required="true">
+      <p class='help-block'
+         ng-show='onboardForm.email.$invalid && c.submitted'>
+        Field is required
+      </p>
+      <p class="help-block" ng-show="onboardForm.email.$error.email && c.submitted">
+        Invalid email format (example@mail.com)
+      </p>
+    </div>
+    
+    <div class="form-group"
+         ng-class=" { 'has-error' : onboardForm.guide && c.submitted }">
+      <label for="executive">*Orientation Guide:</label>
+      <select class='dropdown' name='guide' 
+              id='guide' class='form-control'
+              ng-init="data.guide = ''" 
+              ng-model="data.guide"
+              ng-required="true"
+              ng-options='guideuser.sys_id as guideuser.name for guideuser in data.guideusers'>
+      </select>
+      <p class='help-block'
+         ng-show='onboardForm.guide.$error.required && c.submitted'>
+        Field is required
+      </p>
     </div>
 
-    <p>
-      *Orientation Guide:
-    </p>
-    <sn-record-picker id='guide' field="guide" table="'sys_user'" 
-                      display-field="'name'" value-field="'sys_id'" 
-                      default-query= "'roles=x_143728_onboard.guide'"
-                      search-fields="'name'" page-size="100" required>
-    </sn-record-picker>
+    <div class="form-group"
+         ng-class=" { 'has-error' : onboardForm.executive && c.submitted }">
+      <label for="executive">*Executive:</label>
+      <select class='dropdown' name='executive' 
+              id='executive' class='form-control'
+              ng-init="data.executive = ''" 
+              ng-model="data.executive"
+              ng-required="true"
+              ng-options='execuser.sys_id as execuser.name for execuser in data.execusers'>
+      </select>
+      <p class='help-block'
+         ng-show='onboardForm.executive.$error.required && c.submitted'>
+        Field is required
+      </p>
+    </div>
 
-    <p>
-      *Executive:
-    </p>
-    <sn-record-picker id='executive' field="executive" table="'sys_user'" 
-                      display-field="'name'" value-field="'sys_id'" 
-                      default-query= "'roles=x_143728_onboard.executive_review_user'"
-                      search-fields="'name'" page-size="100" required>
-    </sn-record-picker>
+    <div class="form-group"
+         ng-class=" { 'has-error' : onboardForm.starts && c.submitted }">
+      <label for="start_date">*Start Date:</label>
+      <sp-date-picker field = "start_date" name='starts'
+                      ng-model="data.start_date" 
+                      ng-change='dateCheck()'
+                      ng-required="true"
+                      sn-change="">
+      </sp-date-picker>
+      <p class='help-block'
+         ng-show='onboardForm.starts.$invalid && c.submitted'>
+        Field is required
+      </p>
+    </div>
     
-    <p>
-      *Start Date:
-    </p>
-    <sp-date-picker field = "start_date" ng-model="c.data.start_date" sn-change="" required></sp-date-picker>
-
-    <p>
-      *Completion Due Date:
-    </p>
-    <sp-date-picker field = "due_date" ng-model="c.data.due_date" sn-change="" required></sp-date-picker>
+     <div class="form-group" 
+         ng-class=" { 'has-error' : onboardForm.position && c.submitted }">
+      <label for="position">*Position:</label>
+      <input type="textarea" name="position" id="position" class="form-control" 
+             ng-model="data.position"
+             ng-required="true">
+      <p class='help-block'
+         ng-show='onboardForm.position.$invalid && c.submitted'>
+        Field is required
+      </p>
+    </div>
 
     <p>*REQUIRED</p>
 
-    <div class="col">
-      <input type="submit" class="btn btn-primary btn-lg btn-block" value="SUBMIT">
+    <div class="col btnDiv">
+      <input type="submit" class="btn btn-primary btn-lg" value="Submit">
     </div>
 
   </form>
-  <button class="btn btn-info btn-lg btn-block" ng-click="goBack()">BACK</button>
+  
+  <div class="btnDiv">
+    <button class="btn btn-info btn-lg " ng-click="goBack()">Back</button>
+  </div>
 
 </div>]]></template>
     </sp_widget>

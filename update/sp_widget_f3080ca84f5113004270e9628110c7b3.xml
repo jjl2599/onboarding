@@ -39,13 +39,17 @@
 	}
 
 	$scope.setRoom =function(room){
-		$scope.data.information.office = room;
+		if($scope.data.information.flag == 'false'){
+			$scope.data.information.office = room;
+		}
 	}
 	
-	//Allows these maps to be able to be highlighted
-	$('#floormap1').maphilight();
-	$('#floormap2').maphilight();
-	
+	//Allows these maps to be able to be highlighted, when the form is not submitted
+	if($scope.data.information.flag == 'false'){
+		$('#floormap1').maphilight();
+		$('#floormap2').maphilight();
+	}
+
 	var idArray = ["#graphic", "#kapse", "#snow", "#qa", "#sws", "#war",
 								 "#m_graphic","#m_kapse","#m_snow","#m_qa","#m_sws","#m_war"];
 	$("#graphic, #kapse, #snow, #qa, #sws, #war, #m_graphic,#m_kapse,#m_snow,#m_qa,#m_sws,#m_war").click(function(e){
@@ -93,8 +97,12 @@
 }
 
 //Global
-p, label, h2, h3{
-  color:white;
+*{
+  font-family:'Lato';
+  color: #005687;
+}
+button{
+  color: white;
 }
 
 //Media Queries
@@ -133,39 +141,37 @@ p, label, h2, h3{
 		data.process = {};
 	
 	var infoRecord = new GlideRecord('x_143728_onboard_contact_information');
-
 	infoRecord.get(data.sys_id);
 
-	//Saves the information, does not trigger the flag
-	if(input && input.action == "saveContact") {
-		infoRecord.office = this.input.information.office;
+	if(input){
+		infoRecord.office = input.information.office;
 		infoRecord.update();
-		gs.addInfoMessage('Office Setup Saved');
-	}	
-
-	//Validates inputs, on successful submittion triggers the flag
-	if(input && input.action == "submitContact") {
-		if(this.input.information.office == ''){
-			gs.addErrorMessage('Please select an office space.');
-		}else{
-			infoRecord.office = this.input.information.office;
-			infoRecord.update();
+		if(input.action == 'saveContact'){
+			//Saves the information, does not trigger the flag
+			gs.addInfoMessage('Office Setup Saved');
+		}else if(input.action == 'submitContact' && (input.information.office == undefined)){
+			//Validates inputs, on successful submittion triggers the flag
+			gs.addErrorMessage('Please select an office space before submitting');
+			return;
+		}else if(input.action == 'submitContact'){
+			//If input passes validation, triggers the flag
 			var processUpdate = new GlideRecord('x_143728_onboard_process');
 			processUpdate.addQuery('sys_id', infoRecord.process_ticket);
 			processUpdate.query();
 			if(processUpdate.next()){
-				processUpdate.office_setup_flag = true;
+				processUpdate.office_flag = true;
 				processUpdate.update();
 			}
 			gs.addInfoMessage('Office Setup Submitted');
 		}
-	}	
+	}
 
 	data.information = {};
 	data.information.sys_id = infoRecord.getDisplayValue('sys_id');
 	data.information.user = infoRecord.getDisplayValue('user.name');
 	data.information.office = infoRecord.getDisplayValue('office');
 	data.information.dueDate = infoRecord.getDisplayValue('process_ticket.due_date');
+	data.information.flag = infoRecord.getDisplayValue('process_ticket.office_flag');
 	data.information.user = infoRecord.getDisplayValue('user.name');
 })();]]></script>
         <servicenow>false</servicenow>
@@ -173,14 +179,14 @@ p, label, h2, h3{
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-04-02 15:35:39</sys_created_on>
         <sys_id>f3080ca84f5113004270e9628110c7b3</sys_id>
-        <sys_mod_count>84</sys_mod_count>
+        <sys_mod_count>94</sys_mod_count>
         <sys_name>Form Context Office</sys_name>
         <sys_package display_value="Onboard" source="x_143728_onboard">07fb0ccd4fc113004270e9628110c71b</sys_package>
         <sys_policy/>
         <sys_scope display_value="Onboard">07fb0ccd4fc113004270e9628110c71b</sys_scope>
         <sys_update_name>sp_widget_f3080ca84f5113004270e9628110c7b3</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-04-12 17:37:34</sys_updated_on>
+        <sys_updated_on>2018-05-29 18:08:22</sys_updated_on>
         <template><![CDATA[<div id='officeDiv'>
   <h2>Office Setup</h2>
 
@@ -220,8 +226,8 @@ p, label, h2, h3{
     </map>
   </div>
 
-  <button class='btn btn-primary' ng-click='saveContact()'>Save</button>
-  <button class='btn btn-info' ng-click='submitContact()'>Submit</button>
+  <button class='btn btn-primary' ng-if='data.information.flag == "false"'  ng-click='saveContact()'>Save</button>
+  <button class='btn btn-info' ng-if='data.information.flag == "false"' ng-click='submitContact()'>Submit</button>
 </div>
 
 ]]></template>
