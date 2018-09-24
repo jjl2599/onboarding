@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<record_update table="sp_carousel_slide">
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_carousel_slide">
     <sp_carousel_slide action="INSERT_OR_UPDATE">
         <background/>
         <carousel/>
@@ -24,12 +23,12 @@
         <chunk_size_bytes>734003</chunk_size_bytes>
         <compressed>true</compressed>
         <content_type>image/jpeg</content_type>
-        <encryption_context/>
         <file_name>background</file_name>
         <image_height>400</image_height>
         <image_width>600</image_width>
         <size_bytes>69685</size_bytes>
         <size_compressed>50810</size_compressed>
+        <state/>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-04-09 00:48:04</sys_created_on>
         <sys_id>aa00c5664f9113004270e9628110c776</sys_id>

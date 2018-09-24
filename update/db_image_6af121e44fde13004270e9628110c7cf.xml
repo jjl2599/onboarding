@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<record_update table="db_image">
+<?xml version="1.0" encoding="UTF-8"?><record_update table="db_image">
     <db_image action="INSERT_OR_UPDATE">
         <active>true</active>
         <category/>
@@ -28,12 +27,12 @@
         <chunk_size_bytes>734003</chunk_size_bytes>
         <compressed>true</compressed>
         <content_type>image/svg+xml</content_type>
-        <encryption_context/>
         <file_name>image</file_name>
         <image_height/>
         <image_width/>
         <size_bytes>462</size_bytes>
         <size_compressed>287</size_compressed>
+        <state/>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-05-22 15:11:31</sys_created_on>
         <sys_id>a50221e44fde13004270e9628110c7ab</sys_id>

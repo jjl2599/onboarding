@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<database>
+<?xml version="1.0" encoding="UTF-8"?><database>
     <element label="Contact Information" max_length="40" name="x_143728_onboard_contact_information" type="collection">
         <element label="Access Points" max_length="40" name="access_points" type="boolean"/>
         <element label="Accounts Setup?" max_length="40" name="account_set" type="boolean"/>
@@ -10,24 +9,24 @@
         <element label="Coffee" max_length="255" name="coffee" type="string"/>
         <element choice="1" label="Culture Event" max_length="40" name="culture_event" type="choice">
             <choice>
-                <element label="Code Wars" sequence="0" value="Code Wars"/>
-                <element label="Toggl Tuesdays" sequence="1" value="Toggle Tuesdays"/>
-                <element label="DnD" sequence="2" value="DnD"/>
-                <element label="Beer Club" sequence="3" value="Beer Club"/>
+                <element inactive_on_update="false" label="Code Wars" sequence="0" value="Code Wars"/>
+                <element inactive_on_update="false" label="Toggl Tuesdays" sequence="1" value="Toggle Tuesdays"/>
+                <element inactive_on_update="false" label="DnD" sequence="2" value="DnD"/>
+                <element inactive_on_update="false" label="Beer Club" sequence="3" value="Beer Club"/>
             </choice>
         </element>
         <element label="Date of Birth" max_length="40" name="date_of_birth" type="glide_date"/>
         <element choice="1" label="Dental Benefits" mandatory="true" max_length="40" name="dental_benefits" type="choice">
             <choice>
-                <element label="OPT Out" sequence="0" value="OPT Out"/>
-                <element label="Company Plan A" sequence="1" value="Company Plan A"/>
-                <element label="Company Plan B" sequence="2" value="Company Plan B"/>
+                <element inactive_on_update="false" label="OPT Out" sequence="0" value="OPT Out"/>
+                <element inactive_on_update="false" label="Company Plan A" sequence="1" value="Company Plan A"/>
+                <element inactive_on_update="false" label="Company Plan B" sequence="2" value="Company Plan B"/>
             </choice>
         </element>
         <element choice="1" label="Agree to Display Information to the Public?" mandatory="true" max_length="40" name="display" type="choice">
             <choice>
-                <element label="Public" sequence="0" value="Public"/>
-                <element label="Private" sequence="1" value="Private"/>
+                <element inactive_on_update="false" label="Public" sequence="0" value="Public"/>
+                <element inactive_on_update="false" label="Private" sequence="1" value="Private"/>
             </choice>
         </element>
         <element label="Email" max_length="40" name="email" read_only="true" type="string"/>
@@ -40,9 +39,9 @@
         <element label="Guidelines" max_length="40" name="guidelines" type="boolean"/>
         <element choice="1" label="Health Insurance" mandatory="true" max_length="40" name="health_insurance" type="choice">
             <choice>
-                <element label="OPT Out" sequence="0" value="OPT Out"/>
-                <element label="Silver Plan" sequence="1" value="Silver Plan"/>
-                <element label="Gold Plan" sequence="2" value="Gold Plan"/>
+                <element inactive_on_update="false" label="OPT Out" sequence="0" value="OPT Out"/>
+                <element inactive_on_update="false" label="Silver Plan" sequence="1" value="Silver Plan"/>
+                <element inactive_on_update="false" label="Gold Plan" sequence="2" value="Gold Plan"/>
             </choice>
         </element>
         <element label="Home Number" max_length="40" name="home_number" type="string"/>
@@ -50,12 +49,12 @@
         <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" display="true" label="Number" max_length="40" name="number" read_only="true" type="string"/>
         <element choice="1" label="Office" mandatory="true" max_length="40" name="office" type="choice">
             <choice>
-                <element label="SWS Room" sequence="0" value="SWS Room"/>
-                <element label="KAPSE Room" sequence="1" value="KAPSE Room"/>
-                <element label="Graphic Design" sequence="3" value="Graphic Design"/>
-                <element label="QA Room" sequence="4" value="QA Room"/>
-                <element label="WAR Room" sequence="5" value="WAR Room"/>
-                <element label="SNOW Room" sequence="6" value="SNOW Room"/>
+                <element inactive_on_update="false" label="SWS Room" sequence="0" value="SWS Room"/>
+                <element inactive_on_update="false" label="KAPSE Room" sequence="1" value="KAPSE Room"/>
+                <element inactive_on_update="false" label="Graphic Design" sequence="3" value="Graphic Design"/>
+                <element inactive_on_update="false" label="QA Room" sequence="4" value="QA Room"/>
+                <element inactive_on_update="false" label="WAR Room" sequence="5" value="WAR Room"/>
+                <element inactive_on_update="false" label="SNOW Room" sequence="6" value="SNOW Room"/>
             </choice>
         </element>
         <element label="payroll" max_length="40" name="payroll" type="boolean"/>

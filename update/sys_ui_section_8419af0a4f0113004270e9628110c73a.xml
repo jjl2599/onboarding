@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<record_update>
+<?xml version="1.0" encoding="UTF-8"?><record_update>
     <sys_ui_section caption="Bank Information" section_id="8419af0a4f0113004270e9628110c73a" sys_domain="global" table="x_143728_onboard_contact_information" version="3" view="">
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>process_ticket.bank_info_due_date</element>

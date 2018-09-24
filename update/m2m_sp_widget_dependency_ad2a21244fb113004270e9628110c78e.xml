@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<record_update table="m2m_sp_widget_dependency">
+<?xml version="1.0" encoding="UTF-8"?><record_update table="m2m_sp_widget_dependency">
     <m2m_sp_widget_dependency action="INSERT_OR_UPDATE">
         <sp_dependency display_value="Granim">0f1a61244fb113004270e9628110c7f4</sp_dependency>
         <sp_widget display_value="Granim">7fc9ad604fb113004270e9628110c714</sp_widget>

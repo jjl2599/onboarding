@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<record_update table="sp_portal">
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_portal">
     <sp_portal action="INSERT_OR_UPDATE">
         <css_variables>$brand-primary: #4395CB;
 $body-bg: #ffffff;
@@ -59,12 +58,12 @@ $text-muted: #979797;
         <chunk_size_bytes>734003</chunk_size_bytes>
         <compressed>true</compressed>
         <content_type>image/svg+xml</content_type>
-        <encryption_context/>
         <file_name>logo</file_name>
         <image_height/>
         <image_width/>
         <size_bytes>126477</size_bytes>
         <size_compressed>85973</size_compressed>
+        <state/>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-05-22 14:32:06</sys_created_on>
         <sys_id>1009d1ac4f9e13004270e9628110c742</sys_id>

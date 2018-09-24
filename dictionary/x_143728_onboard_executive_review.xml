@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<database>
+<?xml version="1.0" encoding="UTF-8"?><database>
     <element label="Executive Review" max_length="40" name="x_143728_onboard_executive_review" type="collection">
         <element label="Comments" max_length="40" name="comments" type="string"/>
         <element label="Executive" max_length="32" name="executive" read_only="true" reference="sys_user" type="reference"/>
@@ -8,15 +7,18 @@
         <element label="Process" max_length="32" name="process" read_only="true" reference="x_143728_onboard_process" type="reference"/>
         <element choice="1" default="Onboarding" label="Status" max_length="40" name="status" type="choice">
             <choice>
-                <element label="Onboarding" sequence="1" value="Onboarding"/>
-                <element label="Meeting" sequence="2" value="Meeting"/>
-                <element label="Completed" sequence="3" value="Completed"/>
+                <element inactive_on_update="false" label="Onboarding" sequence="1" value="Onboarding"/>
+                <element inactive_on_update="false" label="Meeting" sequence="2" value="Meeting"/>
+                <element inactive_on_update="false" label="Completed" sequence="3" value="Completed"/>
             </choice>
         </element>
         <index name="index">
             <element name="executive"/>
         </index>
         <index name="index2">
+            <element name="process"/>
+        </index>
+        <index name="index3">
             <element name="information"/>
         </index>
     </element>

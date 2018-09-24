@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<database>
+<?xml version="1.0" encoding="UTF-8"?><database>
     <element label="Process" max_length="40" name="x_143728_onboard_process" type="collection">
         <element label="Account Flag" max_length="40" name="account_flag" type="boolean"/>
         <element label="Account Setup Due Date" max_length="40" name="account_setup_due_date" type="glide_date"/>

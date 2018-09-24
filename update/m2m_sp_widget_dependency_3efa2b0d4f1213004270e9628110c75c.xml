@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<record_update table="m2m_sp_widget_dependency">
+<?xml version="1.0" encoding="UTF-8"?><record_update table="m2m_sp_widget_dependency">
     <m2m_sp_widget_dependency action="INSERT_OR_UPDATE">
         <sp_dependency display_value="angular-ellipsis">124430c3e730030075c2a117c2f6a98e</sp_dependency>
         <sp_widget display_value="Onboard Announcements">befa2b814f1213004270e9628110c774</sp_widget>

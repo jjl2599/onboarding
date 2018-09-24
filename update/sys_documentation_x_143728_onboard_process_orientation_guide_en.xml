@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<record_update>
+<?xml version="1.0" encoding="UTF-8"?><record_update>
     <sys_documentation element="orientation_guide" label="Orientation Guide" language="en" table="x_143728_onboard_process">
         <sys_documentation action="INSERT_OR_UPDATE">
             <element>orientation_guide</element>

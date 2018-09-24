@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<record_update table="gsw_status_of_content">
+<?xml version="1.0" encoding="UTF-8"?><record_update table="gsw_status_of_content">
     <gsw_status_of_content action="INSERT_OR_UPDATE">
         <best_practice_allowed_ever>0</best_practice_allowed_ever>
         <checksum/>
-        <content display_value="Step 2">bb844a09939012003d80f157b67ffb7d</content>
+        <content display_value="">bb844a09939012003d80f157b67ffb7d</content>
         <effective_weight>1</effective_weight>
         <more_info_visited>false</more_info_visited>
         <previous_status>0</previous_status>

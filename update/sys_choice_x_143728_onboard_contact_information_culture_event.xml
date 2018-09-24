@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<record_update>
+<?xml version="1.0" encoding="UTF-8"?><record_update>
     <sys_choice action="INSERT_OR_UPDATE" field="culture_event" table="x_143728_onboard_contact_information" version="3">
         <sys_choice action="INSERT_OR_UPDATE">
             <dependent_value/>
@@ -83,7 +82,7 @@
             <sys_class_name>sys_choice_set</sys_class_name>
             <sys_created_by>admin</sys_created_by>
             <sys_created_on>2018-04-02 14:46:18</sys_created_on>
-            <sys_id>c5cc7b544f5113004270e9628110c74b</sys_id>
+            <sys_id>d237e2724f2823004270e9628110c76a</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_name>culture_event</sys_name>
             <sys_package display_value="Onboard" source="x_143728_onboard">07fb0ccd4fc113004270e9628110c71b</sys_package>

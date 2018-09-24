@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<record_update table="m2m_sp_widget_dependency">
+<?xml version="1.0" encoding="UTF-8"?><record_update table="m2m_sp_widget_dependency">
     <m2m_sp_widget_dependency action="INSERT_OR_UPDATE">
         <sp_dependency display_value="maphilight">202fdbd74f1513004270e9628110c7ae</sp_dependency>
         <sp_widget display_value="Form Context Office">f3080ca84f5113004270e9628110c7b3</sp_widget>
